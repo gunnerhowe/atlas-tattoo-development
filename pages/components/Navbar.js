@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <header>
-      <nav className={`nav`}>
+      <nav className={'nav'}>
         <Link href={"/"}>
           <a>
             <h1 className="logo">Atlas Tattoo Development</h1>
@@ -25,7 +25,7 @@ const Navbar = () => {
         </Link>
         <div
           onClick={() => setNavActive(!navActive)}
-          className={`nav__menu-bar`}
+          className={'nav__menu-bar'}
         >
           <div></div>
           <div></div>
