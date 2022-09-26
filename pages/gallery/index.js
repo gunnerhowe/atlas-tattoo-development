@@ -274,13 +274,10 @@ export default function GalleryPage() {
               <Image className={styles.imgPreview} src={image126} alt=' ' width={image_width} height={image_heigth}/>
               </div>
         </div>
-        <button>
-          <Link href="/">Home</Link>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          </button>
+        <Link href="/">
+          <button className={styles.btn_neu}>
+          Home</button>
+        </Link>
       </main>
     </div>
   );

@@ -16,9 +16,10 @@ export default function Home() {
         <p className={styles.description}>
         </p>
         <span></span>
-        <button className={styles.btn_neu}>
-          <Link href="/generate">Generate</Link>
-        </button>
+        <Link href="/generate">
+          <button className={styles.btn_neu}>
+          Generate</button>
+        </Link>
       </main>
     </div>
   );

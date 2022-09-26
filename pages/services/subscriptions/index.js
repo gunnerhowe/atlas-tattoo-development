@@ -15,13 +15,10 @@ export default function Home() {
         <h1 className={styles.title}><span className={styles.titleColor}>Subscriptions</span></h1>
         <p className={styles.description}>
         </p>
-        <button>
-          <Link href="/">Home</Link>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          </button>
+        <Link href="/">
+          <button className={styles.btn_neu}>
+          Home</button>
+        </Link>
       </main>
     </div>
   );
