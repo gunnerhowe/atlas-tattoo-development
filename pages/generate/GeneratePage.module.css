@@ -66,8 +66,8 @@
     .title { font-size: 1rem; }
   }
   
-  @media (min-width: 400px) {
-    .title { font-size: calc(1.5rem + 1vw); }
+  @media (min-width: 300px) {
+    .title { font-size: calc(1.5rem + 1vw);}
   }
   
   @media (min-width: 1001px){
