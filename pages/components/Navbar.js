@@ -9,6 +9,7 @@ const MENU_LIST = [
   { text: "Gallery", href: "/gallery" },
   { text: "Services", href: "/services" },
   { text: "Generate", href: "/generate" },
+  { text: "Signup", href: "/signup" },
 ];
 const Navbar = () => {
   const [navActive, setNavActive] = useState(null);

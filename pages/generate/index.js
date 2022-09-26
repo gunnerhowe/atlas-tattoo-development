@@ -48,11 +48,7 @@ export default function Generate() {
             placeholder="Query"
           />
         </p>{" "}
-        <button onClick={GetDalle2}>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+        <button className={classes.btn_neu} onClick={GetDalle2}>
           Generate</button>
         {error ? (
           <div className={classes.error}>Something went wrong..Try again</div>

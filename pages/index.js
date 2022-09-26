@@ -12,16 +12,13 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}><span className={styles.titleColor}>Atlas Tattoo Development</span></h1>
+        <h1 className={styles.title}><span className={styles.titleColor}>Ink Your Skin With Intelligence.</span></h1>
         <p className={styles.description}>
         </p>
-        <button>
+        <span></span>
+        <button className={styles.btn_neu}>
           <Link href="/generate">Generate</Link>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          </button>
+        </button>
       </main>
     </div>
   );

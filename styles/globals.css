@@ -133,7 +133,7 @@ input:focus {
  }
  */
  
-button {
+/*button {
   padding: 0.9em 1.6em;
   border: none;
   outline: none;
@@ -159,7 +159,7 @@ button::after {
   border-radius: 10px;
  }
  /* glow */
-button::before {
+/*button::before {
   content: "";
   background: linear-gradient(
      45deg,
@@ -205,9 +205,9 @@ button:active:after {
 button:active {
   color: #000;
   font-weight: bold;
-}
+}*/
 
-/* From uiverse.io by @mobinkakei */
+/* Loader */
 .wrapper {
   width: 200px;
   height: 60px;
