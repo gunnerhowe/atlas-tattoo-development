@@ -5,7 +5,7 @@ import styles from "./SignInPage.module.css";
 import SVG from '/pages/gallery/images/back_arrow.svg'
 import Image from 'next/image'
 
-export default function Home() {
+export default function SignInPage() {
 
   return (
     <div className={styles.container}>
@@ -37,6 +37,9 @@ export default function Home() {
         <Link href="/">
           <button className={styles.btn_neu}>
           Submit</button>
+        </Link>
+        <Link href="/signup">
+            <a>Signup</a>
         </Link>
       </main>
     </div>
