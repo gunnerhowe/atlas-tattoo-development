@@ -5,7 +5,7 @@
     padding-right: 2rem;
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 75vh;
   }
   
   
@@ -15,7 +15,7 @@
     background: #e0e0e0;
     box-shadow: 15px 15px 30px #bebebe,
                 -15px -15px 30px #ffffff;
-    height: 100%;
+    height: 60vh;
     padding: 1rem 1rem;
     flex: 1;
     display: flex;
@@ -56,24 +56,12 @@
     text-decoration: underline;
   }
   
-  /*.title {
+  .title {
     margin: 0;
     line-height: 1.15;
-    font-size: 4rem;
-  }*/
-
-  @media (min-width: 0px) {
-    .title { font-size: 1rem; }
+    font-size: 2rem;
+    margin-top: 2rem;
   }
-  
-  @media (min-width: 300px) {
-    .title { font-size: calc(1.5rem + 1vw);}
-  }
-  
-  @media (min-width: 1001px){
-    .title { font-size: 2rem; }
-  }
-  
   
   .title,
   .description {
@@ -81,7 +69,8 @@
   }
   
   .description {
-    margin: 2rem 0;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
     line-height: 1.5;
     font-size: 2rem;
   }
@@ -105,22 +94,17 @@
   
   .card {
     margin: 1rem;
-    text-align: center;
+    text-align: left;
     color: inherit;
     text-decoration: none;
     border-radius: 10px;
     transition: color 0.15s ease, border-color 0.15s ease;
-    width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: .25rem;
-    padding-bottom: .25rem;
-    
+    max-width: 100%;
   }
   
   .imgPreview {
-    width: 500px;
-    border-radius: 50px;
+    width: 20vw;
+    border-radius: 10px;
   }
   
   .imgPreview:hover,
@@ -151,10 +135,6 @@
     .grid {
       width: 100%;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin-right: 2rem;
-      margin-bottom: 2rem;
     }
   }
   
@@ -176,7 +156,9 @@
   }
   .btn_neu {
     padding: 1.5em 5em;
-    background: #efefef;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    background: #e0e0e0;
     border: none;
     border-radius: .5rem;
     color: #444;
@@ -203,4 +185,77 @@
                 inset -2px -2px 4px rgba(255, 255, 255, .5),
                 inset 2px 2px 2px rgba(255, 255, 255, .075),
                 inset 2px 2px 4px rgba(0, 0, 0, .15);
+  }
+
+  /*-----------back button----------------*/
+.back_neu {
+    border-radius: 50%;
+    background: #e0e0e0;
+    box-shadow:  10px 10px 20px #bebebe,
+                -10px -10px 20px #ffffff;
+    border: none;
+    height: 10vh;
+    width: 10vh;
+    margin-right: 85vw;
+    margin-bottom: 20vh;
+    position: fixed;
+  }
+  
+  .back_neu:hover {
+    box-shadow: -2px -2px 6px rgba(255, 255, 255, .6),
+                -2px -2px 4px rgba(255, 255, 255, .4),
+                2px 2px 2px rgba(255, 255, 255, .05),
+                2px 2px 4px rgba(0, 0, 0, .1);
+  }
+  
+  .back_neu:active {
+    box-shadow: inset -2px -2px 6px rgba(255, 255, 255, .7),
+                inset -2px -2px 4px rgba(255, 255, 255, .5),
+                inset 2px 2px 2px rgba(255, 255, 255, .075),
+                inset 2px 2px 4px rgba(0, 0, 0, .15);
+  }
+  
+  @media (max-width: 1536px) {
+    .back_neu {
+      margin-right: 75vw;
+      height: 45px;
+      width: 45px;
+      margin-bottom: 60vh;
+    }
+  }
+  
+  @media (max-width: 1366px) {
+    .back_neu {
+      margin-right: 87vw;
+      height: 45px;
+      width: 45px;
+      margin-bottom: 45vh;
+    }
+  }
+  
+  @media (max-width: 414px) {
+    .back_neu {
+      margin-right: 60%;
+      height: 50px;
+      width: 50px;
+      margin-bottom: 60vh;
+    }
+  }
+  
+  @media (max-width: 375px) {
+    .back_neu {
+      margin-right: 55%;
+      height: 40px;
+      width: 40px;
+      margin-bottom: 60vh;
+    }
+  }
+  
+  @media (max-width: 360px) {
+    .back_neu {
+      margin-right: 55%;
+      height: 40px;
+      width: 40px;
+      margin-bottom: 60vh;
+    }
   }

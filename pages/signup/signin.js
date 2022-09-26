@@ -1,7 +1,9 @@
 import Head from "next/head";
 import { useState } from "react";
 import Link from 'next/link';
-import styles from "./SignupPage.module.css";
+import styles from "./SignInPage.module.css";
+import SVG from '/pages/gallery/images/back_arrow.svg'
+import Image from 'next/image'
 
 export default function Home() {
 
@@ -12,21 +14,12 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}><span className={styles.titleColor}>Signup</span></h1>
-        <p className={styles.description}>
-          <input
-            id="firstname"
-            type="text"
-            placeholder="First Name"
-          />
-        </p>
-        <p className={styles.description}>
-          <input
-            id="lastname"
-            type="text"
-            placeholder="Last Name"
-          />
-        </p>
+        <Link href='/'>
+          <button className={styles.back_neu}>
+            <Image src={SVG} alt='svg' ></Image>
+          </button>
+        </Link>
+        <h1 className={styles.title}><span className={styles.titleColor}>Sign In</span></h1>
         <p className={styles.description}>
           <input
             id="email"

@@ -38,7 +38,7 @@ export default function Generate() {
       </Head>
 
       <main className={classes.main}>
-        <h1 className={classes.title}><span className={classes.titleColor}>Atlas Tattoo Development</span></h1>
+        <h1 className={classes.title}><span className={classes.titleColor}>Get Inked With The Future</span></h1>
         <p className={classes.description}>
           <input
             id="query"
