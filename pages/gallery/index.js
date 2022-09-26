@@ -144,8 +144,6 @@ export default function GalleryPage() {
 
       <main className={styles.main}>
         <h1 className={styles.title}><span className={styles.titleColor}>Gallery</span></h1>
-        <p className={styles.description}>
-        </p>
         <div className={styles.grid}>
               <div className={styles.card}>
               <Image className={styles.imgPreview} src={image1} alt=' ' width={image_width} height={image_heigth}/>
