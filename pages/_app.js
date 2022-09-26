@@ -1,7 +1,7 @@
 import Head from 'next/head';
 
 import '../styles/globals.css';
-import Layout from '../pages/components/layout';
+import Layout from '../layout';
 
 function MyApp({ Component, pageProps }) {
   return (
