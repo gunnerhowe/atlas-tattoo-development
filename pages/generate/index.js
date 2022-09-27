@@ -5,6 +5,7 @@ import { useState } from "react";
 import React from 'react';
 import Link from 'next/link'
 import {signIn, signOut, useSession} from 'next-auth/react'
+import { saveAs } from "file-saver";
 
 export default function Generate() {
   const { data: session, status} = useSession();
@@ -83,7 +84,7 @@ export default function Generate() {
                 {results.map((result) => {
                   return (
                     <div className={classes.card}>
-                      <Image className={classes.imgPreview} src={result.generation.image_path} alt=' ' width='300vw' height='300vw'/>
+                      <Image className={classes.imgPreview} src={result.generation.image_path} alt=' ' width='300vw' height='300vw'/>          
                     </div>
                   );
                 })}

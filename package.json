@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "dalle-node": "1.0.5",
+    "file-saver": "^2.0.5",
     "next": "^12.2.5",
     "next-auth": "^4.12.0",
     "nextjs": "^0.0.3",
