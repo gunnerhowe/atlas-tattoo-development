@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Atlas Tattoo Dev</title>
+        <title>Atlas Tattoo Development</title>
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}><span className={styles.titleColor}>Ink Your Skin With Intelligence.</span></h1>
