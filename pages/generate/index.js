@@ -85,6 +85,9 @@ export default function Generate() {
                   return (
                     <div className={classes.card}>
                       <Image className={classes.imgPreview} src={result.generation.image_path} alt=' ' width='300vw' height='300vw'/>          
+                    </div>,
+                    <div>
+                      <button className={classes.btn_neu} onClick={saveAs(result.generation.image_path)}>Save</button>
                     </div>
                   );
                 })}
