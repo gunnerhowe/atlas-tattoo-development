@@ -2,9 +2,13 @@ import Image from 'next/image'
 import classes from "./GeneratePage.module.css";
 import Head from "next/head";
 import { useState } from "react";
+import React from 'react';
+import Link from 'next/link'
+import {signIn, signOut, useSession} from 'next-auth/react'
 
 export default function Generate() {
-  const [token, setToken] = useState("sess-gkBvdsysh38gXC5i52VtLcyrvrBz5whPQrOtHdBl");
+  const { data: session, status} = useSession();
+  const [token, setToken] = useState("sess-u5OiOtl27T0qbIg0XaGTkq2yiuJSVVtaoneqbS6l");
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -38,43 +42,55 @@ export default function Generate() {
       </Head>
 
       <main className={classes.main}>
-        <h1 className={classes.title}><span className={classes.titleColor}>Get Inked With The Future</span></h1>
-        <p className={classes.description}>
-          <input
-            id="query"
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Query"
-          />
-        </p>{" "}
-        <button className={classes.btn_neu} onClick={GetDalle2}>
-          Generate</button>
-        {error ? (
-          <div className={classes.error}>Something went wrong..Try again</div>
-        ) : (
-          <></>
+        {!session && (
+          <>
+            <br />
+            <button className={classes.btn_neu} onClick={signIn}>Sign In</button>
+          </>
         )}
-        {loading && 
-        <div className="wrapper">
-        <span></span>
-        <span></span>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="circle"></div>
-        <div className="shadow"></div>
-        <div className="shadow"></div>
-        <div className="shadow"></div>
-        </div>}
-        <div className={classes.grid}>
-          {results.map((result) => {
-            return (
-              <div className={classes.card}>
-                <Image className={classes.imgPreview} src={result.generation.image_path} alt=' '/>
+        {
+          session && (
+            <>
+              <h1 className={classes.title}><span className={classes.titleColor}>Get Inked With The Future</span></h1>
+              <p className={classes.description}>
+                <input
+                  id="query"
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Query"
+                />
+              </p>{" "}
+              <button className={classes.btn_neu} onClick={GetDalle2}>
+                Generate</button>
+              {error ? (
+                <div className={classes.error}>Something went wrong..Try again</div>
+              ) : (
+                <></>
+              )}
+              {loading && 
+              <div className="wrapper">
+              <br />
+              <br />
+              <div className="circle"></div>
+              <div className="circle"></div>
+              <div className="circle"></div>
+              <div className="shadow"></div>
+              <div className="shadow"></div>
+              <div className="shadow"></div>
+              </div>}
+              <div className={classes.grid}>
+                {results.map((result) => {
+                  return (
+                    <div className={classes.card}>
+                      <Image className={classes.imgPreview} src={result.generation.image_path} alt=' ' width='300vw' height='300vw'/>
+                    </div>
+                  );
+                })}
               </div>
-            );
-          })}
-        </div>
+            </>
+          )
+        }
       </main>
     </div>
   );

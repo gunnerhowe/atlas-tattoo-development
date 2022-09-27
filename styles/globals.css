@@ -213,6 +213,7 @@ button:active {
   height: 60px;
   position: relative;
   z-index: 1;
+  margin-top: 2rem;
 }
 
 .circle {
