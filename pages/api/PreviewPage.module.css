@@ -1,4 +1,4 @@
-.main_container {
+/* .main_container {
     padding-bottom: 2rem;
     padding-left: 2rem;
     padding-top: 2rem;
@@ -24,7 +24,6 @@
               -15px -15px 30px #ffffff;
   height: 75vh;
   padding: 1rem 1rem;
-  /*flex: 1;*/
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -90,7 +89,7 @@
     }
   }
 
-  /*-----------Checkout button----------------*/
+
 .btn_neu body {
     display: flex;
     justify-content: center;
@@ -101,7 +100,6 @@
   }
   .btn_neu {
     padding: 1.5em 5em;
-    /*background: #efefef;*/
     background: #e0e0e0;
     border: none;
     border-radius: .5rem;
@@ -146,4 +144,4 @@
   
   @media (min-width: 1001px){
     .main_title { font-size: 2rem; }
-  }
+  } */
