@@ -144,384 +144,575 @@ export default function GalleryPage() {
       <main className={styles.main}>
         <h1 className={styles.title}><span className={styles.titleColor}>Gallery</span></h1>
         <div className={styles.grid}>
-        <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image47} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image48} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image49} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image50} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image51} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image52} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image53} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image54} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image83} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image84} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image85} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image86} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image11} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image12} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image13} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image14} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image15} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image16} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image17} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image18} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image19} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image20} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image21} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image22} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image23} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image24} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image25} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image26} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image27} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image28} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image29} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image30} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image31} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image32} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image33} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image34} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image35} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image36} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image37} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image38} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image39} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image40} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image41} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image42} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image43} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image44} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image45} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image46} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image55} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image56} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image57} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image58} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image59} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image60} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image61} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image62} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image63} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image64} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image65} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image66} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image67} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image68} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image69} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image70} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image71} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image72} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image73} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image74} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image75} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image76} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image77} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image78} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image79} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image80} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image81} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image82} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image87} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image88} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image89} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image90} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image91} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image92} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image93} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image94} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image95} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image96} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image97} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image98} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image99} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image100} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image101} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image102} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image103} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image104} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image105} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image106} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image107} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image108} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image109} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image110} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image111} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image112} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image113} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image114} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image115} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image116} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image117} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image118} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image119} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image120} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image121} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image122} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image123} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image124} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image125} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image126} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image1} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image2} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image3} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image4} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image5} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image6} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image7} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image8} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image9} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
-              <div className={styles.card}>
-              <Image className={styles.imgPreview} src={image10} alt=' ' width={image_width} height={image_heigth}/>
-              </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image47} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image48} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image49} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image50} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image51} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image52} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image53} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image54} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image83} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image84} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image85} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image86} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image11} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image12} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image13} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image14} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image15} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image16} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image17} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image18} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image19} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image20} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image21} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image22} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image23} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image24} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image25} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image26} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image27} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image28} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image29} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image30} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image31} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image32} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image33} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image34} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image35} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image36} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image37} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image38} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image39} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image40} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image41} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image42} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image43} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image44} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image45} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image46} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image55} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image56} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image57} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image58} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image59} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image60} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image61} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image62} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image63} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image64} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image65} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image66} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image67} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image68} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image69} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image70} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image71} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image72} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image73} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image74} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image75} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image76} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image77} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image78} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image79} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image80} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image81} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image82} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image87} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image88} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image89} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image90} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image91} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image92} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image93} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image94} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image95} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image96} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image97} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image98} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image99} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image100} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image101} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image102} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image103} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image104} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image105} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image106} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image107} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image108} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image109} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image110} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image111} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image112} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image113} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image114} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image115} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image116} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image117} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image118} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image119} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image120} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image121} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image122} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image123} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image124} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image125} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image126} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image1} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image2} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image3} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image4} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image5} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image6} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image7} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image8} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+          <div className={styles.card_row}>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image9} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+            <div className={styles.card}>
+              <Image className={styles.imgPreview} src={image10} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+            </div>
+          </div>
+
+
         </div>
         <Link href="/">
           <button className={styles.btn_neu}>

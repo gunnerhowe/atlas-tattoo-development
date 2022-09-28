@@ -11,11 +11,11 @@ import TwitterProvider from "next-auth/providers/twitter";
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET
         }),
-        TwitterProvider({
+ /*       TwitterProvider({
             clientId: process.env.TWITTER_CLIENT_ID,
             clientSecret: process.env.TWITTER_CLIENT_SECRET
         }),
-/*        AppleProvider({
+        AppleProvider({
             clientId: process.env.APPLE_ID,
             clientSecret: process.env.APPLE_SECRET
         }),
