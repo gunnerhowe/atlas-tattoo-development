@@ -31,7 +31,7 @@ export default function PreviewPage() {
         <section className={styles.section_stripe}>
           <h1 className={styles.main_title}>Credits</h1>
           <container className={styles.container_row}>
-          <form action="/api/prices/oneX" method="POST">
+          <form action="/api/oneX" method="POST">
             <container className={styles.container}>
               <div>
                 <h1 className={styles.title}>
@@ -43,7 +43,7 @@ export default function PreviewPage() {
               </button>
             </container>
             </form>
-            <form action="/api/prices/fiveX" method="POST">
+            <form action="/api/fiveX" method="POST">
             <container className={styles.container}>
               <div>
                 <h1 className={styles.title}>
@@ -55,7 +55,7 @@ export default function PreviewPage() {
               </button>
             </container>
             </form>
-            <form action="/api/prices/tenX" method="POST">
+            <form action="/api/tenX" method="POST">
             <container className={styles.container}>
               <div>
                 <h1 className={styles.title}>
@@ -69,7 +69,7 @@ export default function PreviewPage() {
             </form>
           </container>
           <container className={styles.container_row}>
-            <form action="/api/prices/twenty-fiveX" method="POST">
+            <form action="/api/twenty-fiveX" method="POST">
             <container className={styles.container}>
               <div>
                 <h1 className={styles.title}>
@@ -81,7 +81,7 @@ export default function PreviewPage() {
               </button>
             </container>
             </form>
-            <form action="/api/prices/fiftyX" method="POST">
+            <form action="/api/fiftyX" method="POST">
             <container className={styles.container}>
               <div>
                 <h1 className={styles.title}>
@@ -93,7 +93,7 @@ export default function PreviewPage() {
               </button>
             </container>
             </form>
-            <form action="/api/prices/hundredX" method="POST">
+            <form action="/api/hundredX" method="POST">
             <container className={styles.container}>
               <div>
                 <h1 className={styles.title}>
