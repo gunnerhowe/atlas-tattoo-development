@@ -16,7 +16,7 @@ export default function Home() {
         <p className={styles.description}>
         </p>
         <span></span>
-        <Link href="/signup/signin">
+        <Link href="/generate">
           <button className={styles.btn_neu}>
           Generate</button>
         </Link>
