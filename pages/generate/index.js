@@ -88,7 +88,7 @@ export default function Generate() {
                       <Image className={classes.imgPreview} src={result.generation.image_path} alt=' ' width='300vw' height='300vw'/>
                       <div>
                         <button className={classes.btn_neu_download} onClick={saveAs(result.generation.image_path)}>
-                          <Image className={classes.download_image} src={SVG} alt='svg' width='75px' height='75px'></Image>
+                          <SVG className={classes.download_image}/>
                         </button>
                       </div>        
                     </div>
