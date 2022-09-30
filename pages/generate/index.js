@@ -6,6 +6,7 @@ import React from 'react';
 import Link from 'next/link'
 import {signIn, signOut, useSession} from 'next-auth/react'
 import { saveAs } from "file-saver";
+import SVG from '/pages/gallery/images/download.svg'
 
 export default function Generate() {
   const { data: session, status} = useSession();
@@ -84,10 +85,12 @@ export default function Generate() {
                 {results.map((result) => {
                   return (
                     <div className={classes.card}>
-                      <Image className={classes.imgPreview} src={result.generation.image_path} alt=' ' width='300vw' height='300vw'/>          
-                    </div>,
-                    <div>
-                      <button className={classes.btn_neu} onClick={saveAs(result.generation.image_path)}>Save</button>
+                      <Image className={classes.imgPreview} src={result.generation.image_path} alt=' ' width='300vw' height='300vw'/>
+                      <div>
+                        <button className={classes.btn_neu_download} onClick={saveAs(result.generation.image_path)}>
+                          <Image className={classes.download_image} src={SVG} alt='svg' width='75px' height='75px'></Image>
+                        </button>
+                      </div>        
                     </div>
                   );
                 })}

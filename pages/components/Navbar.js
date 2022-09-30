@@ -18,6 +18,7 @@ const MENU_LIST1 = [
   { text: "Gallery", href: "/gallery" },
   { text: "Services", href: "/services" },
   { text: "Generate", href: "/generate" },
+  { text: "Profile", href: "/profile" },
   { text: "Sign Out", href: "/api/auth/signout" },
 ];
 
