@@ -10,7 +10,8 @@ import SVG from '/pages/gallery/images/download.svg'
 
 export default function Generate() {
   const { data: session, status} = useSession();
-  const [token, setToken] = useState("sess-u5OiOtl27T0qbIg0XaGTkq2yiuJSVVtaoneqbS6l");
+  //const [token, setToken] = useState("sess-u5OiOtl27T0qbIg0XaGTkq2yiuJSVVtaoneqbS6l");
+  const token = process.env.BEARER_TOKEN
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
