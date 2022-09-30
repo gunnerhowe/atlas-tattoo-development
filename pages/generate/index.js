@@ -5,7 +5,7 @@ import { useState } from "react";
 import React from 'react';
 import Link from 'next/link'
 import {signIn, signOut, useSession} from 'next-auth/react'
-import { saveAs } from "file-saver";
+//import { saveAs } from "file-saver";
 import SVG from '/pages/gallery/images/download.svg'
 
 export default function Generate() {
@@ -87,7 +87,7 @@ export default function Generate() {
                     <div className={classes.card}>
                       <Image className={classes.imgPreview} src={result.generation.image_path} alt=' ' width='300vw' height='300vw'/>
                       <div>
-                        <button className={classes.btn_neu_download} onClick={saveAs(result.generation.image_path)}>
+                        <button className={classes.btn_neu_download}>
                           <SVG className={classes.download_image}/>
                         </button>
                       </div>        
