@@ -23,7 +23,7 @@ export default function Generate() {
       fetch(`/api/dalle2?k=${token}&q=${query}`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "text/plain",
         },
       })
         .then((res) => res.json())
@@ -70,6 +70,11 @@ export default function Generate() {
               </p>{" "}
               <button className={classes.btn_neu} onClick={GetDalle2}>
                 Generate</button>
+                {error ? (
+                <div className={classes.error}>Something went wrong..Try again</div>
+              ) : (
+                <></>
+              )}
               {loading && 
               <div className="wrapper">
               <br />
