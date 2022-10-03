@@ -70,11 +70,6 @@ export default function Generate() {
               </p>{" "}
               <button className={classes.btn_neu} onClick={GetDalle2}>
                 Generate</button>
-              {error ? (
-                <div className={classes.error}>Something went wrong..Try again</div>
-              ) : (
-                <></>
-              )}
               {loading && 
               <div className="wrapper">
               <br />
