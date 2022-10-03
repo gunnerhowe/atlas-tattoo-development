@@ -11,32 +11,35 @@ import SVG from '/pages/gallery/images/download.svg'
 export default function Generate() {
   const { data: session, status} = useSession();
   const [token, setToken] = useState("sess-u5OiOtl27T0qbIg0XaGTkq2yiuJSVVtaoneqbS6l");
-  //const [token, setToken] = useState(string(process.env.BEARER_TOKEN));
-  //const token = string(process.env.BEARER_TOKEN)
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   function GetDalle2() {
-    setError(false);
-    setLoading(true);
-    fetch(`/api/dalle2?k=${token}&q=${query}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setResults(data.result);
-        setLoading(false);
+    if (token != "" && query != "") {
+      setError(false);
+      setLoading(true);
+      fetch(`/api/dalle2?k=${token}&q=${query}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-        setError(true);
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          setResults(data.result);
+          setLoading(false);
+          console.log(data.results)
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+          setError(true);
+        });
+    } else {
+      setError(true);
+    }
   }
 
   return (
@@ -86,8 +89,8 @@ export default function Generate() {
               <div className={classes.grid}>
                 {results.map((result) => {
                   return (
-                    <div className={classes.card}>
-                      <Image className={classes.imgPreview} src={result.generation.image_path} alt=' ' width='300vw' height='300vw'/>
+                    <div key={result.generation.image_path.toString()} className={classes.card}>
+                      <Image key={result.generation.image_path.toString()} className={classes.imgPreview} src={result.generation.image_path} alt=' ' width='300vw' height='300vw'/>
                       <div>
                         <button className={classes.btn_neu_download}>
                           <SVG className={classes.download_image}/>
