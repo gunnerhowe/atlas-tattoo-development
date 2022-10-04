@@ -7,6 +7,7 @@ import Link from 'next/link'
 import {signIn, signOut, useSession} from 'next-auth/react'
 //import { saveAs } from "file-saver";
 import SVG from '/pages/gallery/images/download.svg'
+import clientPromise from "../../lib/mongodb";
 
 export default function Generate() {
   const { data: session, status} = useSession();
@@ -30,7 +31,25 @@ export default function Generate() {
         .then((data) => {
           setResults(data.result);
           setLoading(false);
-          console.log(data.results)
+
+          async (req, res) => {
+            try {
+                const client = await clientPromise;
+                const db = client.db("sample_mflix");
+                const dalleJson = result.generation.image_path;
+         
+                const result = await db
+                     .collection("movies")
+                     .insertOne(dalleJson);
+                 console.log('A document was inserted with the _id: {result.insertedId}')
+         
+                res.json(result);
+            } catch (e) {
+                console.error(e);
+            }
+         };
+
+
         })
         .catch((err) => {
           console.log(err);
