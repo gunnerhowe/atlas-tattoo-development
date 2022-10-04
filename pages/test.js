@@ -13,6 +13,7 @@ export default function Testing() {
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [testing, setTesting] = useState({});
 
     function GetDalle2() {
         if (token != "" && query != "") {
@@ -28,6 +29,7 @@ export default function Testing() {
             .then((data) => {
               setResults(data.result);
               setLoading(false);
+              setTesting({test: data.result});
             })
             .catch((err) => {
               console.log(err);
@@ -37,43 +39,42 @@ export default function Testing() {
         } else {
           setError(true);
         }
-
-        async function getServerSideProps() {
-
-            try {
-                //Connecting to the DB
-                const client = await clientPromise;
-        
-                //Specificially saying which DB to connect to
-                const db = client.db("sample_mflix");
-        
-                //Example of creating a doc that inserts into the db
-                const doc = {data: results.generate};
-        
-                const result = await db
-                    .collection("movies")
-                    .insertOne(doc);
-                console.log('A document was inserted with the _id: {result.insertedId}')
-        
-                //Example of retrieving a document from the db
-                const movies = await db
-                    .collection("movies")
-                    .find({})
-                    .sort({ metacritic: -1 })
-                    .limit(20)
-                    .toArray();
-        
-                //returning the JSON strings so that they can be added to the UI in the above function
-                return {
-                    props: { movies: JSON.parse(JSON.stringify(movies)) },
-                };
-        
-                //Error catcher
-                } catch (e) {
-                    console.error(e);
-                }
-            }
       }
+
+      async function getServerSideProps() {
+
+        try {
+            //Connecting to the DB
+            const client = await clientPromise;
+    
+            //Specificially saying which DB to connect to
+            const db = client.db("sample_mflix");
+    
+            //Example of creating a doc that inserts into the db
+            
+            //const toInsert = data
+
+            const toInsert = {data: 'test'}
+
+            const forReturn = 'hello'
+
+            const result = await db
+                .collection("movies")
+                .insertOne(toInsert);
+            console.log('A document was inserted with the _id:')
+    
+            //Example of retrieving a document from the db
+    
+            //returning the JSON strings so that they can be added to the UI in the above function
+            return {
+                forReturn
+            };
+    
+            //Error catcher
+            } catch (e) {
+                console.error(e);
+            }
+        }
 
 
     return (

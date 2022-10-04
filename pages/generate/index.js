@@ -90,7 +90,7 @@ export default function Generate() {
                 {results.map((result) => {
                   return (
                     <div key={result.generation.image_path.toString()} className={classes.card}>
-                      <Image key={result.generation.image_path.toString()} className={classes.imgPreview} src={result.generation.image_path} alt=' ' width='300vw' height='300vw'/>
+                      <Image key={result.generation.image_path.toString()} className={classes.imgPreview} src={JSON.parse(JSON.stringify(result.generation.image_path))} alt=' ' width='300vw' height='300vw'/>
                       <div>
                         <button className={classes.btn_neu_download}>
                           <SVG className={classes.download_image}/>
