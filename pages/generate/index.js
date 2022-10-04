@@ -10,7 +10,7 @@ import SVG from '/pages/gallery/images/download.svg'
 
 export default function Generate() {
   const { data: session, status} = useSession();
-  const [token, setToken] = useState("sess-u5OiOtl27T0qbIg0XaGTkq2yiuJSVVtaoneqbS6l");
+  const [token, setToken] = useState(process.env.BEARER_TOKEN);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ export default function Generate() {
     if (token != "" && query != "") {
       setError(false);
       setLoading(true);
-      fetch(`/api/dalle2?k=${token}&q=${query}`, {
+      fetch(process.env.API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +90,7 @@ export default function Generate() {
                 {results.map((result) => {
                   return (
                     <div key={result.generation.image_path.toString()} className={classes.card}>
-                      <Image key={result.generation.image_path.toString()} className={classes.imgPreview} src={JSON.parse(JSON.stringify(result.generation.image_path))} alt=' ' width='300vw' height='300vw'/>
+                      <Image key={result.generation.image_path.toString()} className={classes.imgPreview} src={result.generation.image_path} alt=' ' width='300vw' height='300vw'/>
                       <div>
                         <button className={classes.btn_neu_download}>
                           <SVG className={classes.download_image}/>
