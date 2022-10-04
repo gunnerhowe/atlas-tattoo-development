@@ -10,7 +10,7 @@ import SVG from '/pages/gallery/images/download.svg'
 
 export default function Generate() {
   const { data: session, status} = useSession();
-  const [token, setToken] = useState(process.env.BEARER_TOKEN);
+  const [token, setToken] = useState("sess-u5OiOtl27T0qbIg0XaGTkq2yiuJSVVtaoneqbS6l");
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ export default function Generate() {
     if (token != "" && query != "") {
       setError(false);
       setLoading(true);
-      fetch(process.env.API_URL, {
+      fetch(`/api/dalle2?k=${token}&q=${query}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +45,7 @@ export default function Generate() {
   return (
     <div className={classes.container}>
       <Head>
-        <title>Atlas Tattoo Dev</title>
+        <title>Atlas Tattoo Development</title>
       </Head>
 
       <main className={classes.main}>
