@@ -23,7 +23,7 @@ export default function Generate() {
       fetch(`/api/dalle2?k=${token}&q=${query}`, {
         method: "POST",
         headers: {
-          "Content-Type": "text/plain",
+          "Content-Type": "application/json",
         },
       })
         .then((res) => res.json())
