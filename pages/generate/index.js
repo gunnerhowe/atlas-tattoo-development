@@ -17,7 +17,7 @@ export default function Generate() {
   const [error, setError] = useState(false);
 
   const loadIt = async (toAdd) => {
-    const newData = await fetch(`http://localhost:3000/api/storeDalle?created=${toAdd.i_created}&image_path=${toAdd.i_image_path}&image_id=${toAdd.i_image_id}&user=${toAdd.i_user}`);
+    const newData = await fetch(`https://atlas-tattoo-development-pied.vercel.app/api/storeDalle?created=${toAdd.i_created}&image_path=${toAdd.i_image_path}&image_id=${toAdd.i_image_id}&user=${toAdd.i_user}`);
     const res = await newData.json();
     console.log(res);
   };
