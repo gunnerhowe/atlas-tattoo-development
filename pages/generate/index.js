@@ -7,7 +7,6 @@ import Link from 'next/link'
 import {signIn, signOut, useSession} from 'next-auth/react'
 //import { saveAs } from "file-saver";
 import SVG from '/pages/gallery/images/download.svg'
-import clientPromise from "../../lib/mongodb";
 
 export default function Generate() {
   const { data: session, status} = useSession();
@@ -16,6 +15,12 @@ export default function Generate() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const loadIt = async (toAdd) => {
+    const newData = await fetch(`http://localhost:3000/api/storeDalle?created=${toAdd.i_created}&image_path=${toAdd.i_image_path}&image_id=${toAdd.i_image_id}&user=${toAdd.i_user}`);
+    const res = await newData.json();
+    console.log(res);
+  };
 
   function GetDalle2() {
     if (token != "" && query != "") {
@@ -31,26 +36,18 @@ export default function Generate() {
         .then((data) => {
           setResults(data.result);
           setLoading(false);
-
-          async (req, res) => {
-            try {
-                const client = await clientPromise;
-                const db = client.db("sample_mflix");
-                const dalleJson = result.generation.image_path;
-         
-                const result = await db
-                     .collection("movies")
-                     .insertOne(dalleJson);
-                 console.log('A document was inserted with the _id: {result.insertedId}')
-         
-                res.json(result);
-            } catch (e) {
-                console.error(e);
-            }
-         };
-
-
-        })
+          results.forEach((result) => 
+            {
+              var toAdd = {
+                i_created: result.created,
+                i_image_path: encodeURIComponent(result.generation.image_path),
+                i_image_id: result.id,
+                i_user: 'Gunner'
+              };
+              console.log(toAdd);
+              loadIt(toAdd);
+            });
+          })
         .catch((err) => {
           console.log(err);
           setLoading(false);
@@ -58,8 +55,10 @@ export default function Generate() {
         });
     } else {
       setError(true);
-    }
+    };
   }
+
+
 
   return (
     <div className={classes.container}>

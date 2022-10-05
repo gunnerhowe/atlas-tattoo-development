@@ -1,18 +1,22 @@
 import clientPromise from "../../lib/mongodb";
 
+
 export default async (req, res) => {
-   try {
-       const client = await clientPromise;
-       const db = client.db("sample_mflix");
-       const dalleJson = result.generation.image_path;
 
-       const result = await db
-            .collection("movies")
-            .insertOne(dalleJson);
-        console.log('A document was inserted with the _id: {result.insertedId}')
+    const newData = req.query;
 
-       res.json(result);
-   } catch (e) {
-       console.error(e);
-   }
+    try {
+        const client = await clientPromise;
+        const db = client.db("Atlas_Tattoo");
+
+
+        const result = await db
+                .collection("images")
+                .insertOne(newData);
+            console.log(`A document was inserted with the _id: ${result.insertedId}`)
+
+        res.json(result);
+    } catch (e) {
+        console.error(e);
+    }
 };
