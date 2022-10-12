@@ -2,9 +2,13 @@ import Head from "next/head";
 import { useState } from "react";
 import Link from 'next/link';
 import styles from "../profile/profilePage.module.css";
-import Image from 'next/image'
+import Image from 'next/image';
+import {signIn, signOut, useSession, getSession} from 'next-auth/react';
+import Navbar from "../profile/components/Nav";
+
 
 export default function ProfilePage() {
+  const { data: session, status} = useSession();
 
   return (
     <div className={styles.container}>
@@ -12,28 +16,13 @@ export default function ProfilePage() {
         <title>Atlas Tattoo Development</title>
       </Head>
       <main className={styles.main}>
-        <h1 className={styles.title}><span className={styles.titleColor}>Welcome to your profile Gunner</span></h1>
-        <p className={styles.description}>
-        </p>
-        <span></span>
-        <Link href="/">
-          <button className={styles.btn_neu}>
-          Home</button>
-        </Link>
-
-        <span></span>
-
-        <Link href="/stripe">
-          <button className={styles.btn_neu}>
-          Credits</button>
-        </Link>
-
-        <span></span>
-
-        <Link href="/profile/myGallery">
-          <button className={styles.btn_neu}>
-          My Gallery</button>
-        </Link>
+        <div className={styles.navbar_cont}>
+          <Navbar/>
+        </div>
+        <h1 className={styles.title}><span className={styles.titleColor}>{session.user.name}'s Profile</span></h1>
+        <button className={styles.btn_neu}>
+          Credits
+        </button>
       </main>
     </div>
   );

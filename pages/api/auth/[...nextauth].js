@@ -1,7 +1,9 @@
 import NextAuth from 'next-auth';
 //import Providers from 'next-auth/providers';
-import GoogleProvider from "next-auth/providers/google"
-import Auth0Provider from "next-auth/providers/auth0"
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import clientPromise from '../../../lib/mongodb';
+import GoogleProvider from "next-auth/providers/google";
+import Auth0Provider from "next-auth/providers/auth0";
 import AppleProvider from "next-auth/providers/apple";
 import TwitterProvider from "next-auth/providers/twitter";
 
@@ -9,7 +11,15 @@ import TwitterProvider from "next-auth/providers/twitter";
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            profile(profile) {
+                return {
+                  id: profile.sub,
+                  name: profile.name,
+                  email: profile.email,
+                  image: profile.picture,
+                }
+              },
         }),
  /*       TwitterProvider({
             clientId: process.env.TWITTER_CLIENT_ID,
@@ -38,12 +48,13 @@ import TwitterProvider from "next-auth/providers/twitter";
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     profile(profile) {
       return {
-        // Return all the profile information you need.
-        // The only truly required field is `id`
-        // to be able identify the account when added to a database
+        id: profile.sub,
+        name: profile.name,
+        email: profile.email,
+        image: profile.picture,
       }
     },
-  }) */
+  })  */
 
 /*   Auth0Provider({
     clientId: process.env.CLIENT_ID,
@@ -53,3 +64,7 @@ import TwitterProvider from "next-auth/providers/twitter";
   }) */
 
   export default (req, res) => NextAuth(req, res, options)
+/*   export default NextAuth({
+    adapter: MongoDBAdapter(clientPromise),
+    providers: options
+  }) */

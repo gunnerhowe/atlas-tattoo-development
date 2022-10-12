@@ -5,22 +5,32 @@ import { useState } from "react";
 import React from 'react';
 import Link from 'next/link'
 import {signIn, signOut, useSession} from 'next-auth/react'
-//import { saveAs } from "file-saver";
 import SVG from '/pages/gallery/images/download.svg'
+import { saveAs } from 'file-saver'
 
 export default function Generate() {
   const { data: session, status} = useSession();
-  const [token, setToken] = useState("sess-u5OiOtl27T0qbIg0XaGTkq2yiuJSVVtaoneqbS6l");
+  const [token, setToken] = useState("sess-yGcqdrc8VaZTJyUnz2L2JHlrW0067vnkBDSWocE0");
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [IsOpen, setIsOpen] = useState(true);
 
-  const loadIt = async (toAdd) => {
-    const newData = await fetch(`https://atlas-tattoo-development-pied.vercel.app/api/storeDalle?created=${toAdd.i_created}&image_path=${toAdd.i_image_path}&image_id=${toAdd.i_image_id}&user=${toAdd.i_user}`);
-    const res = await newData.json();
-    console.log(res);
-  };
+  const loadIt = async (files) => {
+    for (const file of files) {
+    var toAdd = {
+      i_created: file.created,
+      i_image_path: encodeURIComponent(file.generation.image_path),
+      i_image_id: file.id,
+      i_task_id: file.task_id,
+      i_email: session.user.email,
+      i_name: session.user.name
+    };
+      const newData = await fetch(`/api/storeDalle?created=${toAdd.i_created}&image_path=${toAdd.i_image_path}&image_id=${toAdd.i_image_id}&task_id=${toAdd.i_task_id}&email=${toAdd.i_email}&name=${toAdd.i_name}`);
+      const res = await newData.json();
+      console.log(res);};
+      setIsOpen(true)};
 
   function GetDalle2() {
     if (token != "" && query != "") {
@@ -35,19 +45,11 @@ export default function Generate() {
         .then((res) => res.json())
         .then((data) => {
           setResults(data.result);
+          const files = (data.result);
+          console.log(data.result);
+          loadIt(files);
           setLoading(false);
-          results.forEach((result) => 
-            {
-              var toAdd = {
-                i_created: result.created,
-                i_image_path: encodeURIComponent(result.generation.image_path),
-                i_image_id: result.id,
-                i_user: 'Gunner'
-              };
-              console.log(toAdd);
-              loadIt(toAdd);
-            });
-          })
+        })
         .catch((err) => {
           console.log(err);
           setLoading(false);
@@ -57,7 +59,6 @@ export default function Generate() {
       setError(true);
     };
   }
-
 
 
   return (
@@ -86,24 +87,18 @@ export default function Generate() {
                   placeholder="Query"
                 />
               </p>{" "}
-              <button className={classes.btn_neu} onClick={GetDalle2}>
-                Generate</button>
+              {IsOpen &&
+              <button className={classes.btn_neu} onClick={() => {GetDalle2(); setIsOpen(false)}}>
+                Generate</button>}
                 {error ? (
                 <div className={classes.error}>Something went wrong..Try again</div>
               ) : (
                 <></>
               )}
               {loading && 
-              <div className="wrapper">
+                <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>}
               <br />
               <br />
-              <div className="circle"></div>
-              <div className="circle"></div>
-              <div className="circle"></div>
-              <div className="shadow"></div>
-              <div className="shadow"></div>
-              <div className="shadow"></div>
-              </div>}
               <div className={classes.grid}>
                 {results.map((result) => {
                   return (

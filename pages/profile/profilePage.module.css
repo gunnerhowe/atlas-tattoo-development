@@ -7,9 +7,14 @@
     width: 100vw;
     height: 82vh;
     align-items: center;
+    flex-direction: column;
   }
-  
-  
+
+  .navbar_cont {
+    position: fixed;
+    top: 125px;
+  }
+
   .main {
     width: 80vw;
     border-radius: 30px;
@@ -44,6 +49,8 @@
   
   .titleColor {
     color: rgb(7, 7, 7);
+    font-size: 1.5rem;
+    font-weight: bold;
   }
   
   .title a {

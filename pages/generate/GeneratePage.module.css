@@ -228,3 +228,7 @@
     height: 40px;
     width: 40px;
   }
+
+  .btn_neu_close {
+    display: none
+  }
