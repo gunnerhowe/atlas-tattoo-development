@@ -8,7 +8,7 @@ import Navbar from "../profile/components/Nav";
 
 
 export default function ProfilePage() {
-  const { data: session, status} = useSession();
+  //const { data: session, status} = useSession();
 
   return (
     <div className={styles.container}>
@@ -19,7 +19,7 @@ export default function ProfilePage() {
         <div className={styles.navbar_cont}>
           <Navbar/>
         </div>
-        <h1 className={styles.title}><span className={styles.titleColor}>{session.user.name}'s Profile</span></h1>
+        <h1 className={styles.title}><span className={styles.titleColor}>Gunner's Profile</span></h1>
         <button className={styles.btn_neu}>
           Credits
         </button>
