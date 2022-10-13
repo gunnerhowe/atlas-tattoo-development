@@ -15,16 +15,14 @@ export default function ProfilePage() {
       <Head>
         <title>Atlas Tattoo Development</title>
       </Head>
+      <main className={styles.main}>
       {!session && (
           <>
-            <main className={styles.main}>
             <button className={styles.btn_neu} onClick={signIn}>Sign In</button>
-            </main>
           </>
         )}
-      {!session && (
+      {session && (
           <>
-      <main className={styles.main}>
         <div className={styles.navbar_cont}>
           <Navbar/>
         </div>
@@ -32,9 +30,9 @@ export default function ProfilePage() {
         <button className={styles.btn_neu}>
           Credits
         </button>
-      </main>
       </>
         )}
+      </main>
     </div>
   );
 }
