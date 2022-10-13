@@ -8,22 +8,33 @@ import Navbar from "../profile/components/Nav";
 
 
 export default function ProfilePage() {
-  //const { data: session, status} = useSession();
+  const { data: session, status} = useSession();
 
   return (
     <div className={styles.container}>
       <Head>
         <title>Atlas Tattoo Development</title>
       </Head>
+      {!session && (
+          <>
+            <main className={styles.main}>
+            <button className={styles.btn_neu} onClick={signIn}>Sign In</button>
+            </main>
+          </>
+        )}
+      {!session && (
+          <>
       <main className={styles.main}>
         <div className={styles.navbar_cont}>
           <Navbar/>
         </div>
-        <h1 className={styles.title}><span className={styles.titleColor}>Gunner's Profile</span></h1>
+        <h1 className={styles.title}><span className={styles.titleColor}>Profile Overview</span></h1>
         <button className={styles.btn_neu}>
           Credits
         </button>
       </main>
+      </>
+        )}
     </div>
   );
 }
