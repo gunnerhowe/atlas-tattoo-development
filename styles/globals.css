@@ -268,7 +268,7 @@ nav{
 /*   right: -288px; */
   right: -100vw;
   padding: 24px 16px;
-  transition: all 0.2s;
+  transition: all 0.8s;
 /*   min-height: calc(100vh - 60px); */
   min-height: 100vh;
   background-color: #f1f1f1;
