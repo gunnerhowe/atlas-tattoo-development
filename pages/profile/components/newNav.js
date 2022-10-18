@@ -8,44 +8,56 @@ import CREDITS from '/pages/gallery/images/credits.svg';
 import GALLERY from '/pages/gallery/images/photo.svg';
 import PLUS from '/pages/gallery/images/plus.svg';
 import MINUS from '/pages/gallery/images/minus.svg';
+import {signIn, signOut, useSession, getSession} from 'next-auth/react';
 
 const Navbar = () => {
     const [IsOpen, setIsOpen] = useState(false);
+    const { data: session, status} = useSession();
   return (
-    <div className={styles.context_menu}>
-        {!IsOpen && (
-            <>
-        <button className={styles.profile_menu_closed} onClick={() => setIsOpen(true)}>
-            <PLUS className={styles.svg_image}/>
-        </button>
-            </>
-        )}
-        {IsOpen && (
-            <>
-        <Link href='/profile'>
-            <button className={open ? styles.profile_btn : ""}>
-                <HOME className={styles.svg_image}/>
-            </button>
-        </Link>
-        <Link href='/profile/myGallery'>
-            <button className={open ? styles.profile_btn : ""}>
-                <GALLERY className={styles.svg_image}/>
-            </button>
-        </Link>
-        <Link href='/stripe'>
-            <button className={open ? styles.profile_btn : ""}>
-                <CREDITS className={styles.svg_image}/>
-            </button>
-        </Link>
-        <Link href='/profile/settings'>
-            <button className={open ? styles.profile_btn : ""}>
-                <SETTINGS className={styles.svg_image}/>
-            </button>
-        </Link>
-        <button className={styles.profile_menu_open} onClick={() => setIsOpen(false)}>                
-            <MINUS className={styles.svg_image}/>
-        </button>
-            </>
+    <div className={IsOpen ? styles.background_menu_active : styles.background_menu}>
+        {session && (
+          <>
+            <div className={styles.context_menu}>
+                {!IsOpen && (
+                    <>
+                <button className={styles.profile_menu_closed} onClick={() => setIsOpen(true)}>
+                    <PLUS className={styles.svg_image}/>
+                </button>
+                    </>
+                )}
+                {IsOpen && (
+                    <>
+                <Link href='/profile'>
+                    <button className={IsOpen ? styles.profile_btn : ""}>
+                        <HOME className={styles.svg_image}/>
+                    </button>
+                </Link>
+                <Link href='/profile/myGallery'>
+                    <button className={IsOpen ? styles.profile_btn : ""}>
+                        <GALLERY className={styles.svg_image}/>
+                    </button>
+                </Link>
+                <Link href='/stripe'>
+                    <button className={IsOpen ? styles.profile_btn : ""}>
+                        <CREDITS className={styles.svg_image}/>
+                    </button>
+                </Link>
+                <Link href='/profile/settings'>
+                    <button className={IsOpen ? styles.profile_btn : ""}>
+                        <SETTINGS className={styles.svg_image}/>
+                    </button>
+                </Link>
+                <button className={styles.profile_menu_open} onClick={() => setIsOpen(false)}>                
+                    <MINUS className={styles.svg_image}/>
+                </button>
+                    </>
+                )}
+            </div>
+        </>)}
+        {!session && (
+          <>
+            <button className={styles.btn_neu} onClick={signIn}>Sign In</button>
+          </>
         )}
     </div>
   );

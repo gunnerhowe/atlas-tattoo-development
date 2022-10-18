@@ -109,14 +109,23 @@
     right: 50px;
 }
 
+.background_menu_active {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: #e8e8f3;
+    opacity: .8;
+    z-index: 20;
+}
+
 .profile_menu_closed {
     border-radius: 100%;
     background: #e0e0e0;
     box-shadow:  10px 10px 20px #bebebe,
                 -10px -10px 20px #ffffff;
     border: none;
-    height: 3rem;
-    width: 3rem;
+    height: 4rem;
+    width: 4rem;
     margin-top: 0px;
   }
   
@@ -141,8 +150,8 @@
     box-shadow:  10px 10px 20px #bebebe,
                 -10px -10px 20px #ffffff;
     border: none;
-    height: 3rem;
-    width: 3rem;
+    height: 4rem;
+    width: 4rem;
     margin-top: 0px;
   }
   
@@ -166,9 +175,11 @@
     box-shadow:  10px 10px 20px #bebebe,
                 -10px -10px 20px #ffffff;
     border: none;
-    height: 3rem;
-    width: 3rem;
+    height: 4rem;
+    width: 4rem;
     margin-bottom: 20px;
+    z-index: 21;
+    position: relative;
   }
   
   .profile_btn:hover {

@@ -10,13 +10,13 @@
   
   
   .main {
-    width: 60vw;
+    width: 100vw;
     border-radius: 30px;
     background: #e0e0e0;
     box-shadow: 15px 15px 30px #bebebe,
                 -15px -15px 30px #ffffff;
     height: 100%;
-    padding: 1rem 1rem;
+    padding: .5rem .5rem;
     flex: 1;
     display: flex;
     flex-direction: column;

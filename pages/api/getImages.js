@@ -1,23 +1,6 @@
 import { Dalle } from "dalle-node";
 import got from 'got';
 
-/* export default async function handler(req, res) {
-  const dalle = new Dalle2(req.query.k);
-  const task = await dalle.getTask(req.query.q);
-  res.status(200).json({ result: task });
-} */
-
-/* export default async function handler(req, res) {
-    const dalle = new Dalle2(req.query.k);
-    const task = await dalle.getDownload(req.query.q);
-    res.status(200).json({ result: task });
-  } */
-
-/*   export default async function handler(req, res) {
-    const dalle = new Dalle2(req.query.k);
-    const task = await dalle.tryDownload(req.query.q);
-    res.status(200).json({ result: task });
-  } */
 
 export class Dalle2 {
     constructor(bearerToken) {
@@ -78,8 +61,8 @@ export class Dalle2 {
         }).json();
     }
 
-      async getDownload(generation_id) {
-        return await got.get(`${ this.url }/generations/${generation_id}/download`, {
+      async getDownload(url) {
+        return await got.get(url, {
           headers: {
             Authorization: "Bearer " + this.bearerToken,
           },

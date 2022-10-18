@@ -30,10 +30,10 @@ export default function ProfilePage() {
         <button className={styles.btn_neu}>
           Credits
         </button>
-        <Navbar/>
       </>
         )}
       </main>
+      <Navbar/>
     </div>
   );
 }

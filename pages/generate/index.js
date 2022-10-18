@@ -3,10 +3,10 @@ import classes from "./GeneratePage.module.css";
 import Head from "next/head";
 import { useState } from "react";
 import React from 'react';
-import Link from 'next/link'
-import {signIn, signOut, useSession} from 'next-auth/react'
-import SVG from '/pages/gallery/images/download.svg'
-import { saveAs } from 'file-saver'
+import Link from 'next/link';
+import {signIn, signOut, useSession} from 'next-auth/react';
+import SVG from '/pages/gallery/images/download.svg';
+import axios from "axios";
 
 export default function Generate() {
   const { data: session, status} = useSession();
@@ -17,20 +17,29 @@ export default function Generate() {
   const [error, setError] = useState(false);
   const [IsOpen, setIsOpen] = useState(true);
 
+
   const loadIt = async (files) => {
+
     for (const file of files) {
-    var toAdd = {
-      i_created: file.created,
-      i_image_path: encodeURIComponent(file.generation.image_path),
-      i_image_id: file.id,
-      i_task_id: file.task_id,
-      i_email: session.user.email,
-      i_name: session.user.name
-    };
+
+      var toAdd = {
+        i_created: file.created,
+        i_image_path: file.generation.image_path,
+        i_image_id: file.id,
+        i_task_id: file.task_id,
+        i_email: session.user.email,
+        i_name: session.user.name,
+      };
+
       const newData = await fetch(`/api/storeDalle?created=${toAdd.i_created}&image_path=${toAdd.i_image_path}&image_id=${toAdd.i_image_id}&task_id=${toAdd.i_task_id}&email=${toAdd.i_email}&name=${toAdd.i_name}`);
       const res = await newData.json();
-      console.log(res);};
-      setIsOpen(true)};
+      //console.log(res);};
+      //console.log('sending a request');
+      };
+      setIsOpen(true)
+    };
+
+
 
   function GetDalle2() {
     if (token != "" && query != "") {
@@ -58,6 +67,22 @@ export default function Generate() {
     } else {
       setError(true);
     };
+  }
+
+
+  function download(url) {
+    axios
+      .post(`/api/download`, { url: url })
+      .then((res) => {
+        const link = document.createElement("a");
+        link.href = `data:application/octet-stream;base64,${res.data.result}`;
+        //console.log(link.href);
+        link.download = `Atlas-Tattoo-Dev.png`;
+        link.click();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
 
@@ -105,7 +130,7 @@ export default function Generate() {
                     <div key={result.generation.image_path.toString()} className={classes.card}>
                       <Image key={result.generation.image_path.toString()} className={classes.imgPreview} src={result.generation.image_path} alt=' ' width='300vw' height='300vw'/>
                       <div>
-                        <button className={classes.btn_neu_download}>
+                        <button className={classes.btn_neu_download} onClick={() => download(result.generation.image_path)}>
                           <SVG className={classes.download_image}/>
                         </button>
                       </div>        
