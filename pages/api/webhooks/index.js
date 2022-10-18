@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       event = stripe.webhooks.constructEvent(
         rawBody.toString(),
         signature,
-        process.env.STRIPE_WEBHOOK_SECRET
+        buffer(process.env.STRIPE_WEBHOOK_SECRET)
       );
     } catch (err) {
       console.log(`❌ Error message: ${err.message}`);
