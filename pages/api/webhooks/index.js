@@ -50,7 +50,7 @@ export default async function handler(req, res) {
     // 2. Handle event type (add business logic here)
     if (event.type === 'checkout.session.completed') {
       console.log(`💰  Payment received!`);
-      const checkoutComp = req.data.object;
+      const checkoutComp = event.data.object;
 
       if (checkoutComp.amount_total === 500) {
         //$5 = 1 Credit
