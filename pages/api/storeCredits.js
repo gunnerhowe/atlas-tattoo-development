@@ -7,9 +7,8 @@ export default async (req, res) => {
     const newData = req.query;
 
     var toAdd = {
-        created: newData.created,
-        email: newData.data.object.email,
-        name: newData.data.object.name,
+        email: newData.email,
+        name: newData.name,
         payment_id: newData.id,
         credits: newData.credits,
       };
