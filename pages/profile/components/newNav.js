@@ -56,7 +56,6 @@ const Navbar = () => {
         </>)}
         {!session && (
           <>
-            <button className={styles.btn_neu} onClick={signIn}>Sign In</button>
           </>
         )}
     </div>
