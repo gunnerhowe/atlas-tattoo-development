@@ -53,7 +53,6 @@ export default async (req, res) => {
             }
         )
         res.json(update);
-        client.close()
         
         } catch (e) {
         console.error(e);
