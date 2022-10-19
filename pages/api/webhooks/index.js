@@ -52,7 +52,7 @@ export default async function handler(req, res) {
       console.log(`💰  Payment received!`);
       const checkoutComp = event.data.object;
 
-      if (checkoutComp.amount_total = 500) {
+      if (checkoutComp.amount_total === 500) {
         //$5 = 1 Credit
         var file = {
           email: checkoutComp.email,
@@ -62,7 +62,7 @@ export default async function handler(req, res) {
         };
         loadIt(file);
 
-      } else if (checkoutComp.amount_total = 2400) {
+      } else if (checkoutComp.amount_total === 2400) {
         //$24 = 5 Credits
         var file = {
           email: checkoutComp.email,
@@ -72,7 +72,7 @@ export default async function handler(req, res) {
         };
         loadIt(file);
 
-      } else if (checkoutComp.amount_total = 4500) {
+      } else if (checkoutComp.amount_total === 4500) {
         //$45 = 10 Credits
         var file = {
           email: checkoutComp.email,
@@ -82,7 +82,7 @@ export default async function handler(req, res) {
         };
         loadIt(file);
 
-      } else if (checkoutComp.amount_total = 7500) {
+      } else if (checkoutComp.amount_total === 7500) {
       //$75 = 25 Credits
       var file = {
         email: checkoutComp.email,
@@ -92,7 +92,7 @@ export default async function handler(req, res) {
       };
       loadIt(file);
 
-      } else if (checkoutComp.amount_total = 20000) {
+      } else if (checkoutComp.amount_total === 20000) {
         //$200 = 50 Credits
         var file = {
           email: checkoutComp.email,
@@ -102,7 +102,7 @@ export default async function handler(req, res) {
         };
         loadIt(file);
 
-      } else if (checkoutComp.amount_total = 30000) {
+      } else if (checkoutComp.amount_total === 30000) {
         //$300 = 100 Credits
         var file = {
           email: checkoutComp.email,
