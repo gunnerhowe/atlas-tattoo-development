@@ -11,14 +11,14 @@ export const config = {
 
 const loadIt = async (file) => {
 
-    var toAdd = {
+/*     var toAdd = {
       email: file.email,
       name: file.name,
       payment_id: file.payment_id,
       credits: file.credits,
-    };
+    }; */
 
-    const newData = await fetch(`https://atlas-tattoo-development-pied.vercel.app/api/storeCredits?email=${toAdd.email}&name=${toAdd.name}&payment_id=${toAdd.payment_id}&credits=${toAdd.credits}`);
+    const newData = await fetch(`https://atlas-tattoo-development-pied.vercel.app/api/storeCredits?email=${file.email}&name=${file.name}&payment_id=${file.payment_id}&credits=${file.credits}`);
     const res = await newData.json();
     console.log(res);
     };
@@ -55,8 +55,8 @@ export default async function handler(req, res) {
       if (checkoutComp.amount_total === 500) {
         //$5 = 1 Credit
         var file = {
-          email: checkoutComp.email,
-          name: checkoutComp.name,
+          email: checkoutComp.customer_details.email,
+          name: checkoutComp.customer_details.name,
           payment_id: checkoutComp.id,
           credits: 1,
         };
@@ -65,8 +65,8 @@ export default async function handler(req, res) {
       } else if (checkoutComp.amount_total === 2400) {
         //$24 = 5 Credits
         var file = {
-          email: checkoutComp.email,
-          name: checkoutComp.name,
+          email: checkoutComp.customer_details.email,
+          name: checkoutComp.customer_details.name,
           payment_id: checkoutComp.id,
           credits: 5,
         };
@@ -75,8 +75,8 @@ export default async function handler(req, res) {
       } else if (checkoutComp.amount_total === 4500) {
         //$45 = 10 Credits
         var file = {
-          email: checkoutComp.email,
-          name: checkoutComp.name,
+          email: checkoutComp.customer_details.email,
+          name: checkoutComp.customer_details.name,
           payment_id: checkoutComp.id,
           credits: 10,
         };
@@ -85,8 +85,8 @@ export default async function handler(req, res) {
       } else if (checkoutComp.amount_total === 7500) {
       //$75 = 25 Credits
       var file = {
-        email: checkoutComp.email,
-        name: checkoutComp.name,
+        email: checkoutComp.customer_details.email,
+        name: checkoutComp.customer_details.name,
         payment_id: checkoutComp.id,
         credits: 25,
       };
@@ -95,8 +95,8 @@ export default async function handler(req, res) {
       } else if (checkoutComp.amount_total === 20000) {
         //$200 = 50 Credits
         var file = {
-          email: checkoutComp.email,
-          name: checkoutComp.name,
+          email: checkoutComp.customer_details.email,
+          name: checkoutComp.customer_details.name,
           payment_id: checkoutComp.id,
           credits: 50,
         };
@@ -105,8 +105,8 @@ export default async function handler(req, res) {
       } else if (checkoutComp.amount_total === 30000) {
         //$300 = 100 Credits
         var file = {
-          email: checkoutComp.email,
-          name: checkoutComp.name,
+          email: checkoutComp.customer_details.email,
+          name: checkoutComp.customer_details.name,
           payment_id: checkoutComp.id,
           credits: 100,
         };
