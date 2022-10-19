@@ -18,7 +18,7 @@ const loadIt = async (file) => {
       credits: file.credits,
     };
 
-    const newData = await fetch(`/api/storeCredits?email=${toAdd.email}&name=${toAdd.name}&payment_id=${toAdd.payment_id}&credits=${toAdd.credits}`);
+    const newData = await fetch(`https://atlas-tattoo-development-pied.vercel.app/api/storeCredits?email=${toAdd.email}&name=${toAdd.name}&payment_id=${toAdd.payment_id}&credits=${toAdd.credits}`);
     const res = await newData.json();
     console.log(res);
     };
