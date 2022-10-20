@@ -34,9 +34,10 @@ export default function PreviewPage() {
         </Head>
         {session && (
           <>
-          <section className={styles.section_stripe}>
+          <div>
             <h1 className={styles.main_title}>Credits</h1>
-            <div className={styles.container_row}>
+          </div>
+          <section className={styles.section_stripe}>
             <form action="/api/prices/oneX" method="POST">
               <div className={styles.container}>
                 <div>
@@ -73,8 +74,6 @@ export default function PreviewPage() {
                 </button>
               </div>
               </form>
-            </div>
-            <div className={styles.container_row}>
               <form action="/api/prices/twenty-fiveX" method="POST">
               <div className={styles.container}>
                 <div>
@@ -111,7 +110,6 @@ export default function PreviewPage() {
                 </button>
               </div>
               </form>
-            </div>
           </section>
           </>)}
         {!session && (

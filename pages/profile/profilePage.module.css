@@ -5,9 +5,10 @@
     padding-right: 2rem;
     display: flex;
     width: 100vw;
-    height: 93vh;
+    height: 93.8vh;
     align-items: center;
     flex-direction: column;
+/*     background-image: linear-gradient(to bottom right, rgb(92, 0, 128), rgb(82, 82, 250)); */
   }
 
   .navbar_cont {
@@ -16,11 +17,15 @@
   }
 
   .main {
-    width: 99vw;
+    width: 80vw;
     border-radius: 30px;
     background: #e0e0e0;
-    box-shadow: 15px 15px 30px #bebebe,
-                -15px -15px 30px #ffffff;
+/*     box-shadow: 15px 15px 30px #bebebe,
+                -15px -15px 30px #ffffff; */
+/*     box-shadow: 5px 5px 10px #4d4b4b,
+              -5px -5px 10px #4d4b4b; */
+    box-shadow: 15px 15px 30px #8602ad,
+              -15px -15px 30px #8602ad;
     height: 99vh;
     padding: 1rem 1rem;
     flex: 1;
@@ -28,6 +33,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+/*     background-image: url('../gallery/images/blue_ink.png');
+    background-size: cover;
+    background-repeat: no-repeat; */
    }
   
   

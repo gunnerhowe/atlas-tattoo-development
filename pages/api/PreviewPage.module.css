@@ -4,48 +4,47 @@
     padding-top: 2rem;
     padding-right: 2rem;
     display: flex;
+    flex-direction: column;
     width: 100vw;
-    height: 82vh;
+    height: 100%;
     align-items: center;
     justify-content: center;
 }
 
-@media (max-width: 600px) {
-    .main_container {
-        height: 100%;
-    }
-  }
-
 .section_stripe {
-  width: 80vw;
+  width: 97vw;
   border-radius: 30px;
   background: #e0e0e0;
   box-shadow: 15px 15px 30px #bebebe,
               -15px -15px 30px #ffffff;
-  height: 75vh;
+  height: 100%;
   padding: 1rem 1rem;
   /*flex: 1;*/
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin-bottom: 3rem;
   }
 
-  @media (max-width: 600px) {
+  @media (min-width: 1400px) {
     .section_stripe {
-        height: 100%;
-    }
+      width: 10vw;
+      height: 70vh;
+      }
   }
 
-  .container_row {
-    display: flex;
-    flex-direction: row;
+  @media (min-width: 768px) {
+    .section_stripe {
+      width: 90vw;
+      }
   }
 
-  @media (max-width: 600px) {
-    .container_row {
-        flex-direction: column;
-    }
+  @media (min-width: 500px) {
+    .section_stripe {
+      width: 70vw;
+      }
   }
 
   .title {
@@ -66,29 +65,23 @@
   }
 
   .container {
-    width: 350px;
+    width: 18rem;
     border-radius: 30px;
     background: #e0e0e0;
     box-shadow: 15px 15px 30px #bebebe,
                 -15px -15px 30px #ffffff;
-    height: 250px;
+    height: 10rem;
     padding: 1rem 1rem;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-right: 2.5rem;
-    margin-left: 2.5rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
     margin-bottom: 2rem;
+    margin-top: 1rem;
    }
-
-   @media (max-width: 600px) {
-    .container {
-        width: 250px;
-        height: 150px;
-    }
-  }
 
   /*-----------Checkout button----------------*/
 .btn_neu body {
@@ -100,15 +93,15 @@
     background: #efefef;
   }
   .btn_neu {
-    padding: 1.5em 5em;
-    /*background: #efefef;*/
     background: #e0e0e0;
+    width: 12rem;
+    height: 4rem;
     border: none;
     border-radius: .5rem;
     color: #444;
     font-size: 1rem;
     font-weight: 700;
-    letter-spacing: .2rem;
+    letter-spacing: .1rem;
     text-align: center;
     outline: none;
     cursor: pointer;

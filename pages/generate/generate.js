@@ -6,10 +6,10 @@ import React from 'react';
 import Link from 'next/link';
 import {signIn, signOut, useSession, getSession} from 'next-auth/react';
 import SVG from '/pages/gallery/images/download.svg';
-import clientPromise from "/lib/mongodb";
+//import clientPromise from "/lib/mongodb";
 import axios from "axios";
 
-export default function Generate({credits}) {
+export default function Generate() {
   const { data: session, status} = useSession();
   const [token, setToken] = useState("sess-yGcqdrc8VaZTJyUnz2L2JHlrW0067vnkBDSWocE0");
   const [query, setQuery] = useState("");
@@ -17,6 +17,7 @@ export default function Generate({credits}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [IsOpen, setIsOpen] = useState(true);
+  const [hasCredit, sethasCredit] = useState("");
 
 
   const loadIt = async (files) => {
@@ -79,6 +80,35 @@ export default function Generate({credits}) {
       });
   }
 
+  async function updateCredits(data) {
+    newCred = (Number(data.credits) - 1);
+    const newData = await fetch(`/api/updateCredits?credits=${newCred}&email=${data.email}`);
+    const res = await newData.json();
+  }
+
+  async function getCredits(seeEmail) {
+    const newData = await fetch(`/api/getCredits?email=${seeEmail}`);
+    const res = await newData.json();
+
+    console.log('this is res');
+    console.log(res)
+    sethasCredit(data.res.credits);
+    console.log('this is re');
+    console.log(hasCredit);
+
+    if (Number(hasCredit) > 0) {
+        GetDalle2();
+        setIsOpen(false);
+        var data = {
+            credits: Number(hasCredit),
+            email: seeEmail
+        };
+        updateCredits(data);
+    } else {
+        alert("You have no credits available. Please obtain at least one and come back to try again")
+    }
+  }
+
   return (
     <div className={classes.container}>
       <Head>
@@ -106,9 +136,9 @@ export default function Generate({credits}) {
                 />
               </p>{" "}
               {IsOpen &&
-                <button className={classes.btn_neu} onClick={() => {GetDalle2(); setIsOpen(false)}}>
+                <button className={classes.btn_neu} onClick={() => {getCredits(session.user.email)}}>
                     Generate
-                </button>}
+                  </button>}
                 {error ? (
                 <div className={classes.error}>Something went wrong..Try again</div>
               ) : (
@@ -141,31 +171,24 @@ export default function Generate({credits}) {
 }
 
 
-export async function getServerSideProps({req}) {
+/* export async function getServerSideProps({req}) {
   const session = await getSession({ req });
   try {
-      //Connecting to the DB
       const client = await clientPromise;
 
-      //Specificially saying which DB to connect to
       const db = client.db("Atlas_Tattoo");
 
-      //Example of retrieving a document from the db
       const credits = await db
           .collection("credits")
           .find({email: session.user.email})
           .toArray()
           console.log(credits)
-          //res.json(credits)
           
-      //returning the JSON strings so that they can be added to the UI in the above function
       return {
-          //props: { credits: JSON.parse(JSON.stringify(credits)) },
           props: {credits: JSON.parse(JSON.stringify(credits))}
       };
 
-  //Error catcher
   } catch (e) {
       console.error(e);
   }
-}
+} */

@@ -5,30 +5,14 @@ import styles from "../profile/profilePage.module.css";
 import Image from 'next/image';
 import {signIn, signOut, useSession, getSession} from 'next-auth/react';
 import Navbar from "../profile/components/newNav";
-import { loadGetInitialProps } from "next/dist/shared/lib/utils";
+import clientPromise from "/lib/mongodb";
 
 
-export default function ProfilePage() {
+export default function ProfilePage( { credits } ) {
   const { data: session, status} = useSession();
-
-/*   const file = {
-     name_id: 'Gunner Howe',
-    email: 'gunnerlevihowe@gmail.com',
-    payment_id: 'id_123456',
-    credits: 5,
-  };
-
-  const loadIt = async (file) => {
-     var toAdd = {
-      name: file.name,
-      email: file.email,
-      payment_id: file.payment_id,
-      credits: file.credits,
-    }; 
-    const newData = await fetch(`/api/storeCredits?email=${file.email}&payment_id=${file.payment_id}&credits=${file.credits}`);
-    const res = await newData.json();
-    console.log(res);
-    }; */
+  const creditDisplay = toString(credits.credits);
+  console.log(creditDisplay);
+  console.log(credits.credits)
 
   return (
     <div className={styles.container}>
@@ -43,16 +27,54 @@ export default function ProfilePage() {
         )}
       {session && (
           <>
-        <div className={styles.navbar_cont}>
-        </div>
-        <h1 className={styles.title}><span className={styles.titleColor}>Profile Overview</span></h1>
-        <button className={styles.btn_neu}>
-          Credits
-        </button>
+        {credits.map((credit) => {
+            return (
+              <div className={styles.navbar_cont}>
+                <h1 className={styles.title}><span className={styles.titleColor}>Profile Overview</span></h1>
+                <br />
+                <Link href='/stripe'>
+                  <button className={styles.btn_neu}>
+                    Current Credits: 
+                    <a> {credit.credits}</a>
+                  </button>
+                </Link>
+              </div>
+            );
+          })}
       </>
         )}
       </main>
       <Navbar/>
     </div>
   );
+}
+
+
+export async function getServerSideProps({req}) {
+  const session = await getSession({ req });
+  try {
+      //Connecting to the DB
+      const client = await clientPromise;
+
+      //Specificially saying which DB to connect to
+      const db = client.db("Atlas_Tattoo");
+
+      //Example of retrieving a document from the db
+      const credits = await db
+          .collection("credits")
+          .find({email: session.user.email})
+          .toArray()
+          console.log(credits)
+          //res.json(credits)
+          
+      //returning the JSON strings so that they can be added to the UI in the above function
+      return {
+          //props: { credits: JSON.parse(JSON.stringify(credits)) },
+          props: {credits: JSON.parse(JSON.stringify(credits))}
+      };
+
+  //Error catcher
+  } catch (e) {
+      console.error(e);
+  }
 }
