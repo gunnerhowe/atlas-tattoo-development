@@ -100,7 +100,7 @@ export async function getServerSideProps({req}) {
       const images = await db
           .collection("images")
           .find({email: session.user.email})
-          //.limit(4)
+          .limit(4)
           .toArray();
           
       //returning the JSON strings so that they can be added to the UI in the above function

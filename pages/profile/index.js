@@ -10,9 +10,6 @@ import clientPromise from "/lib/mongodb";
 
 export default function ProfilePage( { credits } ) {
   const { data: session, status} = useSession();
-  const creditDisplay = toString(credits.credits);
-  console.log(creditDisplay);
-  console.log(credits.credits)
 
   return (
     <div className={styles.container}>
@@ -34,8 +31,7 @@ export default function ProfilePage( { credits } ) {
                 <br />
                 <Link href='/stripe'>
                   <button className={styles.btn_neu}>
-                    Current Credits: 
-                    <a> {credit.credits}</a>
+                    Current Credits: {credit.credits}
                   </button>
                 </Link>
               </div>
