@@ -11,7 +11,7 @@ export default async (req, res) => {
             .collection("credits")
             .findOne({email: seeEmail.email})
             //.toArray()
-            console.log(credits)
+            //console.log(credits)
 
        res.json(credits);
    } catch (e) {

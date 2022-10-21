@@ -6,36 +6,57 @@ import React from 'react';
 import Link from 'next/link';
 import {signIn, signOut, useSession, getSession} from 'next-auth/react';
 import SVG from '/pages/gallery/images/download.svg';
-import clientPromise from "/lib/mongodb";
+//import clientPromise from "/lib/mongodb";
 import axios from "axios";
 
-export default function Generate({credits}) {
+//Main page export
+export default function Generate() {
+  //Session
   const { data: session, status} = useSession();
+  //Dalle Token
   const [token, setToken] = useState("sess-yGcqdrc8VaZTJyUnz2L2JHlrW0067vnkBDSWocE0");
+  //Dalle Query
   const [query, setQuery] = useState("");
+  //Dalle Results
   const [results, setResults] = useState([]);
+  //Dalle Loading
   const [loading, setLoading] = useState(false);
+  //Dalle Error
   const [error, setError] = useState(false);
+  //Genrate button visibility
   const [IsOpen, setIsOpen] = useState(true);
+  //No credits warning
+  const [noCred, setnoCred] = useState(false);
 
 
+  //function to get the base64 image
+  const base = async (url) => {
+      let newBase = await axios.post(`/api/download`, { url: url })
+        let base6 = await newBase.data.result
+        return base6
+  }
+
+//Function to load the Dalle generations into Mongodb
   const loadIt = async (files) => {
     for (const file of files) {
-      var toAdd = {
-        i_created: file.created,
-        i_image_path: file.generation.image_path,
-        i_image_id: file.id,
-        i_task_id: file.task_id,
-        i_email: session.user.email,
-        i_name: session.user.name,
-      };
-      const newData = await fetch(`/api/storeDalle?created=${toAdd.i_created}&image_path=${toAdd.i_image_path}&image_id=${toAdd.i_image_id}&task_id=${toAdd.i_task_id}&email=${toAdd.i_email}&name=${toAdd.i_name}`);
-      const res = await newData.json();
+
+      let baseData = await base(file.generation.image_path);
+
+      const newData = await axios.post('/api/storeDalle',{
+          created: file.created,
+          image_path: file.generation.image_path,
+          image_id: file.id,
+          task_id: file.task_id,
+          email: session.user.email,
+          name: session.user.name,
+          base64: 'data:application/octet-stream;base64,'+baseData
+      });
+      const res = await toString(newData);
       };
       setIsOpen(true)
     };
 
-
+//Dalle generation function
   function GetDalle2() {
     if (token != "" && query != "") {
       setError(false);
@@ -64,13 +85,13 @@ export default function Generate({credits}) {
     };
   }
 
+  //Download the generations
   function download(url) {
     axios
       .post(`/api/download`, { url: url })
       .then((res) => {
         const link = document.createElement("a");
         link.href = `data:application/octet-stream;base64,${res.data.result}`;
-        //console.log(link.href);
         link.download = `Atlas-Tattoo-Dev.png`;
         link.click();
       })
@@ -79,6 +100,43 @@ export default function Generate({credits}) {
       });
   }
 
+  //Subtract 1 credit from the user in Mongodb
+  async function updateCredits(data) {
+    const newCred = (Number(data.credits) - 1);
+    const newData = await fetch(`/api/updateCredits?credits=${newCred}&email=${data.email}`);
+    const res = await newData.json();
+    console.log(res);
+  }
+
+
+  //Get credits that were generated from getCredits()
+  const getActivity = async () => {
+    let jsonData = await getCredits(session.user.email);
+    console.log(jsonData);
+    const numCred = jsonData.credits;
+    const eEmail = session.user.email;
+    if (Number(numCred) > 0) {
+      var data = {
+        credits: Number(numCred),
+        email: eEmail
+      };
+      updateCredits(data);
+      GetDalle2();
+      setIsOpen(false);
+    } else {
+        setnoCred(true);
+    }
+  }
+
+  //Get the Dalle Credits for the user from Mongodb
+   const getCredits = async (seeEmail) => {
+    let newData = await fetch(`/api/getCredits?email=${seeEmail}`)
+    let newJson = await newData.json();
+    return newJson;
+  }
+
+
+  //Visual elements
   return (
     <div className={classes.container}>
       <Head>
@@ -106,9 +164,17 @@ export default function Generate({credits}) {
                 />
               </p>{" "}
               {IsOpen &&
-                <button className={classes.btn_neu} onClick={() => {GetDalle2(); setIsOpen(false)}}>
+                <button className={classes.btn_neu} onClick={() => {getActivity()}}>
                     Generate
-                </button>}
+                  </button>}
+                  <br />
+              {noCred &&
+                <>
+                <span><br /></span>
+                <h1 className={classes.warning}>
+                    No credits available...
+                  </h1>
+                </>}
                 {error ? (
                 <div className={classes.error}>Something went wrong..Try again</div>
               ) : (
@@ -141,31 +207,24 @@ export default function Generate({credits}) {
 }
 
 
-export async function getServerSideProps({req}) {
+/* export async function creds({req}) {
   const session = await getSession({ req });
   try {
-      //Connecting to the DB
       const client = await clientPromise;
 
-      //Specificially saying which DB to connect to
       const db = client.db("Atlas_Tattoo");
 
-      //Example of retrieving a document from the db
       const credits = await db
           .collection("credits")
           .find({email: session.user.email})
           .toArray()
           console.log(credits)
-          //res.json(credits)
           
-      //returning the JSON strings so that they can be added to the UI in the above function
       return {
-          //props: { credits: JSON.parse(JSON.stringify(credits)) },
           props: {credits: JSON.parse(JSON.stringify(credits))}
       };
 
-  //Error catcher
   } catch (e) {
       console.error(e);
   }
-}
+} */

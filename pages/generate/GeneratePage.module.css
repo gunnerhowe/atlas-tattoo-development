@@ -232,3 +232,9 @@
   .btn_neu_close {
     display: none
   }
+
+
+  .warning {
+    color: rgb(187, 3, 3);
+    font-size: medium;
+  }
