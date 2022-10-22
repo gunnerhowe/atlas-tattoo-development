@@ -13,7 +13,9 @@ import Navbar from "../profile/components/newNav";
 
 export default function GalleryPage({ images }) {
   const { data: session, status} = useSession();
-  const [lastItem, setlastItem] = useState("");
+  const [lastImage, setlastImage] = useState([]);
+  const [nextImages, setnextImages] = useState([]);
+  const [skipImages, setskipImages] = useState(4);
 
   function download(path) {
     const link = document.createElement("a");
@@ -22,20 +24,29 @@ export default function GalleryPage({ images }) {
     link.click();
   }
 
-/*   function download(url) {
-    axios
-      .post(`/api/download`, { url: url })
-      .then((res) => {
-        const link = document.createElement("a");
-        link.href = `data:application/octet-stream;base64,${res.data.result}`;
-        //console.log(link.href);
-        link.download = `Atlas-Tattoo-Dev.png`;
-        link.click();
-      })
-      .catch((err) => {
+
+  const seeMore = async () => {
+    let moreImages = await getMore(skipImages);
+    const addImages = moreImages.data
+
+    setnextImages(nextImages.concat(addImages));
+    setskipImages(Number(skipImages) + 4);
+
+  }
+
+
+  const getMore = async (skip) => {
+
+      try {
+        let newData = await axios.post('/api/dalle/getImages',{
+            email: session.user.email,
+            skip: skip
+        });
+
+        return newData;
+      } catch (err) {
         console.log(err);
-      });
-  } */
+      }};
 
 
   return (
@@ -56,8 +67,8 @@ export default function GalleryPage({ images }) {
             <main className={styles.main}>
             <div className={styles.navbar_cont}>
             </div>
-        <h1 className={styles.title}><span className={styles.titleColor}>{session.user.name}'s Gallery</span></h1>
-        <div className={styles.grid}>
+              <h1 className={styles.title}><span className={styles.titleColor}>{session.user.name}'s Gallery</span></h1>
+              <div className={styles.grid}>
                 {images.map((image) => {
                   return (
                     <div key={image._id} className={styles.card}>
@@ -76,7 +87,28 @@ export default function GalleryPage({ images }) {
                     </div>
                   );
                 })}
+                {nextImages.map((nextImage) => {
+                  return (
+                    <div key={nextImage._id} className={styles.card}>
+                      <Image 
+                        className={styles.imgPreview}
+                        src={nextImage.base64}
+                        width={300}
+                        height={300}
+                        quality={100}
+                        alt=''/>
+                      <div>
+                        <button className={styles.btn_neu_download} onClick={() => download(nextImage.base64)}>
+                          <SVG className={styles.download_image}/>
+                        </button>
+                      </div>        
+                    </div>
+                  );
+                })}
               </div>
+              <button className={styles.btn_neu_more} onClick={() => seeMore()}>
+                Load More
+              </button>
         </main>
         </>
           )
@@ -100,6 +132,7 @@ export async function getServerSideProps({req}) {
       const images = await db
           .collection("images")
           .find({email: session.user.email})
+          .sort({_id: -1})
           .limit(4)
           .toArray();
           

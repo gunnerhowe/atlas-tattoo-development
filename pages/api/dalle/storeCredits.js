@@ -1,4 +1,5 @@
-import clientPromise from "../../lib/mongodb";
+import clientPromise from "../../../lib/mongodb";
+import axios from "axios";
 
 export default async (req, res) => {
 
@@ -14,7 +15,13 @@ export default async (req, res) => {
         .updateOne(
             {email: newData.email},
             {
-                $set: {credits: Number(newData.credits)},
+                $set: {name_id: newData.name_id},
+                $set: {email: newData.email},
+                $set: {payment_id: newData.payment_id},
+                $inc: {credits: Number(newData.credits)}
+            },
+            {
+                upsert: true
             }
         )
         res.json(update);

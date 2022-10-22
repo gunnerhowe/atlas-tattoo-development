@@ -31,7 +31,7 @@ export default function Generate() {
 
   //function to get the base64 image
   const base = async (url) => {
-      let newBase = await axios.post(`/api/download`, { url: url })
+      let newBase = await axios.post(`/api/dalle/download`, { url: url })
         let base6 = await newBase.data.result
         return base6
   }
@@ -42,7 +42,7 @@ export default function Generate() {
 
       let baseData = await base(file.generation.image_path);
 
-      const newData = await axios.post('/api/storeDalle',{
+      const newData = await axios.post('/api/dalle/storeDalle',{
           created: file.created,
           image_path: file.generation.image_path,
           image_id: file.id,
@@ -61,7 +61,7 @@ export default function Generate() {
     if (token != "" && query != "") {
       setError(false);
       setLoading(true);
-      fetch(`/api/dalle2?k=${token}&q=${query}`, {
+      fetch(`/api/dalle/dalle2?k=${token}&q=${query}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export default function Generate() {
   //Download the generations
   function download(url) {
     axios
-      .post(`/api/download`, { url: url })
+      .post(`/api/dalle/download`, { url: url })
       .then((res) => {
         const link = document.createElement("a");
         link.href = `data:application/octet-stream;base64,${res.data.result}`;
@@ -103,7 +103,7 @@ export default function Generate() {
   //Subtract 1 credit from the user in Mongodb
   async function updateCredits(data) {
     const newCred = (Number(data.credits) - 1);
-    const newData = await fetch(`/api/updateCredits?credits=${newCred}&email=${data.email}`);
+    const newData = await fetch(`/api/dalle/updateCredits?credits=${newCred}&email=${data.email}`);
     const res = await newData.json();
     console.log(res);
   }
@@ -130,7 +130,7 @@ export default function Generate() {
 
   //Get the Dalle Credits for the user from Mongodb
    const getCredits = async (seeEmail) => {
-    let newData = await fetch(`/api/getCredits?email=${seeEmail}`)
+    let newData = await fetch(`/api/dalle/getCredits?email=${seeEmail}`)
     let newJson = await newData.json();
     return newJson;
   }
