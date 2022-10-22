@@ -11,7 +11,7 @@ export const config = {
 
 const loadIt = async (file) => {
 
-    const newData = await fetch(`https://atlas-tattoo-development-pied.vercel.app/api/storeCredits?email=${file.email}&name=${file.name}&payment_id=${file.payment_id}&credits=${file.credits}`);
+    const newData = await fetch(`https://atlas-tattoo-development-pied.vercel.app/api/dalle/storeCredits?email=${file.email}&name=${file.name}&payment_id=${file.payment_id}&credits=${file.credits}`);
     const res = await newData.json();
     console.log(res);
     };
