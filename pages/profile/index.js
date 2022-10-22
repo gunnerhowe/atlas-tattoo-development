@@ -10,6 +10,17 @@ import clientPromise from "/lib/mongodb";
 
 export default function ProfilePage( { credits } ) {
   const { data: session, status} = useSession();
+  const [curCred, setcurCred] = useState(credits[0]);
+
+  function showCred() {
+    if (Number(credits) != []) {
+      const numCred = curCred.credits;
+      return numCred;
+    } else {
+      const numCred = 0;
+      return numCred;
+    };
+  }
 
   return (
     <div className={styles.container}>
@@ -24,10 +35,18 @@ export default function ProfilePage( { credits } ) {
         )}
       {session && (
           <>
-        {credits.map((credit) => {
+        <div className={styles.navbar_cont}>
+        <h1 className={styles.title}><span className={styles.titleColor}>Profile Overview</span></h1>
+             <br />
+            <Link href='/stripe'>
+                <button className={styles.btn_neu_creds}>
+                  Current Credits: {showCred()}
+                </button>
+            </Link>
+          </div>
+       {/*  {credits.map((credit) => {
             return (
               <div className={styles.navbar_cont}>
-                <h1 className={styles.title}><span className={styles.titleColor}>Profile Overview</span></h1>
                 <br />
                 <Link href='/stripe'>
                   <button className={styles.btn_neu_creds}>
@@ -36,7 +55,7 @@ export default function ProfilePage( { credits } ) {
                 </Link>
               </div>
             );
-          })}
+          })} */}
       </>
         )}
       </main>
@@ -60,7 +79,7 @@ export async function getServerSideProps({req}) {
           .collection("credits")
           .find({email: session.user.email})
           .toArray()
-          console.log(credits)
+          //console.log(credits)
           //res.json(credits)
           
       //returning the JSON strings so that they can be added to the UI in the above function

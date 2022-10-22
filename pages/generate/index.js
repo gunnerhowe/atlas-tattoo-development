@@ -113,9 +113,9 @@ export default function Generate() {
   const getActivity = async () => {
     let jsonData = await getCredits(session.user.email);
     console.log(jsonData);
-    const numCred = jsonData.credits;
-    const eEmail = session.user.email;
-    if (Number(numCred) > 0) {
+    if (jsonData != null) {
+      const numCred = jsonData.credits;
+      const eEmail = session.user.email;
       var data = {
         credits: Number(numCred),
         email: eEmail
