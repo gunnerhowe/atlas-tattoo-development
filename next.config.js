@@ -5,7 +5,8 @@ const nextConfig = {
     domains: ['openailabsprodscus.blob.core.windows.net'],
   },
   experimental: { 
-    images: { allowFutureImage: true } 
+    images: { allowFutureImage: true } ,
+    largePageDataBytes: 999 * 1000
   },
   webpack(config) {
     config.module.rules.push({

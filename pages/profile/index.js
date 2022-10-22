@@ -30,7 +30,7 @@ export default function ProfilePage( { credits } ) {
                 <h1 className={styles.title}><span className={styles.titleColor}>Profile Overview</span></h1>
                 <br />
                 <Link href='/stripe'>
-                  <button className={styles.btn_neu}>
+                  <button className={styles.btn_neu_creds}>
                     Current Credits: {credit.credits}
                   </button>
                 </Link>
