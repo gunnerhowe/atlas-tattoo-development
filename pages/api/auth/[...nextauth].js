@@ -45,7 +45,12 @@ import FacebookProvider from "next-auth/providers/facebook";
             },
             from: "",
         }) */
-    ]
+    ],
+    pages: {
+      signIn: '/signin',
+      //signOut: '/auth/signout',
+      //newUser: '/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+    }
 }
 
 /* GoogleProvider({
