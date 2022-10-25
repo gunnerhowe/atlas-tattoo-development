@@ -6,6 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 import Auth0Provider from "next-auth/providers/auth0";
 import AppleProvider from "next-auth/providers/apple";
 import TwitterProvider from "next-auth/providers/twitter";
+import FacebookProvider from "next-auth/providers/facebook";
 
  const options = {
     providers: [
@@ -21,11 +22,15 @@ import TwitterProvider from "next-auth/providers/twitter";
                 }
               },
         }),
- /*       TwitterProvider({
+        FacebookProvider({
+          clientId: process.env.FACEBOOK_CLIENT_ID,
+          clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+        }),
+        TwitterProvider({
             clientId: process.env.TWITTER_CLIENT_ID,
             clientSecret: process.env.TWITTER_CLIENT_SECRET
         }),
-        AppleProvider({
+        /*AppleProvider({
             clientId: process.env.APPLE_ID,
             clientSecret: process.env.APPLE_SECRET
         }),
