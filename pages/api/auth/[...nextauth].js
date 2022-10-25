@@ -48,7 +48,7 @@ import FacebookProvider from "next-auth/providers/facebook";
     ],
     pages: {
       signIn: '/signin',
-      //signOut: '/auth/signout',
+      signOut: '/signout',
       //newUser: '/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
     }
 }

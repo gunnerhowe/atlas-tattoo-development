@@ -34,180 +34,6 @@ input:focus {
   place-content: "Enter your message!";
  }
 
- /*
- button {
-  position: relative;
-  padding: 1em 1.8em;
-  outline: none;
-  border: 1px solid #303030;
-  background: #212121;
-  color: #ae00ff;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 15px;
-  overflow: hidden;
-  transition: 0.2s;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: bold;
- }
- 
- button:hover {
-  box-shadow: 0 0 10px #ae00ff, 0 0 25px #001eff, 0 0 50px #ae00ff;
-  transition-delay: 0.6s;
- }
- 
- button span {
-  position: absolute;
- }
- 
- button span:nth-child(1) {
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #ae00ff);
- }
- 
- button:hover span:nth-child(1) {
-  left: 100%;
-  transition: 0.7s;
- }
- 
- button span:nth-child(3) {
-  bottom: 0;
-  right: -100%;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #001eff);
- }
- 
- button:hover span:nth-child(3) {
-  right: 100%;
-  transition: 0.7s;
-  transition-delay: 0.35s;
- }
- 
- button span:nth-child(2) {
-  top: -100%;
-  right: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(180deg, transparent, #ae00ff);
- }
- 
- button:hover span:nth-child(2) {
-  top: 100%;
-  transition: 0.7s;
-  transition-delay: 0.17s;
- }
- 
- button span:nth-child(4) {
-  bottom: -100%;
-  left: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(360deg, transparent, #001eff);
- }
- 
- button:hover span:nth-child(4) {
-  bottom: 100%;
-  transition: 0.7s;
-  transition-delay: 0.52s;
- }
- 
- button:active {
-  background: #ae00af;
-  background: linear-gradient(to top right, #ae00af, #001eff);
-  color: #bfbfbf;
-  box-shadow: 0 0 8px #ae00ff, 0 0 8px #001eff, 0 0 8px #ae00ff;
-  transition: 0.1s;
- }
- 
- button:active span:nth-child(1) 
- span:nth-child(2) 
- span:nth-child(2) 
- span:nth-child(2) {
-  transition: none;
-  transition-delay: none;
- }
- */
- 
-/*button {
-  padding: 0.9em 1.6em;
-  border: none;
-  outline: none;
-  color: #FFF;
-  font-family: inherit;
-  font-weight: 500;
-  font-size: 17px;
-  cursor: pointer;
-  position: relative;
-  z-index: 0;
-  border-radius: 12px;
- }
- 
-button::after {
-  content: "";
-  z-index: -1;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(46, 46, 46);
-  left: 0;
-  top: 0;
-  border-radius: 10px;
- }
- /* glow */
-/*button::before {
-  content: "";
-  background: linear-gradient(
-     45deg,
-     #FF0000, #002BFF, #FF00C8, #002BFF,
-       #FF0000, #002BFF, #FF00C8, #002BFF
- );
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background-size: 600%;
-  z-index: -1;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  filter: blur(8px);
-  animation: glowing 20s linear infinite;
-  transition: opacity .3s ease-in-out;
-  border-radius: 10px;
-  opacity: 0;
- }
- 
-@keyframes glowing {
-  0% {
-   background-position: 0 0;
-  }
- 
-  50% {
-   background-position: 400% 0;
-  }
- 
-  100% {
-   background-position: 0 0;
-  }
- }
- 
-button:hover::before {
-  opacity: 1;
- }
- 
-button:active:after {
-  background: transparent;
- }
- 
-button:active {
-  color: #000;
-  font-weight: bold;
-}*/
-
-
 /*below here*/
 
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700&display=swap');
@@ -235,7 +61,9 @@ nav{
   padding: 16px;
   justify-content: space-between;
   align-items: center;
-  background-color: #f1f1f1;
+/*   background-color: #f1f1f1; */
+  background-color: rgb(56, 56, 56);
+  color: black;
 }
 .nav__menu-bar{
   display: flex;
@@ -266,7 +94,9 @@ nav{
   padding: 24px 16px;
   transition: all 0.8s;
   min-height: 100vh;
-  background-color: #f1f1f1;
+/*   background-color: #f1f1f1; */
+  background-color: rgb(56, 56, 56);
+  color: rgba(255, 255, 255, .7);
   align-items: center;
   justify-content: center;
 }
@@ -283,7 +113,9 @@ nav{
     padding: 24px 16px;
     transition: all 0.8s;
     min-height: 100vh;
-    background-color: #f1f1f1;
+/*     background-color: #f1f1f1; */
+    background-color: rgb(56, 56, 56);
+    color: rgba(255, 255, 255, .7);
     align-items: center;
     justify-content: center;
   }
@@ -316,37 +148,7 @@ nav{
   justify-content: center;
   align-items: center;
 }
-/* @media screen and (min-width: 4000px) {
-  .nav__menu-bar{
-    display: none;
-  }
-  .logo{
-    font-size: 1.5rem;
-  }
-  .nav__menu-list{
-    position: unset;
-    flex-direction: row;
-    min-height: fit-content;
-    width: fit-content;
-    column-gap: 24px;
-    align-items: center;
-  }
-  .nav__link::before{
-    content: '';
-    position: absolute;
-    width: 0%;
-    height: 6px;
-    bottom: -16px;
-    left: 0;
-    background-color: black;
-    transition: all 0.2s;
-  }
-  
-  .nav__link:hover:before{
-   width: 100%;
-  }
-}
- */
+
 
 .lds-ellipsis {
   display: inline-block;

@@ -113,7 +113,7 @@ export default function Generate() {
   const getActivity = async () => {
     let jsonData = await getCredits(session.user.email);
     console.log(jsonData);
-    if (jsonData != null) {
+    if (jsonData != null, jsonData.credits.credits > 0) {
       const numCred = jsonData.credits;
       const eEmail = session.user.email;
       var data = {
