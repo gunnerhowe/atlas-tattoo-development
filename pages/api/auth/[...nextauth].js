@@ -53,28 +53,4 @@ import FacebookProvider from "next-auth/providers/facebook";
     }
 }
 
-/* GoogleProvider({
-    clientId: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    profile(profile) {
-      return {
-        id: profile.sub,
-        name: profile.name,
-        email: profile.email,
-        image: profile.picture,
-      }
-    },
-  })  */
-
-/*   Auth0Provider({
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    issuer: process.env.ISSUER,
-    authorization: { params: { scope: "openid your_custom_scope" } },
-  }) */
-
   export default (req, res) => NextAuth(req, res, options)
-/*   export default NextAuth({
-    adapter: MongoDBAdapter(clientPromise),
-    providers: options
-  }) */

@@ -403,3 +403,15 @@ nav{
     transform: translate(24px, 0);
   }
 }
+
+.menu_session_email {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: rgb(2, 161, 55);
+}
+
+.menu_check {
+  width: 25px;
+  height: 25px;
+  margin-top: 80px;
+}

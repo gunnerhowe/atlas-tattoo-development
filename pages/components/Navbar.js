@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import Logo from "./Logo";
 import NavItem from "./NavItem";
 import {signIn, signOut, useSession} from 'next-auth/react';
+import CHECK from '../gallery/images/check.svg';
+
+//const { data: session, status} = useSession();
 
 const MENU_LIST = [
   { text: "Home", href: "/" },
@@ -23,9 +26,9 @@ const MENU_LIST1 = [
 ];
 
 const Navbar = () => {
-  const { data: session, status} = useSession();
   const [navActive, setNavActive] = useState(null);
   const [activeIdx, setActiveIdx] = useState(-1);
+  const { data: session, status} = useSession();
 
   return (
     <header>
@@ -74,6 +77,7 @@ const Navbar = () => {
                   <NavItem active={activeIdx === idx} {...menu} />
                 </div>
               ))}
+              <a className='menu_session_email'><CHECK className='menu_check'></CHECK> {session.user.name}</a>
             </div>
           </>
         )}

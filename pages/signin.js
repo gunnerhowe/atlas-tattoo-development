@@ -7,9 +7,11 @@ import Image from 'next/image'
 import GOOGLE from './gallery/images/Google.svg';
 import FACEBOOK from './gallery/images/Facebook.svg';
 import TWITTER from './gallery/images/Twitter.svg';
-import { getProviders, signIn, getSession } from "next-auth/react";
+import CHECK from './gallery/images/check.svg';
+import { getProviders, signIn, getSession, useSession } from "next-auth/react";
 
 export default function SignInPage({ providers }) {
+  const { data: session, status} = useSession();
 
   return (
     <div className={styles.container}>
@@ -17,16 +19,31 @@ export default function SignInPage({ providers }) {
         <title>Atlas Tattoo Dev</title>
       </Head>
       <main className={styles.main}>
-        <h1 className={styles.title}><span className={styles.titleColor}>Sign In</span></h1>
-        <button className={styles.btn_neu} onClick={() => signIn(providers.google.id)}>
-            <GOOGLE className={styles.google}></GOOGLE>
-        </button>
-        <button className={styles.btn_neu} onClick={() => signIn(providers.facebook.id)}>
-              <FACEBOOK className={styles.facebook}></FACEBOOK>
-        </button>
-        <button className={styles.btn_neu} onClick={() => signIn(providers.twitter.id)}>
-          <TWITTER className={styles.twitter}></TWITTER>
-        </button>
+        {!session && (
+          <>
+            <h1 className={styles.title}><span className={styles.titleColor}>Sign In</span></h1>
+
+            <button className={styles.btn_neu} onClick={() => signIn(providers.google.id)}>
+                <GOOGLE className={styles.google}></GOOGLE>
+            </button>
+
+            <button className={styles.btn_neu} onClick={() => signIn(providers.facebook.id)}>
+                  <FACEBOOK className={styles.facebook}></FACEBOOK>
+            </button>
+
+            <button className={styles.btn_neu} onClick={() => signIn(providers.twitter.id)}>
+              <TWITTER className={styles.twitter}></TWITTER>
+            </button>
+          </>
+        )}
+        {session && (
+          <>
+            <CHECK className={styles.check}></CHECK>
+            <h1 className={styles.title}><span className={styles.titleColor}>You are signed in as:</span></h1>
+            <br />
+            <a className={styles.signName}>{session.user.name}</a>
+          </>
+        )}
       </main>
     </div>
   );
