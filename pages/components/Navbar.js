@@ -6,7 +6,6 @@ import NavItem from "./NavItem";
 import {signIn, signOut, useSession} from 'next-auth/react';
 import CHECK from '../gallery/images/check.svg';
 
-//const { data: session, status} = useSession();
 
 const MENU_LIST = [
   { text: "Home", href: "/" },
@@ -29,6 +28,9 @@ const Navbar = () => {
   const [navActive, setNavActive] = useState(null);
   const [activeIdx, setActiveIdx] = useState(-1);
   const { data: session, status} = useSession();
+  const [nav_cross1, setnav_cross1] = useState(null);
+  const [nav_cross2, setnav_cross2] = useState(null);
+  const [nav_cross3, setnav_cross3] = useState(null);
 
   return (
     <header>
@@ -39,12 +41,12 @@ const Navbar = () => {
           </a>
         </Link>
         <div
-          onClick={() => setNavActive(!navActive)}
+          onClick={() => {setNavActive(!navActive), setnav_cross1(!nav_cross1), setnav_cross2(!nav_cross2), setnav_cross3(!nav_cross3)}}
           className={'nav__menu-bar'}
         >
-          <div></div>
-          <div></div>
-          <div></div>
+          <div className={`${nav_cross1 ? "active" : ""} nav_cross_style1`}></div>
+          <div className={`${nav_cross2 ? "active" : ""} nav_cross_style2`}></div>
+          <div className={`${nav_cross3 ? "active" : ""} nav_cross_style3`}></div>
         </div>
         {!session && (
           <>
@@ -54,6 +56,9 @@ const Navbar = () => {
                 onClick={() => {
                   setActiveIdx(idx);
                   setNavActive(false);
+                  setnav_cross1(false);
+                  setnav_cross2(false);
+                  setnav_cross3(false);
                 }}
                 key={menu.text}
               >
@@ -71,6 +76,9 @@ const Navbar = () => {
                   onClick={() => {
                     setActiveIdx(idx);
                     setNavActive(false);
+                    setnav_cross1(false);
+                    setnav_cross2(false);
+                    setnav_cross3(false);
                   }}
                   key={menu.text}
                 >

@@ -11,6 +11,7 @@ import clientPromise from "/lib/mongodb";
 export default function ProfilePage( { credits } ) {
   const { data: session, status} = useSession();
   const [curCred, setcurCred] = useState(credits[0]);
+  const [query, setQuery] = useState("");
 
   function showCred() {
     if (Number(credits) != []) {
@@ -35,26 +36,16 @@ export default function ProfilePage( { credits } ) {
         )}
       {session && (
           <>
-        <div className={styles.navbar_cont}>
           <h1 className={styles.title}><span className={styles.titleColor}>Profile Overview</span></h1>
-          <br />
-          <div className={styles.prof_menu}>
             <Link href='/profile/myGallery'>
               <button className={styles.btn_neu}>
                 My Collection
               </button>
             </Link>
-            <Link href='/profile/settings'>
-              <button className={styles.btn_neu}>
-                Settings
-              </button>
-            </Link>
-          </div>
           <Link href='/stripe'>
             <button className={styles.btn_neu_creds}>
               <br />
               <a>Current Credits:</a>
-              <br />
               <br />
               <a>{showCred()}</a>
               <br />
@@ -66,6 +57,30 @@ export default function ProfilePage( { credits } ) {
               Generate
             </button>
           </Link>
+          <div className={styles.settings}>
+            <div className={styles.display_box}>
+              <a className={styles.user_info}>Name: {session.user.name}</a>
+              <a className={styles.user_info}>Email: {session.user.email}</a>
+            </div>
+            <div className={styles.display_box}>
+              <a className={styles.transfer_text}>Transfer Credits to another account associated with a different Email</a>
+              <input
+                id="query"
+                type="text"
+                value={query}
+                onChange={(e) => {setQuery(e.target.value)}}
+                placeholder="johnsmith@gmail.com"
+                className={styles.transfer_input}
+              />
+              <button className={styles.btn_neu}>
+                Transfer
+              </button>
+            </div>
+            <div className={styles.display_box}>
+              <button className={styles.btn_neu_Delete}>
+                Delete Profile
+              </button>
+            </div>
         </div>
       </>
         )}

@@ -75,13 +75,45 @@ nav{
 .nav__menu-bar div{
   width: 40px;
   height: 4px;
-  background-color: black;
+/*   background-color: black; */
+  background-color: rgba(255, 255, 255, .7);
   border-radius: 2px;
 }
 
-.nav_menu-bar div.active{
-  rotate: 45deg;
+
+
+
+
+.nav_cross_style1 {
+  background-color: rgba(255, 255, 255, .7);
 }
+
+.nav_cross_style1.active {
+  background-color: rgba(255, 255, 255, .7);
+  transform: rotate(45deg) translate(2px, 2px);
+  transition-duration: 1s;
+}
+
+.nav_cross_style2 {
+  background-color: rgba(255, 255, 255, .7);
+}
+
+.nav_cross_style2.active {
+  display: none
+}
+
+.nav_cross_style3 {
+  background-color: rgba(255, 255, 255, .7);
+}
+
+.nav_cross_style3.active {
+  background-color: rgba(255, 255, 255, .7);
+  transform: rotate(-45deg) translate(5px, -5px);
+  transition-duration: 1s;
+}
+
+
+
 
 .nav__menu-list{
   display: flex;
