@@ -22,19 +22,10 @@ export default function SignOutPage({ providers }) {
       <main className={styles.main}>
         {!session && (
           <>
-            <h1 className={styles.title}><span className={styles.titleColor}>Sign In</span></h1>
-
-            <button className={styles.btn_neu} onClick={() => signIn(providers.google.id)}>
-                <GOOGLE className={styles.google}></GOOGLE>
-            </button>
-
-            <button className={styles.btn_neu} onClick={() => signIn(providers.facebook.id)}>
-                  <FACEBOOK className={styles.facebook}></FACEBOOK>
-            </button>
-
-            <button className={styles.btn_neu} onClick={() => signIn(providers.twitter.id)}>
-              <TWITTER className={styles.twitter}></TWITTER>
-            </button>
+            <h1 className={styles.title}><span className={styles.titleColor}>Sign Back In</span></h1>
+              <button className={styles.btn_neu_out} onClick={signIn}>
+                Sign In
+              </button>
           </>
         )}
         {session && (

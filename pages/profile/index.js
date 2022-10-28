@@ -36,26 +36,37 @@ export default function ProfilePage( { credits } ) {
       {session && (
           <>
         <div className={styles.navbar_cont}>
-        <h1 className={styles.title}><span className={styles.titleColor}>Profile Overview</span></h1>
-             <br />
-            <Link href='/stripe'>
-                <button className={styles.btn_neu_creds}>
-                  Current Credits: {showCred()}
-                </button>
+          <h1 className={styles.title}><span className={styles.titleColor}>Profile Overview</span></h1>
+          <br />
+          <div className={styles.prof_menu}>
+            <Link href='/profile/myGallery'>
+              <button className={styles.btn_neu}>
+                My Collection
+              </button>
+            </Link>
+            <Link href='/profile/settings'>
+              <button className={styles.btn_neu}>
+                Settings
+              </button>
             </Link>
           </div>
-       {/*  {credits.map((credit) => {
-            return (
-              <div className={styles.navbar_cont}>
-                <br />
-                <Link href='/stripe'>
-                  <button className={styles.btn_neu_creds}>
-                    Current Credits: {credit.credits}
-                  </button>
-                </Link>
-              </div>
-            );
-          })} */}
+          <Link href='/stripe'>
+            <button className={styles.btn_neu_creds}>
+              <br />
+              <a>Current Credits:</a>
+              <br />
+              <br />
+              <a>{showCred()}</a>
+              <br />
+              <br />
+            </button>
+          </Link>
+          <Link href='/generate'>
+            <button className={styles.btn_neu}>
+              Generate
+            </button>
+          </Link>
+        </div>
       </>
         )}
       </main>

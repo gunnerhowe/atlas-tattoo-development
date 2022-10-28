@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     responseType: "arraybuffer",
   },
      {headers: {
-          Authorization: "Bearer sess-yGcqdrc8VaZTJyUnz2L2JHlrW0067vnkBDSWocE0"}
+          Authorization: "Bearer sess-zZMIcPlTNMom0iLCxV1jggZ3eV4EaEjKSdyNJaWK"}
       });
 
   const base64 = Buffer.from(response.data, "binary").toString("base64");

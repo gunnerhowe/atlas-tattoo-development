@@ -26,7 +26,7 @@ input {
               -6px -6px 12px #c5c5c5;
   font-size: medium;
   font-weight: bold;
-  width: 50vw;
+  width: 75vw;
  }
  
 input:focus {
@@ -63,7 +63,7 @@ nav{
   align-items: center;
 /*   background-color: #f1f1f1; */
   background-color: rgb(56, 56, 56);
-  color: black;
+  color: rgba(255, 255, 255, .7);
 }
 .nav__menu-bar{
   display: flex;
