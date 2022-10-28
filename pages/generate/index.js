@@ -246,6 +246,8 @@ export default function Generate() {
       setIsOpen(true);
       setstyle("");
       setBackground("");
+      setselectedBackground("");
+      setselectedStyle("");
     };
 
 //Dalle generation function
@@ -349,7 +351,7 @@ export default function Generate() {
             <>
               <h1 className={classes.title}><span className={classes.titleColor}>Get Inked With The Future</span></h1>
                 <p className={classes.description}>
-                <button className={classes.btn_neu_inspire} onClick={() => {setQuery(inspire[Math.floor(Math.random() * inspire.length)]), setstyle(""), setBackground("")}}>
+                <button className={classes.btn_neu_inspire} onClick={() => {setQuery(inspire[Math.floor(Math.random() * inspire.length)]), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
                   Inspire Me
                 </button>
                   <input
