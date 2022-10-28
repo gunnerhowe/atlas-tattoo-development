@@ -117,6 +117,7 @@ export default function Generate() {
   const [ShowBackground, setShowBackground] = useState(false);
 
   const [selectedStyle, setselectedStyle] = useState("");
+  const [selectedBackground, setselectedBackground] = useState("");
 
   const [style, setstyle] = useState("");
   const [background, setBackground] = useState("");
@@ -348,7 +349,7 @@ export default function Generate() {
             <>
               <h1 className={classes.title}><span className={classes.titleColor}>Get Inked With The Future</span></h1>
                 <p className={classes.description}>
-                <button className={classes.btn_neu_inspire} onClick={() => {setQuery(inspire[Math.floor(Math.random() * inspire.length)]), setStyle(""), setBackground("")}}>
+                <button className={classes.btn_neu_inspire} onClick={() => {setQuery(inspire[Math.floor(Math.random() * inspire.length)]), setstyle(""), setBackground("")}}>
                   Inspire Me
                 </button>
                   <input
@@ -416,15 +417,15 @@ export default function Generate() {
                   </button>
                 </div>
                   <div className={classes.select_style}>
-                    <button onClick={() => {setBackground("")}} className={classes.styles_button}>
+                    <button onClick={() => {setBackground(""), setselectedBackground('None_Background')}} className={(selectedBackground=='None_Background') ? classes.styles_button_active : classes.styles_button}>
                       <Image className={classes.imgPreview} src={None} alt='AI Tattoo' width={image_width} height={image_heigth}/>
                       <h3>Clear Selected</h3>
                     </button>
-                    <button onClick={() => {setBackground(", White Background")}} className={classes.styles_button}>
+                    <button onClick={() => {setBackground(", White Background"), setselectedBackground('White')}} className={(selectedBackground=='White') ? classes.styles_button_active : classes.styles_button}>
                       <Image className={classes.imgPreview} src={White} alt='AI Tattoo' width={image_width} height={image_heigth}/>
                       <h3>White Background</h3>
                     </button>
-                    <button onClick={() => {setBackground("")}} className={classes.styles_button}>
+                    <button onClick={() => {setBackground(""), setselectedBackground('Colored')}} className={(selectedBackground=='Colored') ? classes.styles_button_active : classes.styles_button}>
                       <Image className={classes.imgPreview} src={Colored} alt='AI Tattoo' width={image_width} height={image_heigth}/>
                       <h3>Colored Background</h3>
                     </button>
