@@ -42,11 +42,11 @@ const Navbar = () => {
                         <CREDITS className={styles.svg_image}/>
                     </button>
                 </Link>
-                <Link href='/profile/settings'>
+{/*                 <Link href='/profile/settings'>
                     <button className={IsOpen ? styles.profile_btn : ""}>
                         <SETTINGS className={styles.svg_image}/>
                     </button>
-                </Link>
+                </Link> */}
                 <button className={styles.profile_menu_open} onClick={() => setIsOpen(false)}>                
                     <MINUS className={styles.svg_image}/>
                 </button>

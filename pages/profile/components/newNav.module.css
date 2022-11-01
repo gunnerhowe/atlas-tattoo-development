@@ -2,20 +2,20 @@
 .context_menu {
     display: grid;
     position: fixed;
-    bottom: 60px;
-    right: 50px;
+    bottom: 30px;
+    right: 30px;
 }
 
 .background_menu_active {
     position: fixed;
     width: 18rem;
-    height: 30rem;
+    height: 22rem;
     background: #bebebe;
     opacity: .91;
     z-index: 20;
     border-radius: 40%;
     position: fixed;
-    bottom: 25px;
+    bottom: 20px;
     right: -100px;
 }
 

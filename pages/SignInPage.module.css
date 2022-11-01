@@ -13,18 +13,19 @@
   
   
   .main {
-    width: 360px;
+    width: 350px;
     border-radius: 30px;
     background: #e0e0e0;
     box-shadow: 15px 15px 30px #bebebe,
                 -15px -15px 30px #ffffff;
-    height: 400px;
+    height: 700px;
 /*     padding: 1rem 1rem; */
 /*     flex: 1; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 75px;
    }
   
   
@@ -186,3 +187,49 @@
                     inset 2px 2px 2px rgba(255, 255, 255, .075),
                     inset 2px 2px 4px rgba(0, 0, 0, .15);
       }
+
+
+      .line {
+        height: 4px;
+        background: black;
+        width: 85%
+      }
+
+
+      .input_section {
+        margin-top: 5px;
+        margin-bottom: 10px
+      }
+
+
+      .auth {
+        margin-top: 10px;
+        align-items: center;
+        justify-self: center;
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+      }
+
+      .h4_header {
+        text-align: left;
+        width: 320px;
+      }
+
+
+      .input_field {
+        border: none;
+        border-radius: 15px;
+        padding: 15px;
+        background-color: #e8e8e8;
+        box-shadow: 6px 6px 12px #ffffff,
+                    -6px -6px 12px #c5c5c5;
+        font-size: medium;
+        font-weight: bold;
+        width: 330px;
+       }
+       
+      .input_field:focus {
+        outline-color: white;
+        place-content: "Enter your message!";
+       }

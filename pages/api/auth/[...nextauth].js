@@ -7,6 +7,18 @@ import Auth0Provider from "next-auth/providers/auth0";
 import AppleProvider from "next-auth/providers/apple";
 import TwitterProvider from "next-auth/providers/twitter";
 import FacebookProvider from "next-auth/providers/facebook";
+import CredentialsProvider from "next-auth/providers/credentials";
+/* 
+import { verifyPassword } from '../../../lib/auth';
+
+const checkPassword = async () => {
+  const newData = await fetch('/api/credentails/password')
+}
+
+const checkEmail = async () => {
+  const newData = await fetch('/api/credentails/email')
+} */
+
 
  const options = {
     providers: [
@@ -30,6 +42,32 @@ import FacebookProvider from "next-auth/providers/facebook";
             clientId: process.env.TWITTER_CLIENT_ID,
             clientSecret: process.env.TWITTER_CLIENT_SECRET
         }),
+/*         CredentialsProvider({
+          name: 'credentials',
+          credentials: {
+            username: {label: "Email", type:"email", placeholder:"jsmith@example.com"},
+            password: {label: "Password", type:"password"},
+          },
+          authorize: (credentials) => {
+            if (
+              credentials.username === 'gunner@gmail.com',
+              credentials.password === 'test'
+            ) {
+              return {
+                id: 2,
+                name: "Gunner",
+                email: "test@gmail.com"
+              }
+            } */
+/*             if(checkPassword && checkEmail) {
+              return {
+                name: checkEmail.name,
+                email: checkEmail.email}
+            } else {
+              return null
+            } */
+/*           }
+        }), */
         /*AppleProvider({
             clientId: process.env.APPLE_ID,
             clientSecret: process.env.APPLE_SECRET

@@ -12,6 +12,9 @@ import { getProviders, signIn, getSession, useSession } from "next-auth/react";
 
 export default function SignInPage({ providers }) {
   const { data: session, status} = useSession();
+  const [emailInput, setemailInput] = useState("");
+  const [passwordInput, setpasswordInput] = useState("");
+
 
   return (
     <div className={styles.container}>
@@ -34,6 +37,38 @@ export default function SignInPage({ providers }) {
             <button className={styles.btn_neu} onClick={() => signIn(providers.twitter.id)}>
               <TWITTER className={styles.twitter}></TWITTER>
             </button>
+            <hr className={styles.line}></hr>
+
+            <section className={styles.auth}>
+              <div className={styles.h4_header}>
+                <h4>Email</h4>
+              </div>
+                <div className={styles.input_section}>
+                  <input 
+                    type='email' 
+                    id='email' 
+                    onChange={(e) => {setemailInput(e.target.value)}}
+                    className={styles.input_field}
+                    />
+                </div>
+
+                <div className={styles.h4_header}>
+                  <h4>Password</h4>
+                </div>
+                <div className={styles.input_section}>
+                  <input
+                    type='password'
+                    id='password'
+                    onChange={(e) => {setpasswordInput(e.target.value)}}
+                    className={styles.input_field}
+                  />
+                </div>
+
+              <div className={styles.actions}>
+                <button className={styles.btn_neu} onClick={() => signIn(providers.credentials.id, {username: emailInput, password: passwordInput})}>Login</button>
+              </div>
+
+            </section>
           </>
         )}
         {session && (
