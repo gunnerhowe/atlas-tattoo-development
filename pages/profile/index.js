@@ -96,10 +96,10 @@ export default function ProfilePage( { credits } ) {
                 value={query}
                 onChange={(e) => {setQuery(e.target.value)}}
                 placeholder="johnsmith@gmail.com"
-                className={styles.transfer_input}
+                className={styles.input_field}
               />
               {!transferComplete && (
-              <button className={styles.btn_neu} onClick={() => getCredits()}>
+              <button className={styles.btn_neu_transfer} onClick={() => getCredits()}>
                 Transfer
               </button>
               )}
