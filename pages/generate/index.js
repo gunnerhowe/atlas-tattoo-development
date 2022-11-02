@@ -10,6 +10,7 @@ import SVG from '/pages/gallery/images/download.svg';
 import axios from "axios";
 import PLUS from '/pages/gallery/images/plus.svg';
 import MINUS from '/pages/gallery/images/minus.svg';
+import clientPromise from "/lib/mongodb";
 
 import FourK from '../gallery/images/pandas/4K photography.png';
 import Abstract from '../gallery/images/pandas/abstract.png';
@@ -104,7 +105,7 @@ const image_width = '200px'
 const image_heigth = '200px'
 
 //Main page export
-export default function Generate() {
+export default function Generate(credits) {
   const { data: session, status} = useSession();
   const [token, setToken] = useState("sess-zZMIcPlTNMom0iLCxV1jggZ3eV4EaEjKSdyNJaWK");
   const [query, setQuery] = useState("");
@@ -115,6 +116,8 @@ export default function Generate() {
   const [noCred, setnoCred] = useState(false);
   const [ShowStyle, setShowStyle] = useState(false);
   const [ShowBackground, setShowBackground] = useState(false);
+/*   const [curCred, setcurCred] = useState(credits.credits[0]);
+  const [numCred, setnumCred] = useState(0); */
 
   const [selectedStyle, setselectedStyle] = useState("");
   const [selectedBackground, setselectedBackground] = useState("");
@@ -216,6 +219,19 @@ export default function Generate() {
   'white ink sinking in water, 8k resolution','tan ink sinking in water, 8k resolution','multi colored ink sinking in water, 8k resolution',
   'yellow and orange ink sinking in water, 8k resolution','pink ink sinking in water, 8k resolution','blue ink sinking in water, 8k resolution',
   'blue and purple ink sinking in water, 8k resolution','navy and gold ink drops sinking in water, 8k resolution','green ink sinking in water, 8k resolution','red ink sinking in water, 8k resolution','grey ink sinking in water, 8k resolution','black ink sinking in water, 8k resolution','tattoo stencil of sunglasses on a white background','a wolf skeleton, realistic','a panda sitting in a chair in the style a astronaut','a panda sitting in a chair in the style a princess','a panda sitting in a chair in the style a emperor','a panda sitting in a chair in the style a samurai','a panda sitting in a chair in the style a ninja','a panda sitting in a chair in the style a swimmer','a panda sitting in a chair in the style a software engineer','a panda sitting in a chair in the style a doctor','a panda sitting in a chair in the style a police','a panda sitting in a chair in the style a pirate','a panda sitting in a chair in the style of Santa','a panda sitting in a chair in the style a knight','Einstein wearing sun glasses, pop art and digital art','a German shepherded playing poker, pop art','Tiger wearing glasses playing poker in the style of digital art','A shark in the style of digital art','A butterfly in the style of Ivan Bilibin and digital art in the colors black and white','A wolf in the style of Ivan Bilibin and digital art','A lion in the style of Ivan Bilibin and digital art','a unicorn in the style of Toshi Yoshida','skeleton butterfly','A line art sketch of a dragon','A dragon in the style of Allison Kunath and digital art','A sketch of a dragon in the style of Ankit Kumar','A pen sketch of a dragon in the style of Allison kunath','A pencil sketch of a dragon','A sketch of a dragon with geometrical shapes','Intricate complex geometric sketch of a butterfly','Intricate geometric sketch of a wolf in the style of Allison Kunath','A geometric sketch of a lion in the style of Allison Kunath','A geometric pencil sketch of a dragon in the style of Allison Kunath','A geometric sketch of a dragon in grey and black color','Naruto in black and white colors in the style of Hiroshi Yoshida','An octopus holding a trident in the style realism in colors black and white','An octopus holding a trident in the style realism','Zeus in the style of digital art','cool tattoo in the style of Ivan Shishkin','cool tattoo in the style of Ghibli','cool tattoo in the style of Ivan Bilibin','cool tattoo in the style of Hiroshi Yoshida','cool tattoo in the style of Toshi Yoshida']
+
+/*   function showCred() {
+    if (Number(credits) != []) {
+      const numCred = curCred.credits;
+      setnumCred(curCred.credits)
+      return numCred;
+    } else {
+      const numCred = 0;
+      setnumCred(0)
+      return numCred;
+    };
+  }
+ */
 
   //function to get the base64 image
   const base = async (url) => {
@@ -352,6 +368,7 @@ export default function Generate() {
                 <button className={classes.btn_neu_inspire} onClick={() => {setQuery(inspire[Math.floor(Math.random() * inspire.length)]), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
                   Inspire Me
                 </button>
+{/*                 <a>Available Credits: {showCred()}</a> */}
                   <input
                     id="query"
                     type="text"
@@ -802,25 +819,31 @@ export default function Generate() {
   );
 }
 
-
-/* export async function creds({req}) {
+export async function getServerSideProps({req}) {
   const session = await getSession({ req });
   try {
+      //Connecting to the DB
       const client = await clientPromise;
 
+      //Specificially saying which DB to connect to
       const db = client.db("Atlas_Tattoo");
 
+      //Example of retrieving a document from the db
       const credits = await db
           .collection("credits")
           .find({email: session.user.email})
           .toArray()
-          console.log(credits)
+          //console.log(credits)
+          //res.json(credits)
           
+      //returning the JSON strings so that they can be added to the UI in the above function
       return {
+          //props: { credits: JSON.parse(JSON.stringify(credits)) },
           props: {credits: JSON.parse(JSON.stringify(credits))}
       };
 
+  //Error catcher
   } catch (e) {
       console.error(e);
   }
-} */
+}
