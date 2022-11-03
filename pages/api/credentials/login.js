@@ -1,19 +1,19 @@
 import clientPromise from "../../../lib/mongodb";
 
 export default async (req, res) => {
-    const seeEmail = req.query;
+    //const seeEmail = req.query;
 
    try {
        const client = await clientPromise;
        const db = client.db("Atlas_Tattoo");
 
-       const credits = await db
+       const valid = await db
             .collection("users")
-            .findOne({email: seeEmail.email})
+            .findOne({email: req.body.user.email})
             //.toArray()
-            //console.log(credits)
 
-       res.json(credits);
+        res.json(valid);
+
    } catch (e) {
        console.error(e);
    }

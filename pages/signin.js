@@ -14,6 +14,19 @@ export default function SignInPage({ providers }) {
   const { data: session, status} = useSession();
   const [emailInput, setemailInput] = useState("");
   const [passwordInput, setpasswordInput] = useState("");
+  const [signError, setsignError] = useState(false);
+
+
+  const trySign = async () => {
+    const attempt = await signIn(providers.credentials.id, {email: emailInput, password: passwordInput, redirect: false})
+    .then(({ok, error}) => {
+      if (ok) {
+        setsignError(false)
+      } else {
+        setsignError(true)
+      }
+    });
+  }
 
 
   return (
@@ -34,9 +47,9 @@ export default function SignInPage({ providers }) {
                   <FACEBOOK className={styles.facebook}></FACEBOOK>
             </button>
 
-            <button className={styles.btn_neu} onClick={() => signIn(providers.twitter.id)}>
+{/*             <button className={styles.btn_neu} onClick={() => signIn(providers.twitter.id)}>
               <TWITTER className={styles.twitter}></TWITTER>
-            </button>
+            </button> */}
             <hr className={styles.line}></hr>
 
             <section className={styles.auth}>
@@ -65,10 +78,20 @@ export default function SignInPage({ providers }) {
                 </div>
 
               <div className={styles.actions}>
-                <button className={styles.btn_neu} onClick={() => signIn(providers.credentials.id, {username: emailInput, password: passwordInput})}>Login</button>
+                <button className={styles.btn_neu} onClick={() => trySign()}>
+                  <a className={styles.login_text}>Login</a>
+                </button>
               </div>
 
             </section>
+            <div className={styles.options}>
+              <Link href='/signup'>
+                <a className={styles.signup}>Sign Up</a>
+              </Link>
+              <Link href='/forgotPass'>
+                <a className={styles.signup}>Reset Password</a>
+              </Link>
+            </div>
           </>
         )}
         {session && (
@@ -77,6 +100,13 @@ export default function SignInPage({ providers }) {
             <h1 className={styles.title}><span className={styles.titleColor}>You are signed in as:</span></h1>
             <br />
             <a className={styles.signName}>{session.user.name}</a>
+          </>
+        )}
+        {signError && (
+          <>
+            <div className={styles.error}>
+              <a>The email or password entered is incorrect</a>
+            </div>
           </>
         )}
       </main>

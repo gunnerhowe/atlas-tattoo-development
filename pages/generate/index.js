@@ -10,7 +10,7 @@ import SVG from '/pages/gallery/images/download.svg';
 import axios from "axios";
 import PLUS from '/pages/gallery/images/plus.svg';
 import MINUS from '/pages/gallery/images/minus.svg';
-import clientPromise from "/lib/mongodb";
+//import clientPromise from "/lib/mongodb";
 
 import FourK from '../gallery/images/pandas/4K photography.png';
 import Abstract from '../gallery/images/pandas/abstract.png';
@@ -819,7 +819,7 @@ export default function Generate(credits) {
   );
 }
 
-export async function getServerSideProps({req}) {
+/* export async function getServerSideProps({req}) {
   const session = await getSession({ req });
   try {
       //Connecting to the DB
@@ -846,4 +846,4 @@ export async function getServerSideProps({req}) {
   } catch (e) {
       console.error(e);
   }
-}
+} */

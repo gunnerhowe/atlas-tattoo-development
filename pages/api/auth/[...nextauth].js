@@ -8,16 +8,13 @@ import AppleProvider from "next-auth/providers/apple";
 import TwitterProvider from "next-auth/providers/twitter";
 import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
-/* 
-import { verifyPassword } from '../../../lib/auth';
+import axios from "axios";
+import { hash, compare } from 'bcryptjs';
 
-const checkPassword = async () => {
-  const newData = await fetch('/api/credentails/password')
+export async function verifyPassword(password, hashedPassword) {
+  const isValid = await compare(password, hashedPassword);
+  return isValid;
 }
-
-const checkEmail = async () => {
-  const newData = await fetch('/api/credentails/email')
-} */
 
 
  const options = {
@@ -43,47 +40,34 @@ const checkEmail = async () => {
             clientSecret: process.env.TWITTER_CLIENT_SECRET,
 /*             version: "2.0" */
         }),
-/*         CredentialsProvider({
+         CredentialsProvider({
           name: 'credentials',
           credentials: {
-            username: {label: "Email", type:"email", placeholder:"jsmith@example.com"},
+            email: {label: "Email", type:"email", placeholder:"jsmith@example.com"},
             password: {label: "Password", type:"password"},
           },
-          authorize: (credentials) => {
-            if (
-              credentials.username === 'gunner@gmail.com',
-              credentials.password === 'test'
-            ) {
-              return {
-                id: 2,
-                name: "Gunner",
-                email: "test@gmail.com"
+          authorize: async (credentials) => {
+            const user = await axios.post('http://localhost:3000/api/credentials/login',
+            {
+              user: {
+                password: credentials.password,
+                email: credentials.email
               }
-            } */
-/*             if(checkPassword && checkEmail) {
-              return {
-                name: checkEmail.name,
-                email: checkEmail.email}
-            } else {
-              return null
-            } */
-/*           }
-        }), */
-        /*AppleProvider({
-            clientId: process.env.APPLE_ID,
-            clientSecret: process.env.APPLE_SECRET
-        }),
-         Providers.Email({
-            server: {
-                host: "",
-                port: "",
-                auth: {
-                    user: "",
-                    pass: ""
-                }
             },
-            from: "",
-        }) */
+            {
+              headers: {
+                accept: '*/*',
+                'Content-Type': 'application/json'
+              }
+            })
+    
+          if (user && await verifyPassword(credentials.password, user.data.password)) {
+            return user.data
+          } else {
+            return null
+          }
+        }
+          })
     ],
     pages: {
       signIn: '/signin',
@@ -91,5 +75,21 @@ const checkEmail = async () => {
       //newUser: '/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
     }
 }
+
+/* const callbacks = {
+  // Getting the JWT token from API response
+  async jwt(token, user) {
+    if (user) {
+      token.accessToken = user.token
+    }
+
+    return token
+  },
+
+  async session(session, token) {
+    session.accessToken = token.accessToken
+    return session
+  }
+} */
 
   export default (req, res) => NextAuth(req, res, options)

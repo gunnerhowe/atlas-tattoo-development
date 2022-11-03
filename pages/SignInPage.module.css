@@ -233,3 +233,25 @@
         outline-color: white;
         place-content: "Enter your message!";
        }
+
+       .login_text {
+        font-size: large;
+       }
+
+       .signup {
+        font-size: small;
+        margin-bottom: 10px;
+        color: rgb(1, 1, 221);
+        text-decoration: underline;
+        margin-left: 15px;
+        margin-right: 15px
+       }
+
+       .options {
+        width: 220px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-self: center;
+        margin-left: 20px
+      }
