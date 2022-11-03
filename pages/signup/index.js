@@ -42,14 +42,23 @@ export default function Home() {
       setblankBlank(false);
     } else if (passWord == "") {
       setpassBlank(true);
+      setpassError(false);
+      setEmailError(false);
     } else if (CpassWord == "" ) {
-      setCpassBlank(true);
+      setpassBlank(true);
+      setpassError(false);
+      setEmailError(false);
     } else if (!updateData.data) {
       addUser();
       setpassError(false);
       setEmailError(false);
       setblankBlank(false);
     } else if (updateData.data.email == email && !updateData.data.password) {
+      addUser();
+      setpassError(false);
+      setEmailError(false);
+      setblankBlank(false);
+    } else if (updateData.data.email == email && updateData.data.password) {
       setEmailError(true);
       setpassError(false);
       setblankBlank(false);
@@ -110,10 +119,8 @@ export default function Home() {
           </button>
         )}
         {success && (
-        <Link href="/">
-          <button className={styles.btn_neu}>
+          <button className={styles.btn_neu} onClick={() => signIn()}>
           <CHECK></CHECK>Login</button>
-        </Link>
         )}
         {passError && (
         <div className={styles.error}>
