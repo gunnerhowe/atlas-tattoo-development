@@ -91,7 +91,7 @@ export default function Home() {
         <p className={styles.description}>
           <input
             id="password"
-            type="text"
+            type="password"
             placeholder="Password"
             onChange={(e) => setpassWord(e.target.value)}
           />
@@ -99,7 +99,7 @@ export default function Home() {
         <p className={styles.description}>
           <input
             id="password_confirm"
-            type="text"
+            type="password"
             placeholder="Confirm Password"
             onChange={(e) => setCpassWord(e.target.value)}
           />

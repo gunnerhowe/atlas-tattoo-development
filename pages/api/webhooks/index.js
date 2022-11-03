@@ -11,10 +11,20 @@ export const config = {
 
 const loadIt = async (file) => {
 
-    const newData = await fetch(`https://www.atlastattoo.tech/api/dalle/storeCredits?email=${file.email}&name=${file.name}&payment_id=${file.payment_id}&credits=${file.credits}`);
+    //const newData = await fetch(`https://www.atlastattoo.tech/api/dalle/storeCredits?email=${file.email}&name=${file.name}&payment_id=${file.payment_id}&credits=${file.credits}`);
+    const newData = await fetch(`http://localhost:3000/api/dalle/storeCredits?email=${file.email}&name=${file.name}&payment_id=${file.payment_id}&credits=${file.credits}`);
     const res = await newData.json();
     console.log(res);
     };
+
+const storeThem = async (file) => {
+  const user = await axios.post('http://localhost:3000/api/credentials/signup',
+    {
+      email: file.email,
+      name: file.name
+    })
+    return user
+};
 
 export default async function handler(req, res) {
 
@@ -54,6 +64,7 @@ export default async function handler(req, res) {
           credits: 1,
         };
         loadIt(file);
+        storeThem(file);
 
       } else if (checkoutComp.amount_total === 2400) {
         //$24 = 5 Credits
@@ -64,6 +75,7 @@ export default async function handler(req, res) {
           credits: 5,
         };
         loadIt(file);
+        storeThem(file);
 
       } else if (checkoutComp.amount_total === 4500) {
         //$45 = 10 Credits
@@ -74,6 +86,7 @@ export default async function handler(req, res) {
           credits: 10,
         };
         loadIt(file);
+        storeThem(file);
 
       } else if (checkoutComp.amount_total === 7500) {
       //$75 = 25 Credits
@@ -84,6 +97,7 @@ export default async function handler(req, res) {
         credits: 25,
       };
       loadIt(file);
+      storeThem(file);
 
       } else if (checkoutComp.amount_total === 20000) {
         //$200 = 50 Credits
@@ -94,6 +108,7 @@ export default async function handler(req, res) {
           credits: 50,
         };
         loadIt(file);
+        storeThem(file);
 
       } else if (checkoutComp.amount_total === 30000) {
         //$300 = 100 Credits
@@ -104,6 +119,7 @@ export default async function handler(req, res) {
           credits: 100,
         };
         loadIt(file);
+        storeThem(file);
       }
     } else {
       console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`);

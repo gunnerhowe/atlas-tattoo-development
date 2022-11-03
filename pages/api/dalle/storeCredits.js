@@ -5,6 +5,8 @@ export default async (req, res) => {
 
     const newData = req.query;
 
+    console.log('Made it to store')
+
       try {
         //establish connection
         const client = await clientPromise;

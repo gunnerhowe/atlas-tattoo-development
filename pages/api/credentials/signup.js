@@ -10,29 +10,45 @@ export default async (req, res) => {
 
     const newData = req.body;
 
-    const password = await hashPassword(newData.password);
-
     const newName = newData.name
 
+    console.log('made it');
       try {
         //establish connection
         const client = await clientPromise;
         const db = client.db("Atlas_Tattoo");
 
-        const update = await db
-        .collection("users")
-        .updateOne(
-            {email: newData.email},
-            {
-                $set: {email: newData.email,
-                        name: newName,
-                        password: password}
-            },
-            {
-                upsert: true
-            }
-        )
-        res.json(update);
+        if (newData.password) {
+            const password = await hashPassword(newData.password);
+            const update = await db
+            .collection("users")
+            .updateOne(
+                {email: newData.email},
+                {
+                    $set: {email: newData.email,
+                            name: newName,
+                            password: password}
+                },
+                {
+                    upsert: true
+                }
+            )
+            res.json(update);
+        } else {
+            const update = await db
+            .collection("users")
+            .updateOne(
+                {email: newData.email},
+                {
+                    $set: {email: newData.email,
+                            name: newName}
+                },
+                {
+                    upsert: true
+                }
+            )
+            res.json(update);
+        }
         
         } catch (e) {
         console.error(e);
