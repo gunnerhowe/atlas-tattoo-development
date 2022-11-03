@@ -12,7 +12,6 @@ export default async (req, res) => {
 
     const newName = newData.name
 
-    console.log('made it');
       try {
         //establish connection
         const client = await clientPromise;

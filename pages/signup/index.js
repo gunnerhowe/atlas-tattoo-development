@@ -49,7 +49,7 @@ export default function Home() {
       setpassError(false);
       setEmailError(false);
       setblankBlank(false);
-    } else if (updateData.data.email == email && updateData.data.password != "") {
+    } else if (updateData.data.email == email && !updateData.data.password) {
       setEmailError(true);
       setpassError(false);
       setblankBlank(false);
