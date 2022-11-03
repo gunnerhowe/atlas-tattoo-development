@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import { buffer } from 'micro';
+import axios from "axios";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
