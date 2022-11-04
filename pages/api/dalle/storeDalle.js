@@ -7,13 +7,10 @@ export default async function handler(req, res) {
     const newData = req.body;
 
     var toAdd = {
-        created: newData.created,
         image_path: newData.image_path,
-        image_id: newData.image_id,
-        task_id: newData.task_id,
         email: newData.email,
         name: newData.name,
-        base64: newData.base64
+        prompt: newData.prompt
       };
 
       try {

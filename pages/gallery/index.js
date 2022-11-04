@@ -138,7 +138,7 @@ export default function GalleryPage() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Atlas Tattoo Dev</title>
+        <title>Atlas Tattoo</title>
       </Head>
 
       <main className={styles.main}>
