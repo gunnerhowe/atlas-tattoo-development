@@ -261,7 +261,7 @@ const GetDalle2API = async () => {
       const openai = new OpenAIApi(configuration);
       const response = await openai.createImage({
         prompt: query + style + background,
-        n: 2,
+        n: 4,
         size: "1024x1024",
       })
         setResults(response.data.data);
