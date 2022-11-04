@@ -11,6 +11,7 @@ import axios from "axios";
 import PLUS from '/pages/gallery/images/plus.svg';
 import MINUS from '/pages/gallery/images/minus.svg';
 //import clientPromise from "/lib/mongodb";
+import { Configuration, OpenAIApi } from "openai";
 
 import FourK from '../gallery/images/pandas/4K photography.png';
 import Abstract from '../gallery/images/pandas/abstract.png';
@@ -99,6 +100,7 @@ import None from '../gallery/images/pandas/None.png';
 
 import White from '../gallery/images/pandas/White.png';
 import Colored from '../gallery/images/pandas/Colored.png';
+//import { response } from 'express';
 
 
 const image_width = '200px'
@@ -116,8 +118,12 @@ export default function Generate(credits) {
   const [noCred, setnoCred] = useState(false);
   const [ShowStyle, setShowStyle] = useState(false);
   const [ShowBackground, setShowBackground] = useState(false);
-/*   const [curCred, setcurCred] = useState(credits.credits[0]);
-  const [numCred, setnumCred] = useState(0); */
+  const [UploadImage, setUploadImage] = useState("");
+  const [IsUpload, setIsUpload] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  //const [FSdata, setFSdata] = useState('https://oaidalleapiprodscus.blob.core.windows.net/private/org-8uKaOs2C3OwX6IFoYHOp3x5v/user-It0WVtFiDOVII6H6ibVsnZaY/img-xmWbCwMcLKNPEnA7IRbQOaNG.png?st=2022-11-04T14%3A16%3A02Z&se=2022-11-04T16%3A16%3A02Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-11-04T01%3A47%3A12Z&ske=2022-11-05T01%3A47%3A12Z&sks=b&skv=2021-08-06&sig=28cUDk/%2BxwsX/425JBVN38h6L/mftMWUAGISerxbnzY%3D');
 
   const [selectedStyle, setselectedStyle] = useState("");
   const [selectedBackground, setselectedBackground] = useState("");
@@ -220,40 +226,21 @@ export default function Generate(credits) {
   'yellow and orange ink sinking in water, 8k resolution','pink ink sinking in water, 8k resolution','blue ink sinking in water, 8k resolution',
   'blue and purple ink sinking in water, 8k resolution','navy and gold ink drops sinking in water, 8k resolution','green ink sinking in water, 8k resolution','red ink sinking in water, 8k resolution','grey ink sinking in water, 8k resolution','black ink sinking in water, 8k resolution','tattoo stencil of sunglasses on a white background','a wolf skeleton, realistic','a panda sitting in a chair in the style a astronaut','a panda sitting in a chair in the style a princess','a panda sitting in a chair in the style a emperor','a panda sitting in a chair in the style a samurai','a panda sitting in a chair in the style a ninja','a panda sitting in a chair in the style a swimmer','a panda sitting in a chair in the style a software engineer','a panda sitting in a chair in the style a doctor','a panda sitting in a chair in the style a police','a panda sitting in a chair in the style a pirate','a panda sitting in a chair in the style of Santa','a panda sitting in a chair in the style a knight','Einstein wearing sun glasses, pop art and digital art','a German shepherded playing poker, pop art','Tiger wearing glasses playing poker in the style of digital art','A shark in the style of digital art','A butterfly in the style of Ivan Bilibin and digital art in the colors black and white','A wolf in the style of Ivan Bilibin and digital art','A lion in the style of Ivan Bilibin and digital art','a unicorn in the style of Toshi Yoshida','skeleton butterfly','A line art sketch of a dragon','A dragon in the style of Allison Kunath and digital art','A sketch of a dragon in the style of Ankit Kumar','A pen sketch of a dragon in the style of Allison kunath','A pencil sketch of a dragon','A sketch of a dragon with geometrical shapes','Intricate complex geometric sketch of a butterfly','Intricate geometric sketch of a wolf in the style of Allison Kunath','A geometric sketch of a lion in the style of Allison Kunath','A geometric pencil sketch of a dragon in the style of Allison Kunath','A geometric sketch of a dragon in grey and black color','Naruto in black and white colors in the style of Hiroshi Yoshida','An octopus holding a trident in the style realism in colors black and white','An octopus holding a trident in the style realism','Zeus in the style of digital art','cool tattoo in the style of Ivan Shishkin','cool tattoo in the style of Ghibli','cool tattoo in the style of Ivan Bilibin','cool tattoo in the style of Hiroshi Yoshida','cool tattoo in the style of Toshi Yoshida']
 
-/*   function showCred() {
-    if (Number(credits) != []) {
-      const numCred = curCred.credits;
-      setnumCred(curCred.credits)
-      return numCred;
-    } else {
-      const numCred = 0;
-      setnumCred(0)
-      return numCred;
-    };
-  }
- */
-
-  //function to get the base64 image
-  const base = async (url) => {
-      let newBase = await axios.post(`/api/dalle/download`, { url: url })
-        let base6 = await newBase.data.result
-        return base6
-  }
-
 //Function to load the Dalle generations into Mongodb
   const loadIt = async (files) => {
     for (const file of files) {
 
-      let baseData = await base(file.generation.image_path);
+      //let baseData = await base(file.generation.image_path);
 
       const newData = await axios.post('/api/dalle/storeDalle',{
-          created: file.created,
-          image_path: file.generation.image_path,
-          image_id: file.id,
-          task_id: file.task_id,
+          //created: file.created,
+          image_path: file.url,
+          //image_id: file.id,
+          //task_id: file.task_id,
           email: session.user.email,
           name: session.user.name,
-          base64: 'data:application/octet-stream;base64,'+baseData
+          prompt: query + style + background
+          //base64: 'data:application/octet-stream;base64,'+baseData
       });
       const res = await toString(newData);
       };
@@ -264,34 +251,53 @@ export default function Generate(credits) {
       setselectedStyle("");
     };
 
-//Dalle generation function
-  function GetDalle2() {
-    if (token != "" && query != "") {
+const GetDalle2API = async () => {
+    if (query != "") {
       setError(false);
       setLoading(true);
-      fetch(`/api/dalle/dalle2?k=${token}&q=${query + style + background}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const configuration = new Configuration({
+        apiKey: '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',
+      });
+      const openai = new OpenAIApi(configuration);
+      const response = await openai.createImage({
+        prompt: query + style + background,
+        n: 4,
+        size: "1024x1024",
       })
-        .then((res) => res.json())
-        .then((data) => {
-          setResults(data.result);
-          const files = (data.result);
-          console.log(data.result);
-          loadIt(files);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setLoading(false);
-          setError(true);
-        });
+        setResults(response.data.data);
+        const files = (response.data.data);
+        console.log(response.data.data);
+        loadIt(files);
+        setLoading(false);
     } else {
       setError(true);
     };
   }
+
+/*   const VarDalle2API = async () => {
+    if (UploadImage != "") {
+      setError(false);
+      setLoading(true);
+      const configuration = new Configuration({
+        apiKey: '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',
+      });
+      const openai = new OpenAIApi(configuration);
+      const response = await openai.createImageVariation(
+        //fs.createReadStream(selectedFile),
+        //selectedFile,
+        FSdata,
+        1,
+        "1024x1024"
+      );
+        setResults(response.data.data);
+        const files = (response.data.data);
+        console.log(response.data.data);
+        loadIt(files);
+        setLoading(false);
+    } else {
+      setError(true);
+    };
+  } */
 
   //Download the generations
   function download(url) {
@@ -320,8 +326,28 @@ export default function Generate(credits) {
   const getActivity = async () => {
     let jsonData = await getCredits(session.user.email);
     console.log(jsonData);
-    if (jsonData != null, jsonData.credits > 0, query == "") {
-      setIsOpen(true);
+
+    if (IsOpen) {
+      if (jsonData != null, jsonData.credits > 0, query == "") {
+        setIsOpen(true);
+        setError(true);
+      } else if (jsonData != null, jsonData.credits > 0) {
+        const numCred = jsonData.credits;
+        const eEmail = session.user.email;
+        var data = {
+          credits: Number(numCred),
+          email: eEmail
+        };
+        updateCredits(data);
+        GetDalle2API();
+        setIsOpen(false);
+      } else {
+        setnoCred(true);
+      }
+
+  } else if (IsUpload) {
+    if (jsonData != null, jsonData.credits > 0, IsUpload == "") {
+      setIsUpload(true);
       setError(true);
     } else if (jsonData != null, jsonData.credits > 0) {
       const numCred = jsonData.credits;
@@ -331,11 +357,12 @@ export default function Generate(credits) {
         email: eEmail
       };
       updateCredits(data);
-      GetDalle2();
-      setIsOpen(false);
+      VarDalle2API();
+      setIsUpload(false);
     } else {
         setnoCred(true);
     }
+  }
   }
 
   //Get the Dalle Credits for the user from Mongodb
@@ -345,6 +372,23 @@ export default function Generate(credits) {
     return newJson;
   }
 
+
+
+/*   const handleUpload = async () => {
+    try {
+      if (!selectedFile) return;
+      const formData = new FormData();
+      formData.append("myImage", selectedImage);
+      const data = await axios.post('/api/image', {
+        data: 'https://oaidalleapiprodscus.blob.core.windows.net/private/org-8uKaOs2C3OwX6IFoYHOp3x5v/user-It0WVtFiDOVII6H6ibVsnZaY/img-xmWbCwMcLKNPEnA7IRbQOaNG.png?st=2022-11-04T14%3A16%3A02Z&se=2022-11-04T16%3A16%3A02Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-11-04T01%3A47%3A12Z&ske=2022-11-05T01%3A47%3A12Z&sks=b&skv=2021-08-06&sig=28cUDk/%2BxwsX/425JBVN38h6L/mftMWUAGISerxbnzY%3D'});
+        const text = await response.text();
+        setFSdata(text);
+        return text
+      console.log(data);
+    } catch (error) {
+      console.log(error.response?.data)
+    }
+  } */
 
   //Visual elements
   return (
@@ -382,34 +426,55 @@ export default function Generate(credits) {
                   </button>}
 
 
-                  <h1 className={classes.title}><span className={classes.titleColor}>Get Inked With The Future</span></h1>
-{/*               {IsOpen && (
-                <> */}
-                <button className={classes.btn_neu_inspire} onClick={() => {setQuery(inspire[Math.floor(Math.random() * inspire.length)]), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
-                  Inspire Me
-                </button>
-{/*                 <button className={classes.btn_neu_inspire} onClick={() => {setIsOpen(false), setIsUpload(true), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
-                  Variations
-                </button> */}
+
+
+
+
+{/*                   <br />
+                  <br />
+                  {IsUpload && (
+                    <>
+                  <button className={classes.btn_neu_inspire} onClick={() => {setIsOpen(true), setIsUpload(false), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
+                    Generate
+                  </button>
                   <input
-                    id="query"
-                    type="text"
-                    value={query}
-                    onChange={(e) => {setQuery(e.target.value)}}
-                    placeholder="Tattoo prompt..."
+                    id="image-input"
+                    type="file"
+                    //value={query}
+                    //onChange={(e) => {setUploadImage(e.target.value)}}
+                    onChange={({target}) => {
+                      if (target.files) {
+                        const file = target.files[0];
+                        setSelectedImage(URL.createObjectURL(file));
+                        setSelectedFile(file);
+                        setUploadImage(file);
+                      }
+                    }}
+                    //placeholder="Tattoo prompt..."
+                    accept="image/jpeg, image/png, image/jpg"
+                    className={classes.upload_image}
                   />
                   <br />
                   <br />
-                {IsOpen && (
-                <>
-                <button className={classes.btn_neu} onClick={() => {getActivity(), setShowStyle(false), setShowBackground(false)}}>
+                  {IsUpload && (
+                    <>
+                  <button className={classes.btn_neu} onClick={() => {handleUpload()}}>
+                    Upload
+                  </button>
+                  <button className={classes.btn_neu} onClick={() => {getActivity()}}>
                     Generate
                   </button>
+                  <button className={classes.btn_neu} onClick={() => {console.log(selectedImage), console.log(selectedFile)}}>
+                    test
+                  </button>
                   </>)}
+                  </>)} */}
 
 
-                  <br />
-                  <br />
+
+
+
+
               {noCred &&
                 <>
                 <span><br /></span>
@@ -429,10 +494,10 @@ export default function Generate(credits) {
               <div className={classes.grid}>
                 {results.map((result) => {
                   return (
-                    <div key={toString(result.generation.image_path)} className={classes.card}>
-                      <Image key={toString(result.generation.image_path)} className={classes.imgPreview} src={result.generation.image_path} alt=' ' width='300vw' height='300vw'/>
+                    <div key={toString(result.url)} className={classes.card}>
+                      <Image key={toString(result.url)} className={classes.imgPreview} src={result.url} alt=' ' width='300vw' height='300vw'/>
                       <div>
-                        <button className={classes.btn_neu_download} onClick={() => download(result.generation.image_path)}>
+                        <button className={classes.btn_neu_download} onClick={() => download(result.url)}>
                           <SVG className={classes.download_image}/>
                         </button>
                       </div>        
@@ -441,6 +506,8 @@ export default function Generate(credits) {
                 })}
               </div>
               <div className={classes.tattoo_options}>
+              {IsOpen && (
+              <>
               {!ShowBackground && (
                 <>
                   <div className={classes.section_head}>
@@ -837,6 +904,7 @@ export default function Generate(credits) {
                   </button>
                   </>
                   )}
+                </>)}
                 </div>
             </>
           )
@@ -845,32 +913,3 @@ export default function Generate(credits) {
     </div>
   );
 }
-
-/* export async function getServerSideProps({req}) {
-  const session = await getSession({ req });
-  try {
-      //Connecting to the DB
-      const client = await clientPromise;
-
-      //Specificially saying which DB to connect to
-      const db = client.db("Atlas_Tattoo");
-
-      //Example of retrieving a document from the db
-      const credits = await db
-          .collection("credits")
-          .find({email: session.user.email})
-          .toArray()
-          //console.log(credits)
-          //res.json(credits)
-          
-      //returning the JSON strings so that they can be added to the UI in the above function
-      return {
-          //props: { credits: JSON.parse(JSON.stringify(credits)) },
-          props: {credits: JSON.parse(JSON.stringify(credits))}
-      };
-
-  //Error catcher
-  } catch (e) {
-      console.error(e);
-  }
-} */
