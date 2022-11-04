@@ -230,7 +230,7 @@ export default function Generate(credits) {
   const loadIt = async (files) => {
     for (const file of files) {
 
-      //let baseData = await base(file.generation.image_path);
+      let baseData = await base(file.url);
 
       const newData = await axios.post('/api/dalle/storeDalle',{
           //created: file.created,
@@ -239,8 +239,8 @@ export default function Generate(credits) {
           //task_id: file.task_id,
           email: session.user.email,
           name: session.user.name,
-          prompt: query + style + background
-          //base64: 'data:application/octet-stream;base64,'+baseData
+          prompt: query + style + background,
+          base64: 'data:application/octet-stream;base64,'+baseData
       });
       const res = await toString(newData);
       };
@@ -251,18 +251,27 @@ export default function Generate(credits) {
       setselectedStyle("");
     };
 
+
+  //function to get the base64 image
+  const base = async (url) => {
+    let newBase = await axios.post(`/api/dalle/download`, { url: url })
+      let base6 = await newBase.data.result
+      return base6
+}
+
 const GetDalle2API = async () => {
     if (query != "") {
       setError(false);
       setLoading(true);
       const configuration = new Configuration({
-        apiKey: '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',
+        apiKey: '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',
       });
       const openai = new OpenAIApi(configuration);
       const response = await openai.createImage({
         prompt: query + style + background,
         n: 4,
         size: "1024x1024",
+        user: "gunnerlevihowe@gmail.com"
       })
         setResults(response.data.data);
         const files = (response.data.data);

@@ -10,7 +10,8 @@ export default async function handler(req, res) {
         image_path: newData.image_path,
         email: newData.email,
         name: newData.name,
-        prompt: newData.prompt
+        prompt: newData.prompt,
+        base64: newData.base64
       };
 
       try {
