@@ -123,7 +123,7 @@ export default function Generate(credits) {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
 
-  const [FSdata, setFSdata] = useState('https://oaidalleapiprodscus.blob.core.windows.net/private/org-8uKaOs2C3OwX6IFoYHOp3x5v/user-It0WVtFiDOVII6H6ibVsnZaY/img-xmWbCwMcLKNPEnA7IRbQOaNG.png?st=2022-11-04T14%3A16%3A02Z&se=2022-11-04T16%3A16%3A02Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-11-04T01%3A47%3A12Z&ske=2022-11-05T01%3A47%3A12Z&sks=b&skv=2021-08-06&sig=28cUDk/%2BxwsX/425JBVN38h6L/mftMWUAGISerxbnzY%3D');
+  //const [FSdata, setFSdata] = useState('https://oaidalleapiprodscus.blob.core.windows.net/private/org-8uKaOs2C3OwX6IFoYHOp3x5v/user-It0WVtFiDOVII6H6ibVsnZaY/img-xmWbCwMcLKNPEnA7IRbQOaNG.png?st=2022-11-04T14%3A16%3A02Z&se=2022-11-04T16%3A16%3A02Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-11-04T01%3A47%3A12Z&ske=2022-11-05T01%3A47%3A12Z&sks=b&skv=2021-08-06&sig=28cUDk/%2BxwsX/425JBVN38h6L/mftMWUAGISerxbnzY%3D');
 
   const [selectedStyle, setselectedStyle] = useState("");
   const [selectedBackground, setselectedBackground] = useState("");
@@ -256,7 +256,7 @@ const GetDalle2API = async () => {
       setError(false);
       setLoading(true);
       const configuration = new Configuration({
-        apiKey: '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',
+        apiKey: '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',
       });
       const openai = new OpenAIApi(configuration);
       const response = await openai.createImage({
@@ -342,7 +342,7 @@ const GetDalle2API = async () => {
         GetDalle2API();
         setIsOpen(false);
       } else {
-          setnoCred(true);
+        setnoCred(true);
       }
 
   } else if (IsUpload) {
