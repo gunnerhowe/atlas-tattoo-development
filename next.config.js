@@ -9,7 +9,7 @@ const nextConfig = {
   },
   experimental: { 
     images: { allowFutureImage: true } ,
-    largePageDataBytes: 999 * 1000
+    largePageDataBytes: 128 * 100000,
   },
   webpack(config) {
     config.module.rules.push({
