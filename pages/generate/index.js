@@ -301,10 +301,11 @@ const GetDalle2API = async () => {
   const getActivity = async () => {
     let jsonData = await getCredits(session.user.email);
     console.log(jsonData);
-
-    if (IsOpen) {
+    if (!jsonData) {
+      setnoCred(true);
+    } else if (IsOpen) {
       if (jsonData != null, jsonData.credits > 0, query == "") {
-        setIsOpen(true);
+        //setIsOpen(true);
         setError(true);
       } else if (jsonData != null, jsonData.credits > 0) {
         const numCred = jsonData.credits;
@@ -321,7 +322,10 @@ const GetDalle2API = async () => {
       }
 
   } else if (IsUpload) {
-    if (jsonData != null, jsonData.credits > 0, IsUpload == "") {
+    if (!jsonData) {
+      setnoCred(true);
+    }
+    else if (jsonData != null, jsonData.credits > 0, IsUpload == "") {
       setIsUpload(true);
       setError(true);
     } else if (jsonData != null, jsonData.credits > 0) {
