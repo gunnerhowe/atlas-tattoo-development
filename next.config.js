@@ -4,8 +4,8 @@ const nextConfig = {
   //reactStrictMode: false,
   //webpack5: true,
   images: {
-    domains: ['openailabsprodscus.blob.core.windows.net'],
-    //domains: ['oaidalleapiprodscus.blob.core.windows.net'],
+    //domains: ['openailabsprodscus.blob.core.windows.net'],
+    domains: ['oaidalleapiprodscus.blob.core.windows.net'],
   },
   experimental: { 
     images: { allowFutureImage: true } ,
