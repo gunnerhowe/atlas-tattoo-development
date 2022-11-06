@@ -47,7 +47,7 @@ export async function verifyPassword(password, hashedPassword) {
             password: {label: "Password", type:"password"},
           },
           authorize: async (credentials) => {
-            const user = await axios.post('http://localhost:3000/api/credentials/login',
+            const user = await axios.post('https://www.atlastattoo.tech/api/credentials/login',
             {
               user: {
                 password: credentials.password,
