@@ -12,7 +12,7 @@ export default async (req, res) => {
             .find({email: newData.email})
             .sort({_id: -1})
             .skip(Number(newData.skip))
-            .limit(4)
+            .limit(1)
             .toArray()
 
             res.json(results);
