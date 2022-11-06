@@ -15,7 +15,7 @@ export default function GalleryPage({ images }) {
   const { data: session, status} = useSession();
   const [lastImage, setlastImage] = useState([]);
   const [nextImages, setnextImages] = useState([]);
-  const [skipImages, setskipImages] = useState(4);
+  const [skipImages, setskipImages] = useState(2);
 
   function download(path) {
     const link = document.createElement("a");
@@ -30,7 +30,7 @@ export default function GalleryPage({ images }) {
     const addImages = moreImages.data
 
     setnextImages(nextImages.concat(addImages));
-    setskipImages(Number(skipImages) + 4);
+    setskipImages(Number(skipImages) + 2);
 
   }
 
@@ -133,7 +133,7 @@ export async function getServerSideProps({req}) {
           .collection("images")
           .find({email: session.user.email})
           .sort({_id: -1})
-          .limit(4)
+          .limit(2)
           .toArray();
           
       //returning the JSON strings so that they can be added to the UI in the above function

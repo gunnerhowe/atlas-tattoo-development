@@ -463,6 +463,12 @@ const GetDalle2API = async () => {
                 <h1 className={classes.warning}>
                     No credits available...
                   </h1>
+                  <br />
+                  <Link href='/stripe'>
+                    <button className={classes.btn_neu_inspire}>
+                      Buy Credits
+                    </button>
+                  </Link>
                 </>}
                 {error ? (
                 <div className={classes.error}>Please enter a prompt to generate an image</div>
