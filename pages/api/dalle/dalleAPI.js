@@ -25,7 +25,7 @@ export default async function handler(req, res) {
     user: newData.user
   });
 
-  const files = (response.data.data);
+/*   const files = (response.data.data);
 
     for (const file of files) {
         ///////////Convert to base64
@@ -296,7 +296,7 @@ export default async function handler(req, res) {
                   console.log(`A document was inserted with the _id: ${result.insertedId}`)
 
                   console.log('ending the Mongo')
-        }}
+        }} */
 
       res.json(response.data.data);
   }

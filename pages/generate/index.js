@@ -100,8 +100,7 @@ import None from '../gallery/images/pandas/None.png';
 
 import White from '../gallery/images/pandas/White.png';
 import Colored from '../gallery/images/pandas/Colored.png';
-//import fs from 'fs';
-//import { response } from 'express';
+import { v4 as uuidv4 } from 'uuid';
 
 
 const image_width = '200px'
@@ -226,6 +225,24 @@ export default function Generate(credits) {
   'yellow and orange ink sinking in water, 8k resolution','pink ink sinking in water, 8k resolution','blue ink sinking in water, 8k resolution',
   'blue and purple ink sinking in water, 8k resolution','navy and gold ink drops sinking in water, 8k resolution','green ink sinking in water, 8k resolution','red ink sinking in water, 8k resolution','grey ink sinking in water, 8k resolution','black ink sinking in water, 8k resolution','tattoo stencil of sunglasses on a white background','a wolf skeleton, realistic','a panda sitting in a chair in the style a astronaut','a panda sitting in a chair in the style a princess','a panda sitting in a chair in the style a emperor','a panda sitting in a chair in the style a samurai','a panda sitting in a chair in the style a ninja','a panda sitting in a chair in the style a swimmer','a panda sitting in a chair in the style a software engineer','a panda sitting in a chair in the style a doctor','a panda sitting in a chair in the style a police','a panda sitting in a chair in the style a pirate','a panda sitting in a chair in the style of Santa','a panda sitting in a chair in the style a knight','Einstein wearing sun glasses, pop art and digital art','a German shepherded playing poker, pop art','Tiger wearing glasses playing poker in the style of digital art','A shark in the style of digital art','A butterfly in the style of Ivan Bilibin and digital art in the colors black and white','A wolf in the style of Ivan Bilibin and digital art','A lion in the style of Ivan Bilibin and digital art','a unicorn in the style of Toshi Yoshida','skeleton butterfly','A line art sketch of a dragon','A dragon in the style of Allison Kunath and digital art','A sketch of a dragon in the style of Ankit Kumar','A pen sketch of a dragon in the style of Allison kunath','A pencil sketch of a dragon','A sketch of a dragon with geometrical shapes','Intricate complex geometric sketch of a butterfly','Intricate geometric sketch of a wolf in the style of Allison Kunath','A geometric sketch of a lion in the style of Allison Kunath','A geometric pencil sketch of a dragon in the style of Allison Kunath','A geometric sketch of a dragon in grey and black color','Naruto in black and white colors in the style of Hiroshi Yoshida','An octopus holding a trident in the style realism in colors black and white','An octopus holding a trident in the style realism','Zeus in the style of digital art','cool tattoo in the style of Ivan Shishkin','cool tattoo in the style of Ghibli','cool tattoo in the style of Ivan Bilibin','cool tattoo in the style of Hiroshi Yoshida','cool tattoo in the style of Toshi Yoshida']
 
+  const startLoad = async (files) => {
+    for (const file of files) {
+      const glob_id = uuidv4();
+      const storingS3 = await axios.post('api/dalle/storingS3', {
+        url: file.url,
+        glob_id: glob_id,
+        email: session.user.email
+      }).then((res) => {
+        const storingMD = axios.post('api/dalle/storingMD', {
+          image_path: ('https://atlastattoo.s3.amazonaws.com/' + glob_id),
+          email: session.user.email,
+          name: session.user.name,
+          prompt: query + style + background,
+        })
+      })
+    }
+  }
+
 const GetDalle2API = async () => {
     if (query != "") {
       setError(false);
@@ -238,13 +255,14 @@ const GetDalle2API = async () => {
         name: session.user.name
     });
         setResults(generate.data);
-        //const files = (generate.data);
+        const files = (generate.data);
         setLoading(false);
         setIsOpen(true);
         setstyle("");
         setBackground("");
         setselectedBackground("");
         setselectedStyle("");
+        startLoad(files);
     } else {
       setError(true);
     };
