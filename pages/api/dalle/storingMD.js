@@ -1,10 +1,4 @@
-import { Configuration, OpenAIApi } from "openai";
 import clientPromise from "../../../lib/mongodb";
-import axios from "axios";
-import { v4 as uuidv4 } from 'uuid';
-import { useState } from 'react';
-import S3 from 'aws-sdk/clients/s3'
-import { buffer } from "micro";
 
 export default async function handler(req, res) {
 
@@ -12,11 +6,10 @@ export default async function handler(req, res) {
     const newData = req.body
 
     var toAdd = {
-        image_path: ('https://atlastattoo.s3.amazonaws.com/' + newData.glob_id),
+        image_path: newData.image_path,
         email: newData.email,
         name: newData.name,
         prompt: newData.prompt,
-        //base64: 'data:application/octet-stream;base64,'+base64
     };
 
         const client = await clientPromise;
@@ -30,6 +23,4 @@ export default async function handler(req, res) {
             console.log('ending the Mongo')
 
          res.json(toAdd);
-
-      //res.json(console.log(`A document was inserted with the _id: ${result.insertedId}`));
   }

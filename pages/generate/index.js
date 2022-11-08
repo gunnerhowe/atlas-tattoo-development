@@ -6,12 +6,9 @@ import React from 'react';
 import Link from 'next/link';
 import {signIn, signOut, useSession, getSession} from 'next-auth/react';
 import SVG from '/pages/gallery/images/download.svg';
-//import clientPromise from "/lib/mongodb";
 import axios from "axios";
 import PLUS from '/pages/gallery/images/plus.svg';
 import MINUS from '/pages/gallery/images/minus.svg';
-//import clientPromise from "/lib/mongodb";
-import { Configuration, OpenAIApi } from "openai";
 
 import FourK from '../gallery/images/pandas/4K photography.png';
 import Abstract from '../gallery/images/pandas/abstract.png';
@@ -131,6 +128,8 @@ export default function Generate(credits) {
   const [base64String, setbase64String] = useState("");
 
   const [glob_id, setglob_id] = useState("");
+  const [imageUrl, setimageUrl] = useState("");
+  const [IsUploadBtn, setIsUploadBtn] = useState(false);
 
   const inspire = ['synthwave sports car','a sea otter with a pearl earring by Johannes Vermeer','panda mad scientist mixing sparkling chemicals, digital art',
   'a stained glass window depicting a robot','abstract pencil and watercolor art of a lonely robot holding a balloon',
@@ -227,24 +226,51 @@ export default function Generate(credits) {
   'yellow and orange ink sinking in water, 8k resolution','pink ink sinking in water, 8k resolution','blue ink sinking in water, 8k resolution',
   'blue and purple ink sinking in water, 8k resolution','navy and gold ink drops sinking in water, 8k resolution','green ink sinking in water, 8k resolution','red ink sinking in water, 8k resolution','grey ink sinking in water, 8k resolution','black ink sinking in water, 8k resolution','tattoo stencil of sunglasses on a white background','a wolf skeleton, realistic','a panda sitting in a chair in the style a astronaut','a panda sitting in a chair in the style a princess','a panda sitting in a chair in the style a emperor','a panda sitting in a chair in the style a samurai','a panda sitting in a chair in the style a ninja','a panda sitting in a chair in the style a swimmer','a panda sitting in a chair in the style a software engineer','a panda sitting in a chair in the style a doctor','a panda sitting in a chair in the style a police','a panda sitting in a chair in the style a pirate','a panda sitting in a chair in the style of Santa','a panda sitting in a chair in the style a knight','Einstein wearing sun glasses, pop art and digital art','a German shepherded playing poker, pop art','Tiger wearing glasses playing poker in the style of digital art','A shark in the style of digital art','A butterfly in the style of Ivan Bilibin and digital art in the colors black and white','A wolf in the style of Ivan Bilibin and digital art','A lion in the style of Ivan Bilibin and digital art','a unicorn in the style of Toshi Yoshida','skeleton butterfly','A line art sketch of a dragon','A dragon in the style of Allison Kunath and digital art','A sketch of a dragon in the style of Ankit Kumar','A pen sketch of a dragon in the style of Allison kunath','A pencil sketch of a dragon','A sketch of a dragon with geometrical shapes','Intricate complex geometric sketch of a butterfly','Intricate geometric sketch of a wolf in the style of Allison Kunath','A geometric sketch of a lion in the style of Allison Kunath','A geometric pencil sketch of a dragon in the style of Allison Kunath','A geometric sketch of a dragon in grey and black color','Naruto in black and white colors in the style of Hiroshi Yoshida','An octopus holding a trident in the style realism in colors black and white','An octopus holding a trident in the style realism','Zeus in the style of digital art','cool tattoo in the style of Ivan Shishkin','cool tattoo in the style of Ghibli','cool tattoo in the style of Ivan Bilibin','cool tattoo in the style of Hiroshi Yoshida','cool tattoo in the style of Toshi Yoshida']
 
-/*   const startLoad = async (files) => {
-    for (const file of files) {
-      setglob_id(uuidv4());
-      //console.log(file.url);
-      const storingS3 = await axios.post('api/dalle/storingS3', {
-        url: file.url,
-        glob_id: glob_id,
-        email: session.user.email
-      }).then((res) => {
-        const storingMD = axios.post('api/dalle/storingMD', {
-          image_path: ('https://atlastattoo.s3.amazonaws.com/' + glob_id),
-          email: session.user.email,
-          name: session.user.name,
-          prompt: query + style + background,
-        })
-      })
+    //function to get the base64 image
+    const base = async (url) => {
+      let newBase = await axios.post(`/api/dalle/download`, { url: url })
+        let base6 = await newBase.data.result
+
+        const baseData = ('data:image/png;base64,' + base6);
+        const buf = Buffer.from(baseData.replace(/^data:image\/\w+;base64,/, ""),'base64');
+
+        return buf
     }
-  } */
+
+  const storeMD = async (url) => {
+    const storingMD = axios.post('api/dalle/storingMD', {
+      image_path: url,
+      email: session.user.email,
+      name: session.user.name,
+      prompt: query + style + background,
+    })
+  }
+
+  const startLoad = async (files) => {
+    for (const file of files) {
+
+      //setglob_id(uuidv4());
+
+      let baseData = await base(file.url);
+
+      const getURL = await fetch("/api/dalle/s3").then(res => res.json());
+      console.log(getURL)
+
+      //post the image directly to the s3 bucket
+      await fetch(getURL, {
+        method: "PUT",
+        headers: {
+          "Content-Type": 'image/jpeg',
+          "Content-Encoding": 'base64',
+        },
+        body: baseData,
+      })
+
+      const varImage = getURL.split('?')[0];
+
+      storeMD(varImage);
+    }
+  }
 
 const GetDalle2API = async () => {
     if (query != "") {
@@ -259,7 +285,7 @@ const GetDalle2API = async () => {
     });
         setResults(generate.data);
         const files = (generate.data);
-        //startLoad(files);
+        startLoad(files);
         setLoading(false);
         setIsOpen(true);
         setstyle("");
@@ -271,34 +297,28 @@ const GetDalle2API = async () => {
     };
   }
 
-    //function to get the base64 image
-  const base = async (url) => {
-    let newBase = await axios.post(`/api/dalle/download`, { url: url })
-      let base6 = await newBase.data.result
-      return base6
-  }
-
-  const VarDalle2API = async () => {
-    if (UploadImage != "") {
+  const VarDalle2API = async (url) => {
+    if (selectedFile != "") {
       setError(false);
       setLoading(true);
 
       //let baseData = await base(file.generation.image_path);
 
-      const sendBase = 'data:image/png;base64,'+base64String 
+      //const sendBase = 'data:image/png;base64,'+base64String 
 
       const generate = await axios.post('/api/dalle/variationAPI',{
-        file: selectedFile,
-        n: 1,
-        size: "1024x1024",
+        url: url,
+        //file: selectedFile,
+        //n: 1,
+        //size: "1024x1024",
         user: session.user.email,
-        base64: sendBase
-        //name: session.user.name
+        //base64: sendBase
+        name: session.user.name
     });
       setResults(generate.data);
       //const files = (generate.data);
       setLoading(false);
-      setIsOpen(true);
+      setIsUploadBtn(true);
       setstyle("");
       setBackground("");
       setselectedBackground("");
@@ -355,28 +375,7 @@ const GetDalle2API = async () => {
         setnoCred(true);
       }
 
-  } else if (IsUpload) {
-    if (!jsonData) {
-      setnoCred(true);
-    }
-    else if (jsonData != null, jsonData.credits > 0, IsUpload == "") {
-      setIsUpload(true);
-      setError(true);
-    } else if (jsonData != null, jsonData.credits > 0) {
-      const numCred = jsonData.credits;
-      const eEmail = session.user.email;
-      var data = {
-        credits: Number(numCred),
-        email: eEmail
-      };
-      updateCredits(data);
-      VarDalle2API();
-      //setIsUpload(false);
-    } else {
-        setnoCred(true);
-    }
-  }
-  }
+  }}
 
   //Get the Dalle Credits for the user from Mongodb
    const getCredits = async (seeEmail) => {
@@ -391,40 +390,48 @@ const GetDalle2API = async () => {
       let newJson = await newData.json();
     }
 
-    function imageUploaded() {
-      var file = document.querySelector(
-          'input[type=file]')['files'][0];
-    
-      var reader = new FileReader();
-      console.log("next");
-        
-      reader.onload = function () {
-          setbase64String(reader.result.replace("data:", "")
-              .replace(/^.+,/, ""));
-    
-          const imageBase64Stringsep = base64String;
-    
-          // alert(imageBase64Stringsep);
-          //console.log(base64String);
-      }
-      reader.readAsDataURL(file);
-  }
+  const handleEvent = async () => {
 
-/*   const handleUpload = async () => {
-    try {
-      if (!selectedFile) return;
-      const formData = new FormData();
-      formData.append("myImage", selectedImage);
-      const data = await axios.post('/api/image', {
-        data: 'https://oaidalleapiprodscus.blob.core.windows.net/private/org-8uKaOs2C3OwX6IFoYHOp3x5v/user-It0WVtFiDOVII6H6ibVsnZaY/img-xmWbCwMcLKNPEnA7IRbQOaNG.png?st=2022-11-04T14%3A16%3A02Z&se=2022-11-04T16%3A16%3A02Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-11-04T01%3A47%3A12Z&ske=2022-11-05T01%3A47%3A12Z&sks=b&skv=2021-08-06&sig=28cUDk/%2BxwsX/425JBVN38h6L/mftMWUAGISerxbnzY%3D'});
-        const text = await response.text();
-        setFSdata(text);
-        return text
-      console.log(data);
-    } catch (error) {
-      console.log(error.response?.data)
-    }
-  } */
+    let jsonData = await getCredits(session.user.email);
+
+      if (IsUpload) {
+        if (!jsonData) {
+          setnoCred(true);
+        }
+        else if (jsonData != null, jsonData.credits > 0, IsUpload == "") {
+          setIsUpload(true);
+          setError(true);
+        } else if (jsonData != null, jsonData.credits > 0) {
+
+          const numCred = jsonData.credits;
+          const eEmail = session.user.email;
+          var data = {
+            credits: Number(numCred),
+            email: eEmail
+          };
+          updateCredits(data);
+          
+          const getURL = await fetch("/api/dalle/s3").then(res => res.json());
+          console.log(getURL)
+
+          //post the image directly to the s3 bucket
+          await fetch(getURL, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "multipart/form-data"
+            },
+            body: selectedFile,
+
+          })
+            const varImage = getURL.split('?')[0];
+            VarDalle2API(varImage);
+        } else {
+          setnoCred(true);
+        }
+      }
+  }
+  
+
 
   //Visual elements
   return (
@@ -445,76 +452,63 @@ const GetDalle2API = async () => {
             <>
               <h1 className={classes.title}><span className={classes.titleColor}>Get Inked With The Future</span></h1>
                 <p className={classes.description}>
-                <button className={classes.btn_neu_inspire} onClick={() => {setQuery(inspire[Math.floor(Math.random() * inspire.length)]), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
-                  Inspire Me
-                </button>
-
-
-{/*                 <button className={classes.btn_neu_inspire} onClick={() => {setIsOpen(false), setIsUpload(true), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
-                  Variation
-                </button> */}
-
-
-                  <input
-                    id="query"
-                    type="text"
-                    value={query}
-                    onChange={(e) => {setQuery(e.target.value)}}
-                    placeholder="Tattoo prompt..."
-                  />
+              {!IsUpload && (
+                <>
+                  <button className={classes.btn_neu_inspire} onClick={() => {setQuery(inspire[Math.floor(Math.random() * inspire.length)]), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
+                    Inspire Me
+                  </button>
+                  <button className={classes.btn_neu_inspire} onClick={() => {setIsUploadBtn(true), setIsOpen(false), setIsUpload(true), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
+                    Variation
+                  </button>
+                    <input
+                      id="query"
+                      type="text"
+                      value={query}
+                      onChange={(e) => {setQuery(e.target.value)}}
+                      placeholder="Tattoo prompt..."
+                    />
+                </>
+                )}
                 </p>{" "}
               {IsOpen &&
+              <>
                 <button className={classes.btn_neu} onClick={() => {getActivity(), setShowStyle(false), setShowBackground(false)}}>
                     Generate
-                  </button>}
-
-
+                  </button>
                   <br />
                   <br />
+                </>}
                   {IsUpload && (
                     <>
-                  <button className={classes.btn_neu_inspire} onClick={() => {setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
-                    Generate
+                  <button className={classes.btn_neu_inspire} onClick={() => {setIsUpload(false), setIsOpen(true), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
+                    Prompt
                   </button>
-                  <input
-                    id="image-input"
-                    type="file"
-                    //value={query}
-                    //onChange={(e) => {setUploadImage(e.target.value)}}
-                    onChange={({target}) => {
-                      if (target.files) {
-                        const file = target.files[0];
-                        setSelectedImage(URL.createObjectURL(file));
-                        setSelectedFile(file);
-                        setUploadImage(file);
-                        imageUploaded(file);
-                      }
-                    }}
-                    //placeholder="Tattoo prompt..."
-                    accept="image/jpeg, image/png, image/jpg"
-                    className={classes.upload_image}
-                  />
+                  <label className={classes.upload_image}>
+                    <form id="imageForm">
+                      <input
+                        id="image-input"
+                        type="file"
+                        onChange={({target}) => {
+                          if (target.files) {
+                            const file = target.files[0];
+                            setSelectedFile(file);
+                          }
+                        }}
+                        accept="image/jpeg, image/png, image/jpg"
+                        className={classes.upload_image1}
+                      />
+                    </form>
+                    <PLUS className={classes.input_svg}></PLUS>
+                  </label>
                   <br />
                   <br />
-                  {IsUpload && (
+                  {IsUploadBtn && (
                     <>
-                  <button className={classes.btn_neu} onClick={() => {handleUpload()}}>
-                    Upload
-                  </button>
-                  <button className={classes.btn_neu} onClick={() => {getActivity()}}>
-                    Generate
-                  </button>
-                  <button className={classes.btn_neu} onClick={() => {console.log(selectedImage), console.log(selectedFile)}}>
-                    test
-                  </button>
+                    <button className={classes.btn_neu} onClick={() => {handleEvent(), setIsUploadBtn(false)}}>
+                      Generate
+                    </button>
                   </>)}
                   </>)}
-
-
-
-
-
-
               {noCred &&
                 <>
                 <span><br /></span>
@@ -551,6 +545,7 @@ const GetDalle2API = async () => {
                   );
                 })}
               </div>
+              <br />
               <div className={classes.tattoo_options}>
               {IsOpen && (
               <>
