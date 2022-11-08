@@ -10,6 +10,7 @@ export default async function handler(req, res) {
 
   const newData = req.body
 
+  console.log('starting the image generation')
 
   //generate the Dalle Images
     const configuration = new Configuration({
@@ -26,6 +27,7 @@ export default async function handler(req, res) {
 
     res.json(response.data.data);
 
+    console.log('sent the image generation')
 
     const files = (response.data.data);
 
@@ -34,7 +36,7 @@ export default async function handler(req, res) {
 
       for (const file of files) {
 
-  
+        console.log('starting the base64')
         ///////////Convert to base64
         const response = await axios.get(file.url, {
           responseType: "arraybuffer",
@@ -47,10 +49,14 @@ export default async function handler(req, res) {
         //////////Store in S3
         const buf = new Buffer.from(baseData.replace(/^data:image\/\w+;base64,/, ""),'base64');
 
+        console.log('ending the base64')
+
         const glob_id = uuidv4();
 
 
         const Mongo = async () => {
+          console.log('starting the Mongo')
+
           var toAdd = {
             image_path: ('https://atlastattoo.s3.amazonaws.com/' + glob_id),
             email: newData.user,
@@ -66,9 +72,12 @@ export default async function handler(req, res) {
                     .collection("images")
                     .insertOne(toAdd);
                 console.log(`A document was inserted with the _id: ${result.insertedId}`)
+
+                console.log('ending the Mongo')
           }
 
         const Amazon = async () => {
+          console.log('starting the S3')
 
           var AWS = require('aws-sdk');
       
@@ -99,6 +108,8 @@ export default async function handler(req, res) {
                     console.log('succesfully uploaded the image!');
                   }
               });
+
+              console.log('ending the S3')
 
               return requesting
         
