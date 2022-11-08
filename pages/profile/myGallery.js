@@ -13,19 +13,33 @@ import Navbar from "./components/newNav";
 
 export default function GalleryPage({ images }) {
   const { data: session, status} = useSession();
-  const [lastImage, setlastImage] = useState([]);
+/*   const [lastImage, setlastImage] = useState([]);
   const [nextImages, setnextImages] = useState([]);
-  const [skipImages, setskipImages] = useState(1);
+  const [skipImages, setskipImages] = useState(1); */
 
-  function download(path) {
+/*   function download(path) {
     const link = document.createElement("a");
     link.href = `${path}`;
     link.download = `Atlas-Tattoo-Dev.png`;
     link.click();
+  } */
+
+  function download(url) {
+    axios
+      .post(`/api/dalle/download`, { url: url })
+      .then((res) => {
+        const link = document.createElement("a");
+        link.href = `data:application/octet-stream;base64,${res.data.result}`;
+        link.download = `Atlas-Tattoo-Dev.png`;
+        link.click();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
 
-  const seeMore = async () => {
+/*   const seeMore = async () => {
     let moreImages = await getMore(skipImages);
     const addImages = moreImages.data
 
@@ -47,7 +61,7 @@ export default function GalleryPage({ images }) {
       } catch (err) {
         console.log(err);
       }};
-
+ */
 
   return (
     <div className={styles.container}>
@@ -74,41 +88,41 @@ export default function GalleryPage({ images }) {
                     <div key={image._id} className={styles.card}>
                       <Image 
                         className={styles.imgPreview}
-                        src={image.base64}
+                        src={image.image_path}
                         width={300}
                         height={300}
                         quality={100}
                         alt=''/>
                       <div>
-                        <button className={styles.btn_neu_download} onClick={() => download(image.base64)}>
+                        <button className={styles.btn_neu_download} onClick={() => download(image.image_path)}>
                           <SVG className={styles.download_image}/>
                         </button>
                       </div>        
                     </div>
                   );
                 })}
-                {nextImages.map((nextImage) => {
+{/*                 {nextImages.map((nextImage) => {
                   return (
                     <div key={nextImage._id} className={styles.card}>
                       <Image 
                         className={styles.imgPreview}
-                        src={nextImage.base64}
+                        src={nextImage.image_path}
                         width={300}
                         height={300}
                         quality={100}
                         alt=''/>
                       <div>
-                        <button className={styles.btn_neu_download} onClick={() => download(nextImage.base64)}>
+                        <button className={styles.btn_neu_download} onClick={() => download(nextImage.image_path)}>
                           <SVG className={styles.download_image}/>
                         </button>
                       </div>        
                     </div>
                   );
-                })}
+                })} */}
               </div>
-              <button className={styles.btn_neu_more} onClick={() => seeMore()}>
+{/*               <button className={styles.btn_neu_more} onClick={() => seeMore()}>
                 Load More
-              </button>
+              </button> */}
         </main>
         </>
           )
@@ -133,7 +147,7 @@ export async function getServerSideProps({req}) {
           .collection("images")
           .find({email: session.user.email})
           .sort({_id: -1})
-          .limit(1)
+          //.limit(1)
           .toArray();
           
       //returning the JSON strings so that they can be added to the UI in the above function

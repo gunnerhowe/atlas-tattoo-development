@@ -100,6 +100,7 @@ import None from '../gallery/images/pandas/None.png';
 
 import White from '../gallery/images/pandas/White.png';
 import Colored from '../gallery/images/pandas/Colored.png';
+//import fs from 'fs';
 //import { response } from 'express';
 
 
@@ -120,16 +121,15 @@ export default function Generate(credits) {
   const [ShowBackground, setShowBackground] = useState(false);
   const [UploadImage, setUploadImage] = useState("");
   const [IsUpload, setIsUpload] = useState(false);
-  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
-
-  //const [FSdata, setFSdata] = useState('https://oaidalleapiprodscus.blob.core.windows.net/private/org-8uKaOs2C3OwX6IFoYHOp3x5v/user-It0WVtFiDOVII6H6ibVsnZaY/img-xmWbCwMcLKNPEnA7IRbQOaNG.png?st=2022-11-04T14%3A16%3A02Z&se=2022-11-04T16%3A16%3A02Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-11-04T01%3A47%3A12Z&ske=2022-11-05T01%3A47%3A12Z&sks=b&skv=2021-08-06&sig=28cUDk/%2BxwsX/425JBVN38h6L/mftMWUAGISerxbnzY%3D');
 
   const [selectedStyle, setselectedStyle] = useState("");
   const [selectedBackground, setselectedBackground] = useState("");
 
   const [style, setstyle] = useState("");
   const [background, setBackground] = useState("");
+  const [base64String, setbase64String] = useState("");
 
   const inspire = ['synthwave sports car','a sea otter with a pearl earring by Johannes Vermeer','panda mad scientist mixing sparkling chemicals, digital art',
   'a stained glass window depicting a robot','abstract pencil and watercolor art of a lonely robot holding a balloon',
@@ -250,15 +250,28 @@ const GetDalle2API = async () => {
     };
   }
 
+    //function to get the base64 image
+  const base = async (url) => {
+    let newBase = await axios.post(`/api/dalle/download`, { url: url })
+      let base6 = await newBase.data.result
+      return base6
+  }
+
   const VarDalle2API = async () => {
     if (UploadImage != "") {
       setError(false);
       setLoading(true);
+
+      //let baseData = await base(file.generation.image_path);
+
+      const sendBase = 'data:image/png;base64,'+base64String 
+
       const generate = await axios.post('/api/dalle/variationAPI',{
         file: selectedFile,
         n: 1,
         size: "1024x1024",
         user: session.user.email,
+        base64: sendBase
         //name: session.user.name
     });
       setResults(generate.data);
@@ -300,7 +313,7 @@ const GetDalle2API = async () => {
   //Get credits that were generated from getCredits()
   const getActivity = async () => {
     let jsonData = await getCredits(session.user.email);
-    console.log(jsonData);
+    //console.log(jsonData);
     if (!jsonData) {
       setnoCred(true);
     } else if (IsOpen) {
@@ -351,7 +364,30 @@ const GetDalle2API = async () => {
     return newJson;
   }
 
+    //Get the Dalle Credits for the user from Mongodb
+    const removeFiles = async () => {
+      let newData = await fetch(`/api/dalle/removeFiles`)
+      let newJson = await newData.json();
+    }
 
+    function imageUploaded() {
+      var file = document.querySelector(
+          'input[type=file]')['files'][0];
+    
+      var reader = new FileReader();
+      console.log("next");
+        
+      reader.onload = function () {
+          setbase64String(reader.result.replace("data:", "")
+              .replace(/^.+,/, ""));
+    
+          const imageBase64Stringsep = base64String;
+    
+          // alert(imageBase64Stringsep);
+          //console.log(base64String);
+      }
+      reader.readAsDataURL(file);
+  }
 
 /*   const handleUpload = async () => {
     try {
@@ -391,9 +427,13 @@ const GetDalle2API = async () => {
                 <button className={classes.btn_neu_inspire} onClick={() => {setQuery(inspire[Math.floor(Math.random() * inspire.length)]), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
                   Inspire Me
                 </button>
+
+
 {/*                 <button className={classes.btn_neu_inspire} onClick={() => {setIsOpen(false), setIsUpload(true), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
                   Variation
                 </button> */}
+
+
                   <input
                     id="query"
                     type="text"
@@ -408,11 +448,7 @@ const GetDalle2API = async () => {
                   </button>}
 
 
-
-
-
-
-{/*                   <br />
+                  <br />
                   <br />
                   {IsUpload && (
                     <>
@@ -430,6 +466,7 @@ const GetDalle2API = async () => {
                         setSelectedImage(URL.createObjectURL(file));
                         setSelectedFile(file);
                         setUploadImage(file);
+                        imageUploaded(file);
                       }
                     }}
                     //placeholder="Tattoo prompt..."
@@ -450,7 +487,7 @@ const GetDalle2API = async () => {
                     test
                   </button>
                   </>)}
-                  </>)} */}
+                  </>)}
 
 
 
