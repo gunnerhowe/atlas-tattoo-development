@@ -11,42 +11,6 @@ export default async function handler(req, res) {
 
   const newData = req.body
 
-  const Amazon = async (buf, glob_id) => {
-
-    var AWS = require('aws-sdk');
-
-        AWS.config.update(
-          {
-            region: 'us-east-1',
-            accessKeyId: process.env.AW_ACCESS_KEY_ID,
-            secretAccessKey: process.env.AW_SECRET_ACCESS_KEY
-          })
-
-        var s3Bucket = new AWS.S3( { params: {Bucket: 'atlastattoo'} } );
-
-        var data = {
-          Key: glob_id, 
-          Body: buf,
-          //Body: url,
-          ContentEncoding: 'base64',
-          ContentType: 'image/jpeg',
-          Tagging: `email=${newData.user}`,
-          ACL: 'public-read'
-        };
-
-        s3Bucket.putObject(data, function(err, data){
-            if (err) { 
-              console.log(err);
-              console.log('Error uploading data: ', data); 
-            } else {
-              console.log('succesfully uploaded the image!');
-              //console.log(data);
-            }
-        });
-
-  
-  }
-
 
   //generate the Dalle Images
     const configuration = new Configuration({
@@ -113,7 +77,65 @@ export default async function handler(req, res) {
 
         //setGlob(glob_id);
 
-        await Amazon(buf, glob_id);
+        const Mongo = async () => {
+          var toAdd = {
+            image_path: ('https://atlastattoo.s3.amazonaws.com/' + glob_id),
+            email: newData.user,
+            name: newData.name,
+            prompt: newData.prompt,
+            //base64: 'data:application/octet-stream;base64,'+base64
+          };
+  
+            const client = await clientPromise;
+            const db = client.db("Atlas_Tattoo");
+    
+            const result = await db
+                    .collection("images")
+                    .insertOne(toAdd);
+                console.log(`A document was inserted with the _id: ${result.insertedId}`)
+          }
+
+        const Amazon = async () => {
+
+          var AWS = require('aws-sdk');
+      
+              AWS.config.update(
+                {
+                  region: 'us-east-1',
+                  accessKeyId: process.env.AW_ACCESS_KEY_ID,
+                  secretAccessKey: process.env.AW_SECRET_ACCESS_KEY
+                })
+      
+              var s3Bucket = new AWS.S3( { params: {Bucket: 'atlastattoo'} } );
+      
+              var data = {
+                Key: glob_id, 
+                Body: buf,
+                //Body: url,
+                ContentEncoding: 'base64',
+                ContentType: 'image/jpeg',
+                Tagging: `email=${newData.user}`,
+                ACL: 'public-read'
+              };
+      
+              s3Bucket.putObject(data, function(err, data){
+                  if (err) { 
+                    console.log(err);
+                    console.log('Error uploading data: ', data); 
+                  } else {
+                    console.log('succesfully uploaded the image!');
+                    //console.log(data);
+                  }
+              });
+      
+              await Mongo();
+        
+        }
+
+        await Amazon();
+
+        //await Mongo();
+        //await Mongo();
 
          /* var data = {
           Key: glob_id, 
@@ -137,27 +159,6 @@ export default async function handler(req, res) {
 
 
         ///////////////Store in Mongodb
-        var toAdd = {
-          image_path: ('https://atlastattoo.s3.amazonaws.com/' + glob_id),
-          email: newData.user,
-          name: newData.name,
-          prompt: newData.prompt,
-          //base64: 'data:application/octet-stream;base64,'+base64
-        };
-
-         try {
-          const client = await clientPromise;
-          const db = client.db("Atlas_Tattoo");
-  
-          const result = await db
-                  .collection("images")
-                  .insertOne(toAdd);
-              console.log(`A document was inserted with the _id: ${result.insertedId}`)
-  
-          //res.json(result);
-      } catch (e) {
-          console.error(e);
-      } 
       };
     };
 
