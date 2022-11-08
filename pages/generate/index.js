@@ -130,6 +130,8 @@ export default function Generate(credits) {
   const [background, setBackground] = useState("");
   const [base64String, setbase64String] = useState("");
 
+  const [glob_id, setglob_id] = useState("");
+
   const inspire = ['synthwave sports car','a sea otter with a pearl earring by Johannes Vermeer','panda mad scientist mixing sparkling chemicals, digital art',
   'a stained glass window depicting a robot','abstract pencil and watercolor art of a lonely robot holding a balloon',
   'an expressive oil painting of a basketball player dunking, depicted as an explosion of a nebula',
@@ -227,7 +229,7 @@ export default function Generate(credits) {
 
   const startLoad = async (files) => {
     for (const file of files) {
-      const glob_id = uuidv4();
+      setglob_id(uuidv4());
       const storingS3 = await axios.post('api/dalle/storingS3', {
         url: file.url,
         glob_id: glob_id,

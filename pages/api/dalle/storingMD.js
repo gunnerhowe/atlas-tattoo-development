@@ -9,7 +9,7 @@ import { buffer } from "micro";
 export default async function handler(req, res) {
 
     console.log('made it to Mongo');
-  const newData = req.body
+    const newData = req.body
 
     var toAdd = {
         image_path: ('https://atlastattoo.s3.amazonaws.com/' + newData.glob_id),
