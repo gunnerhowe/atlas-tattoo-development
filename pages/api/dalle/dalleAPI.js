@@ -37,24 +37,33 @@ export default async function handler(req, res) {
       for (const file of files) {
 
         console.log('starting the base64')
-        ///////////Convert to base64
-        const response = await axios.get(file.url, {
-          responseType: "arraybuffer",
-        });
+
+        const convertBase = async () => {
+          ///////////Convert to base64
+          const response = await axios.get(file.url, {
+            responseType: "arraybuffer",
+          }).then((response) => {
+            const base64 = Buffer.from(response.data, "binary").toString("base64");
+            const baseData = ('data:image/png;base64,' + base64);
+            const buf = Buffer.from(baseData.replace(/^data:image\/\w+;base64,/, ""),'base64');
+            console.log('ending the base64');
+            const glob_id = uuidv4();
+            Amazon(buf, glob_id)
+          })};
+
+          convertBase();
       
-        const base64 = Buffer.from(response.data, "binary").toString("base64");
-        const baseData = ('data:image/png;base64,' + base64);
+       // const base64 = Buffer.from(response.data, "binary").toString("base64");
+        //const baseData = ('data:image/png;base64,' + base64);
 
 
         //////////Store in S3
-        const buf = new Buffer.from(baseData.replace(/^data:image\/\w+;base64,/, ""),'base64');
+        //const buf = new Buffer.from(baseData.replace(/^data:image\/\w+;base64,/, ""),'base64');
 
-        console.log('ending the base64')
-
-        const glob_id = uuidv4();
+        //console.log('ending the base64')
 
 
-        const Mongo = async () => {
+        const Mongo = async (glob_id) => {
           console.log('starting the Mongo')
 
           var toAdd = {
@@ -76,7 +85,7 @@ export default async function handler(req, res) {
                 console.log('ending the Mongo')
           }
 
-        const Amazon = async () => {
+        const Amazon = async (buf, glob_id) => {
           console.log('starting the S3')
 
           var AWS = require('aws-sdk');
@@ -105,17 +114,19 @@ export default async function handler(req, res) {
                     console.log(err);
                     console.log('Error uploading data: ', data); 
                   } else {
-                    console.log('succesfully uploaded the image!');
+                    console.log(`succesfully uploaded the image ${glob_id}`);
                   }
               });
 
-              console.log('ending the S3')
+              console.log('ending the S3');
 
-              return requesting
+              Mongo(glob_id)
+
+              //return requesting
         
         }
 
-        await Amazon().then((requesting) => {if(requesting.signedAt) {Mongo()}else{return null}});
+        //await Amazon().then((requesting) => {if(requesting.signedAt) {Mongo()}else{return null}});
 
         ///////////////Store in Mongodb
         //await Mongo();
