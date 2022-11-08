@@ -29,5 +29,7 @@ export default async function handler(req, res) {
 
             console.log('ending the Mongo')
 
+         res.json(toAdd);
+
       //res.json(console.log(`A document was inserted with the _id: ${result.insertedId}`));
   }

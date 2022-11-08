@@ -230,6 +230,7 @@ export default function Generate(credits) {
   const startLoad = async (files) => {
     for (const file of files) {
       setglob_id(uuidv4());
+      //console.log(file.url);
       const storingS3 = await axios.post('api/dalle/storingS3', {
         url: file.url,
         glob_id: glob_id,
