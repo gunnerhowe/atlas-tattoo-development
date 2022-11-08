@@ -26,23 +26,9 @@ export default async function handler(req, res) {
 
     const files = (response.data.data);
 
-
-
-
-    const loadIt = async (files) => {
-      for (const file of files) {
-  
-        ///////////Convert to base64
-        const response = await axios.get(file.url, {
-          responseType: "arraybuffer",
-        });
-      
-        const base64 = Buffer.from(response.data, "binary").toString("base64");
-        const baseData = 'data:image/png;base64,' + base64
+        //////////Store in S3
         var AWS = require('aws-sdk');
 
-
-        //////////Store in S3
         AWS.config.update(
           {
             region: 'us-east-1',
@@ -52,6 +38,32 @@ export default async function handler(req, res) {
 
         var s3Bucket = new AWS.S3( { params: {Bucket: 'atlastattoo'} } );
 
+
+    const loadIt = async (files) => {
+      for (const file of files) {
+
+  
+        ///////////Convert to base64
+        const response = await axios.get(file.url, {
+          responseType: "arraybuffer",
+        });
+      
+        const base64 = Buffer.from(response.data, "binary").toString("base64");
+        const baseData = ('data:image/png;base64,' + base64);
+
+
+        //////////Store in S3
+/*          var AWS = require('aws-sdk');
+
+        AWS.config.update(
+          {
+            region: 'us-east-1',
+            accessKeyId: process.env.AW_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AW_SECRET_ACCESS_KEY
+          })  */
+
+        //var s3Bucket = new AWS.S3( { params: {Bucket: 'atlastattoo'} } );
+
         const buf = new Buffer.from(baseData.replace(/^data:image\/\w+;base64,/, ""),'base64');
 
         const glob_id = uuidv4();
@@ -59,6 +71,7 @@ export default async function handler(req, res) {
          var data = {
           Key: glob_id, 
           Body: buf,
+          //Body: url,
           ContentEncoding: 'base64',
           ContentType: 'image/jpeg',
           Tagging: `email=${newData.user}`,
