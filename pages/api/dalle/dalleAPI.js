@@ -4,10 +4,9 @@ import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import { setUncaughtExceptionCaptureCallback } from "process";
+import S3 from 'aws-sdk/clients/s3'
 
 export default async function handler(req, res) {
-  //const [baseData1, setbaseData1] = useState("");
-  //const [Glob, setGlob] = useState("");
 
   const newData = req.body
 
@@ -30,18 +29,6 @@ export default async function handler(req, res) {
 
     const files = (response.data.data);
 
-        //////////Store in S3
-/*         var AWS = require('aws-sdk');
-
-        AWS.config.update(
-          {
-            region: 'us-east-1',
-            accessKeyId: process.env.AW_ACCESS_KEY_ID,
-            secretAccessKey: process.env.AW_SECRET_ACCESS_KEY
-          })
-
-        var s3Bucket = new AWS.S3( { params: {Bucket: 'atlastattoo'} } ); */
-
 
     const loadIt = async (files) => {
 
@@ -58,24 +45,10 @@ export default async function handler(req, res) {
 
 
         //////////Store in S3
-/*          var AWS = require('aws-sdk');
-
-        AWS.config.update(
-          {
-            region: 'us-east-1',
-            accessKeyId: process.env.AW_ACCESS_KEY_ID,
-            secretAccessKey: process.env.AW_SECRET_ACCESS_KEY
-          })  */
-
-        //var s3Bucket = new AWS.S3( { params: {Bucket: 'atlastattoo'} } );
-
         const buf = new Buffer.from(baseData.replace(/^data:image\/\w+;base64,/, ""),'base64');
-
-        //setbaseData1(buf);
 
         const glob_id = uuidv4();
 
-        //setGlob(glob_id);
 
         const Mongo = async () => {
           var toAdd = {
@@ -107,58 +80,34 @@ export default async function handler(req, res) {
                 })
       
               var s3Bucket = new AWS.S3( { params: {Bucket: 'atlastattoo'} } );
+
       
               var data = {
                 Key: glob_id, 
                 Body: buf,
-                //Body: url,
                 ContentEncoding: 'base64',
                 ContentType: 'image/jpeg',
                 Tagging: `email=${newData.user}`,
                 ACL: 'public-read'
               };
       
-              s3Bucket.putObject(data, function(err, data){
+              const requesting = s3Bucket.putObject(data, function(err, data){
                   if (err) { 
                     console.log(err);
                     console.log('Error uploading data: ', data); 
                   } else {
                     console.log('succesfully uploaded the image!');
-                    //console.log(data);
                   }
               });
-      
-              await Mongo();
+
+              return requesting
         
         }
 
-        await Amazon();
-
-        //await Mongo();
-        //await Mongo();
-
-         /* var data = {
-          Key: glob_id, 
-          Body: buf,
-          //Body: url,
-          ContentEncoding: 'base64',
-          ContentType: 'image/jpeg',
-          Tagging: `email=${newData.user}`,
-          ACL: 'public-read'
-        };
-
-        s3Bucket.putObject(data, function(err, data){
-            if (err) { 
-              console.log(err);
-              console.log('Error uploading data: ', data); 
-            } else {
-              console.log('succesfully uploaded the image!');
-              //console.log(data);
-            }
-        }); */
-
+        await Amazon().then((requesting) => {if(requesting.signedAt) {Mongo()}else{return null}});
 
         ///////////////Store in Mongodb
+        //await Mongo();
       };
     };
 
