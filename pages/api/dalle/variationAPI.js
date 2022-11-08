@@ -13,8 +13,8 @@ export default async function handler(req, res) {
   AWS.config.update(
     {
       region: 'us-east-1',
-      accessKeyId: process.env.AWE_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWE_SECRET_ACCESS_KEY
+      accessKeyId: process.env.AW_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AW_SECRET_ACCESS_KEY
     })
 
   var s3Bucket = new AWS.S3( { params: {Bucket: 'atlastattoo'} } );
