@@ -491,3 +491,18 @@
                     inset 2px 2px 2px rgba(255, 255, 255, .075),
                     inset 2px 2px 4px rgba(0, 0, 0, .15);
       }
+
+
+      .file_selected {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .input_svg1 {
+        width: 50px;
+        height: 50px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }

@@ -510,7 +510,10 @@ const GetDalle2API = async () => {
                       />
                     </form>
                     {selectedFile && (
-                      <CHECK className={classes.input_svg}></CHECK>
+                      <div className={classes.file_selected}>
+                        <CHECK className={classes.input_svg1}></CHECK>
+                        <a>{selectedFile.name}</a>
+                      </div>
                     )}
                     {!selectedFile && (
                       <PLUS className={classes.input_svg}></PLUS>
