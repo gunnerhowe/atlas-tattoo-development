@@ -239,12 +239,19 @@ export default function Generate(credits) {
     }
 
   const storeMD = async (url) => {
+    if (!IsUpload) {
     const storingMD = axios.post('api/dalle/storingMD', {
       image_path: url,
       email: session.user.email,
       name: session.user.name,
       prompt: query + style + background,
-    })
+    })} else {
+      const storingMD = axios.post('api/dalle/storingMD', {
+        image_path: url,
+        email: session.user.email,
+        name: session.user.name,
+        prompt: 'Variation',
+      })}
   }
 
   const startLoad = async (files) => {
@@ -317,7 +324,8 @@ const GetDalle2API = async () => {
         name: session.user.name
     });
       setResults(generate.data);
-      //const files = (generate.data);
+      const files = (generate.data);
+      startLoad(files);
       setLoading(false);
       setIsUploadBtn(true);
       setstyle("");

@@ -2,7 +2,6 @@ import clientPromise from "../../../lib/mongodb";
 
 export default async function handler(req, res) {
 
-    console.log('made it to Mongo');
     const newData = req.body
 
     var toAdd = {
@@ -20,7 +19,12 @@ export default async function handler(req, res) {
                 .insertOne(toAdd);
             console.log(`A document was inserted with the _id: ${result.insertedId}`)
 
-            console.log('ending the Mongo')
+        const update = await db
+            .collection("images")
+            .remove(
+                {image_path: null},
+            );
+        console.log(`A document was removed with the _id: ${result}`)
 
          res.json(toAdd);
   }

@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 
         const response = await openai.createImageVariation(
           request(newData.url),
-          1,
+          4,
           "1024x1024",
             //newData.user
         );
