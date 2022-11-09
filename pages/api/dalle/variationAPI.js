@@ -13,27 +13,28 @@ export default async function handler(req, res) {
     });
     const openai = new OpenAIApi(configuration);
 
-    const response = await openai.createImageVariation(
-        request(newData.url),
-        1,
-        "1024x1024",
-        newData.user
-      );
 
+      try {
 
-    res.json(response.data.data);
+        const response = await openai.createImageVariation(
+          request(newData.url),
+          1,
+          "1024x1024",
+            //newData.user
+        );
 
-     const files = (response.data.data);
+        res.json(response.data.data);
 
-      for (const file of files) {
-        var toAdd = {
-          image_path: file.url,
-          email: newData.user,
-          name: newData.name,
-          prompt: 'Variation',
-        };
+        const file = (response.data.data);
 
-        try {
+        //for (const file of files) {
+          var toAdd = {
+            image_path: file.url,
+            email: newData.user,
+            name: newData.name,
+            prompt: 'Variation',
+          };
+
           const client = await clientPromise;
           const db = client.db("Atlas_Tattoo");
   
@@ -41,11 +42,36 @@ export default async function handler(req, res) {
                   .collection("images")
                   .insertOne(toAdd);
               console.log(`A document was inserted with the _id: ${result.insertedId}`)
-  
-          //res.json(result);
+
       } catch (e) {
           console.error(e);
+          const response = await openai.createImageVariation(
+            request(newData.url),
+            1,
+            "1024x1024",
+              //newData.user
+          );
+  
+          res.json(response.data.data);
+  
+          const file = (response.data.data);
+  
+          //for (const file of files) {
+            var toAdd = {
+              image_path: file.url,
+              email: newData.user,
+              name: newData.name,
+              prompt: 'Variation',
+            };
+  
+            const client = await clientPromise;
+            const db = client.db("Atlas_Tattoo");
+    
+            const result = await db
+                    .collection("images")
+                    .insertOne(toAdd);
+                console.log(`A document was inserted with the _id: ${result.insertedId}`)
       }
-      };
+      //};
 
 }

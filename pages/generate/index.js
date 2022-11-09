@@ -9,6 +9,7 @@ import SVG from '/pages/gallery/images/download.svg';
 import axios from "axios";
 import PLUS from '/pages/gallery/images/plus.svg';
 import MINUS from '/pages/gallery/images/minus.svg';
+import CHECK from '/pages/gallery/images/check.svg';
 
 import FourK from '../gallery/images/pandas/4K photography.png';
 import Abstract from '../gallery/images/pandas/abstract.png';
@@ -430,6 +431,14 @@ const GetDalle2API = async () => {
         }
       }
   }
+
+  const handleSVG = async () => {
+    if (selectedFile != null) {
+      return <CHECK></CHECK>
+    } else {
+      return <PLUS></PLUS>
+    }
+  }
   
 
 
@@ -451,15 +460,17 @@ const GetDalle2API = async () => {
           session && (
             <>
               <h1 className={classes.title}><span className={classes.titleColor}>Get Inked With The Future</span></h1>
-                <p className={classes.description}>
               {!IsUpload && (
                 <>
-                  <button className={classes.btn_neu_inspire} onClick={() => {setQuery(inspire[Math.floor(Math.random() * inspire.length)]), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
-                    Inspire Me
-                  </button>
-                  <button className={classes.btn_neu_inspire} onClick={() => {setIsUploadBtn(true), setIsOpen(false), setIsUpload(true), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
-                    Variation
-                  </button>
+                  <br />
+                  <div className={classes.generate_options}>
+                    <button className={classes.btn_neu_inspire} onClick={() => {setQuery(inspire[Math.floor(Math.random() * inspire.length)]), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
+                      Inspire Me
+                    </button>
+                    <button className={classes.btn_neu_inspire} onClick={() => {setIsUploadBtn(true), setIsOpen(false), setIsUpload(true), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
+                      Variation
+                    </button>
+                  </div>
                     <input
                       id="query"
                       type="text"
@@ -467,9 +478,9 @@ const GetDalle2API = async () => {
                       onChange={(e) => {setQuery(e.target.value)}}
                       placeholder="Tattoo prompt..."
                     />
+                    <br />
                 </>
                 )}
-                </p>{" "}
               {IsOpen &&
               <>
                 <button className={classes.btn_neu} onClick={() => {getActivity(), setShowStyle(false), setShowBackground(false)}}>
@@ -480,7 +491,7 @@ const GetDalle2API = async () => {
                 </>}
                   {IsUpload && (
                     <>
-                  <button className={classes.btn_neu_inspire} onClick={() => {setIsUpload(false), setIsOpen(true), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
+                  <button className={classes.btn_neu_inspire1} onClick={() => {setIsUpload(false), setIsOpen(true), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
                     Prompt
                   </button>
                   <label className={classes.upload_image}>
@@ -498,7 +509,12 @@ const GetDalle2API = async () => {
                         className={classes.upload_image1}
                       />
                     </form>
-                    <PLUS className={classes.input_svg}></PLUS>
+                    {selectedFile && (
+                      <CHECK className={classes.input_svg}></CHECK>
+                    )}
+                    {!selectedFile && (
+                      <PLUS className={classes.input_svg}></PLUS>
+                    )}
                   </label>
                   <br />
                   <br />
