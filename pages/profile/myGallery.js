@@ -85,20 +85,18 @@ export default function GalleryPage({ images }) {
               <div className={styles.grid}>
                 {images.map((image) => {
                   return (
-                    <div key={image._id} className={styles.card}>
-                      <Image 
-                        className={styles.imgPreview}
-                        src={image.image_path}
-                        width={300}
-                        height={300}
-                        quality={100}
-                        alt=''/>
-                      <div>
-                        <button className={styles.btn_neu_download} onClick={() => download(image.image_path)}>
-                          <SVG className={styles.download_image}/>
-                        </button>
-                      </div>        
-                    </div>
+                      <div key={image._id} className={styles.card}>
+                          <Image 
+                            className={styles.imgPreview}
+                            src={image.image_path}
+                            width={300}
+                            height={300}
+                            quality={100}
+                            alt=''/>
+                          <button className={styles.btn_neu_download} onClick={() => download(image.image_path)}>
+                            <SVG className={styles.download_image}/>
+                          </button>     
+                      </div>
                   );
                 })}
 {/*                 {nextImages.map((nextImage) => {

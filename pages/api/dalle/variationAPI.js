@@ -25,10 +25,10 @@ export default async function handler(req, res) {
 
         res.json(response.data.data);
 
-        const file = (response.data.data);
+        //const file = (response.data.data);
 
         //for (const file of files) {
-          var toAdd = {
+          /* var toAdd = {
             image_path: file.url,
             email: newData.user,
             name: newData.name,
@@ -41,23 +41,23 @@ export default async function handler(req, res) {
           const result = await db
                   .collection("images")
                   .insertOne(toAdd);
-              console.log(`A document was inserted with the _id: ${result.insertedId}`)
+              console.log(`A document was inserted with the _id: ${result.insertedId}`) */
 
       } catch (e) {
           console.error(e);
-          const response = await openai.createImageVariation(
+/*           const response = await openai.createImageVariation(
             request(newData.url),
             1,
             "1024x1024",
               //newData.user
           );
   
-          res.json(response.data.data);
+          res.json(response.data.data); */
   
-          const file = (response.data.data);
+          //const file = (response.data.data);
   
           //for (const file of files) {
-            var toAdd = {
+            /* var toAdd = {
               image_path: file.url,
               email: newData.user,
               name: newData.name,
@@ -70,7 +70,7 @@ export default async function handler(req, res) {
             const result = await db
                     .collection("images")
                     .insertOne(toAdd);
-                console.log(`A document was inserted with the _id: ${result.insertedId}`)
+                console.log(`A document was inserted with the _id: ${result.insertedId}`) */
       }
       //};
 

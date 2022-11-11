@@ -94,6 +94,15 @@ import Looney from '../gallery/images/pandas/Looney.png';
 import Seuss from '../gallery/images/pandas/Seuss.png';
 import Black from '../gallery/images/pandas/Black Outline.png';
 
+import Bio from '../gallery/images/pandas/Bio.png';
+import BlkGrey from '../gallery/images/pandas/BlkGrey.png';
+import BlkWork from '../gallery/images/pandas/BlkWork.png';
+import Americana from '../gallery/images/pandas/Americana.png';
+import Geom from '../gallery/images/pandas/Geometric_tat.png';
+import Surr from '../gallery/images/pandas/Surrealism_tat.png';
+import New from '../gallery/images/pandas/New.png';
+import Neo from '../gallery/images/pandas/Neo.png';
+
 import None from '../gallery/images/pandas/None.png';
 
 import White from '../gallery/images/pandas/White.png';
@@ -118,7 +127,7 @@ export default function Generate(credits) {
   const [ShowBackground, setShowBackground] = useState(false);
   const [UploadImage, setUploadImage] = useState("");
   const [IsUpload, setIsUpload] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
 
   const [selectedStyle, setselectedStyle] = useState("");
@@ -131,6 +140,7 @@ export default function Generate(credits) {
   const [glob_id, setglob_id] = useState("");
   const [imageUrl, setimageUrl] = useState("");
   const [IsUploadBtn, setIsUploadBtn] = useState(false);
+  const [typeError, setTypeError] = useState(false);
 
   const inspire = ['synthwave sports car','a sea otter with a pearl earring by Johannes Vermeer','panda mad scientist mixing sparkling chemicals, digital art',
   'a stained glass window depicting a robot','abstract pencil and watercolor art of a lonely robot holding a balloon',
@@ -268,7 +278,7 @@ export default function Generate(credits) {
       await fetch(getURL, {
         method: "PUT",
         headers: {
-          "Content-Type": 'image/jpeg',
+          "Content-Type": 'image/png',
           "Content-Encoding": 'base64',
         },
         body: baseData,
@@ -324,6 +334,7 @@ const GetDalle2API = async () => {
         name: session.user.name
     });
       setResults(generate.data);
+      setIsUploadBtn(false);
       const files = (generate.data);
       startLoad(files);
       setLoading(false);
@@ -403,48 +414,38 @@ const GetDalle2API = async () => {
 
     let jsonData = await getCredits(session.user.email);
 
-      if (IsUpload) {
-        if (!jsonData) {
-          setnoCred(true);
-        }
-        else if (jsonData != null, jsonData.credits > 0, IsUpload == "") {
-          setIsUpload(true);
-          setError(true);
-        } else if (jsonData != null, jsonData.credits > 0) {
+    if (!jsonData) {
+      setnoCred(true);
+    }
+    else if (jsonData != null, jsonData.credits > 0, IsUpload == "") {
+      setIsUpload(true);
+      setError(true);
+    } else if (jsonData != null, jsonData.credits > 0) {
 
-          const numCred = jsonData.credits;
-          const eEmail = session.user.email;
-          var data = {
-            credits: Number(numCred),
-            email: eEmail
-          };
-          updateCredits(data);
-          
-          const getURL = await fetch("/api/dalle/s3").then(res => res.json());
-          console.log(getURL)
+      const numCred = jsonData.credits;
+      const eEmail = session.user.email;
+      var data = {
+        credits: Number(numCred),
+        email: eEmail
+      };
+      updateCredits(data);
+      
+      const getURL = await fetch("/api/dalle/s3").then(res => res.json());
+      console.log(getURL)
 
-          //post the image directly to the s3 bucket
-          await fetch(getURL, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "multipart/form-data"
-            },
-            body: selectedFile,
+      //post the image directly to the s3 bucket
+      await fetch(getURL, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+        body: selectedFile,
 
-          })
-            const varImage = getURL.split('?')[0];
-            VarDalle2API(varImage);
-        } else {
-          setnoCred(true);
-        }
-      }
-  }
-
-  const handleSVG = async () => {
-    if (selectedFile != null) {
-      return <CHECK></CHECK>
+      })
+        const varImage = getURL.split('?')[0];
+        VarDalle2API(varImage);
     } else {
-      return <PLUS></PLUS>
+      setnoCred(true);
     }
   }
   
@@ -473,11 +474,16 @@ const GetDalle2API = async () => {
                   <br />
                   <div className={classes.generate_options}>
                     <button className={classes.btn_neu_inspire} onClick={() => {setQuery(inspire[Math.floor(Math.random() * inspire.length)]), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
-                      Inspire Me
+                      Inspire
                     </button>
-                    <button className={classes.btn_neu_inspire} onClick={() => {setIsUploadBtn(true), setIsOpen(false), setIsUpload(true), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
+                    <button className={classes.btn_neu_inspire} onClick={() => {setIsUploadBtn(false), setIsOpen(false), setIsUpload(true), setResults([]), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
                       Variation
                     </button>
+                    <Link href='/profile/myGallery'>
+                      <button className={classes.btn_neu_inspire}>
+                        Collection
+                      </button>
+                    </Link>
                   </div>
                     <input
                       id="query"
@@ -499,7 +505,7 @@ const GetDalle2API = async () => {
                 </>}
                   {IsUpload && (
                     <>
-                  <button className={classes.btn_neu_inspire1} onClick={() => {setIsUpload(false), setIsOpen(true), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
+                  <button className={classes.btn_neu_inspire1} onClick={() => {setIsUploadBtn(false), setResults([]), setIsUpload(false), setSelectedFile(null), setIsOpen(true), setstyle(""), setBackground(""), setselectedBackground(""), setselectedStyle("")}}>
                     Prompt
                   </button>
                   <label className={classes.upload_image}>
@@ -511,10 +517,12 @@ const GetDalle2API = async () => {
                           if (target.files) {
                             const file = target.files[0];
                             setSelectedFile(file);
+                            setIsUploadBtn(true);
                           }
                         }}
-                        accept="image/jpeg, image/png, image/jpg"
+                        accept="image/png"
                         className={classes.upload_image1}
+                        onClick={() => {setTypeError(false)}}
                       />
                     </form>
                     {selectedFile && (
@@ -531,10 +539,37 @@ const GetDalle2API = async () => {
                   <br />
                   {IsUploadBtn && (
                     <>
-                    <button className={classes.btn_neu} onClick={() => {handleEvent(), setIsUploadBtn(false)}}>
+                    <button className={classes.btn_neu} onClick={() => 
+                      {
+                        console.log(selectedFile.type)
+                        if (selectedFile.type != 'image/png') {
+                          setTypeError(true);
+                          setIsUploadBtn(false);
+                        } else {
+                          handleEvent();
+                          setIsUpload(false);
+                          setIsUploadBtn(false);
+                        }}
+                      }>
                       Generate
                     </button>
                   </>)}
+                  {typeError && (
+                    <div className={classes.warning}>
+                      <h1 className={classes.warning}>
+                        Make sure the image meets the following requirements
+                      </h1>
+                      <h1 className={classes.warning}>
+                        File Type: .png
+                      </h1>
+                      <h1 className={classes.warning}>
+                        Dimensions: Square
+                      </h1>
+                      <h1 className={classes.warning}>
+                        Size: less than 4MB
+                      </h1>
+                    </div>
+                  )}
                   </>)}
               {noCred &&
                 <>
@@ -557,6 +592,14 @@ const GetDalle2API = async () => {
               {loading && 
                 <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>}
               <br />
+              {selectedFile && (
+                <>
+                <div className={classes.isThere}>
+                  <Image className={classes.imgPreview} src={URL.createObjectURL(selectedFile)} alt='' width='300' height='300'></Image>
+                  <h1 className={classes.original_image}>Original Image</h1>
+                </div>
+                </>
+              )}
               <br />
               <div className={classes.grid}>
                 {results.map((result) => {
@@ -637,6 +680,38 @@ const GetDalle2API = async () => {
                     <button onClick={() => {setstyle(''), setselectedStyle('None_style')}} className={(selectedStyle=='None_style') ? classes.styles_button_active : classes.styles_button}>
                       <Image className={classes.imgPreview} src={None} alt='AI Tattoo' width={image_width} height={image_heigth}/>
                       <h3>Clear Selected</h3>
+                    </button>
+                    <button onClick={() => {setstyle(', in the art style of neo-traditional tattoo art'), setselectedStyle('Neo')}} className={(selectedStyle=='Neo') ? classes.styles_button_active : classes.styles_button}>
+                      <Image className={classes.imgPreview} src={Neo} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+                      <h3>Neo-Traditional</h3>
+                    </button>
+                    <button onClick={() => {setstyle(', in the art style of New School tattoo art'), setselectedStyle('New')}} className={(selectedStyle=='New') ? classes.styles_button_active : classes.styles_button}>
+                      <Image className={classes.imgPreview} src={New} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+                      <h3>New School</h3>
+                    </button>
+                    <button onClick={() => {setstyle(', in the art style of Surrealism tattoo art'), setselectedStyle('Surr')}} className={(selectedStyle=='Surr') ? classes.styles_button_active : classes.styles_button}>
+                      <Image className={classes.imgPreview} src={Surr} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+                      <h3>Surrealism</h3>
+                    </button>
+                    <button onClick={() => {setstyle(', in the art style of Geometric tattoo art'), setselectedStyle('Geom')}} className={(selectedStyle=='Geom') ? classes.styles_button_active : classes.styles_button}>
+                      <Image className={classes.imgPreview} src={Geom} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+                      <h3>Geometric</h3>
+                    </button>
+                    <button onClick={() => {setstyle(', in the art style of Classic Americana tattoo art'), setselectedStyle('Americana')}} className={(selectedStyle=='Americana') ? classes.styles_button_active : classes.styles_button}>
+                      <Image className={classes.imgPreview} src={Americana} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+                      <h3>Classic Americana</h3>
+                    </button>
+                    <button onClick={() => {setstyle(', in the art style of Black Work tattoo art'), setselectedStyle('BlkWork')}} className={(selectedStyle=='BlkWork') ? classes.styles_button_active : classes.styles_button}>
+                      <Image className={classes.imgPreview} src={BlkWork} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+                      <h3>Black Work</h3>
+                    </button>
+                    <button onClick={() => {setstyle(', in the art style of Black and Grey tattoo art'), setselectedStyle('BlkGrey')}} className={(selectedStyle=='BlkGrey') ? classes.styles_button_active : classes.styles_button}>
+                      <Image className={classes.imgPreview} src={BlkGrey} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+                      <h3>Black and Grey</h3>
+                    </button>
+                    <button onClick={() => {setstyle(', in the art style of Biomechanical tattoo art'), setselectedStyle('Bio')}} className={(selectedStyle=='Bio') ? classes.styles_button_active : classes.styles_button}>
+                      <Image className={classes.imgPreview} src={Bio} alt='AI Tattoo' width={image_width} height={image_heigth}/>
+                      <h3>Biomechanical</h3>
                     </button>
                     <button onClick={() => {setstyle(', Black outline'), setselectedStyle('Black')}} className={(selectedStyle=='Black') ? classes.styles_button_active : classes.styles_button}>
                       <Image className={classes.imgPreview} src={Black} alt='AI Tattoo' width={image_width} height={image_heigth}/>

@@ -128,6 +128,7 @@
   flex-direction: column;
 }
 
+
 .imgPreview {
   width: 60vw;
   height: 60vw;
@@ -145,10 +146,12 @@
 .imgPreview:hover,
 .imgPreview:focus,
 .imgPreview:active {
-  transform: scale(1.1);
+  transform: scale(1.05);
   cursor: pointer;
   transition-duration: 1s;
 }
+
+
 
 .card h2 {
   margin: 0 0 1rem 0;

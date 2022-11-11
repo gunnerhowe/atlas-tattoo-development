@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
         const update = await db
             .collection("images")
-            .remove(
+            .deleteMany(
                 {image_path: null},
             );
         console.log(`A document was removed with the _id: ${result}`)
