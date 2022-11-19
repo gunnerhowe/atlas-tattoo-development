@@ -10,6 +10,7 @@ import axios from "axios";
 import PLUS from '/pages/gallery/images/plus.svg';
 import MINUS from '/pages/gallery/images/minus.svg';
 import CHECK from '/pages/gallery/images/check.svg';
+import RED from '/pages/gallery/images/Red_x.svg';
 
 import FourK from '../gallery/images/pandas/4K photography.png';
 import Abstract from '../gallery/images/pandas/abstract.png';
@@ -527,7 +528,16 @@ const GetDalle2API = async () => {
                     </form>
                     {selectedFile && (
                       <div className={classes.file_selected}>
-                        <CHECK className={classes.input_svg1}></CHECK>
+                        {typeError && (
+                          <>
+                          <br />
+                          <h2>Error</h2>
+                          <br />
+                          </>
+                        )}
+                        {!typeError && (
+                          <CHECK className={classes.input_svg1}></CHECK>
+                        )}
                         <a>{selectedFile.name}</a>
                       </div>
                     )}
