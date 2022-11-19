@@ -10,7 +10,7 @@ import axios from "axios";
 import PLUS from '/pages/gallery/images/plus.svg';
 import MINUS from '/pages/gallery/images/minus.svg';
 import CHECK from '/pages/gallery/images/check.svg';
-import RED from '/pages/gallery/images/Red_x.svg';
+import RED from '/pages/gallery/images/Red_X.svg';
 
 import FourK from '../gallery/images/pandas/4K photography.png';
 import Abstract from '../gallery/images/pandas/abstract.png';
